@@ -1,0 +1,53 @@
+{
+  "loginPage": {
+    "formTitle": "Login",
+    "form": {
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "loginButton": "Login",
+      "emailRequiredError": "The email field is required.",
+      "emailInvalidError": "The email field must be a valid email address.",
+      "passwordMinLengthError": "The password field must be at least 8 characters.",
+      "passwordRequiredError": "The password field is required.",
+      "passwordInvalidError": "The password field must contain at one uppercase character, one lowercase character, a number and a special character."
+    },
+    "forgotPasswordLink": "Forgot Password?"
+  },
+  "resetPasswordPage": {
+    "formTitle": "Reset Password",
+    "form": {
+      "emailLabel": "Email",
+      "sendCode": "Send Code",
+      "emailRequiredError": "The email field is required.",
+      "emailInvalidError": "The email field must be a valid email address.",
+      "passwordMinLengthError": "The password field must be at least 8 characters.",
+      "passwordRequiredError": "The password field is required.",
+      "passwordInvalidError": "The password field must contain at one uppercase character, one lowercase character, a number and a special character.",
+      "emailFormDescription": "Please enter your email address and we will send you a password reset code.",
+      "codeLabel": "Code",
+      "passwordLabel": "Password",
+      "passwordConfirmLabel": "Confirm Password",
+      "resetPassword": "Reset Password",
+      "codeRequiredError": "The code field is required.",
+      "passwordConfirmRequiredError": "The confirm password field is required.",
+      "passwordNotMatchError": "The confirm password field must match the password."
+    },
+    "loginLink": "Login"
+  },
+  "metadata": {
+    "auth": {
+      "title": "Sukon Dashboard | Login"
+    }
+  },
+  "languageToggler": {
+    "lang": "English",
+    "changeLang": "Change Language"
+  },
+
+  "themeToggler": {
+    "light": "Light",
+    "dark": "Dark",
+    "changeTheme": "Change Theme",
+    "system": "System"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "loginPage": {
+    "formTitle": "تسجيل الدخول",
+    "form": {
+      "emailLabel": "البريد الالكترونى",
+      "passwordLabel": "كلمة المرور",
+      "loginButton": "دخول",
+      "emailRequiredError": "من فضلك قم بادخال البريد الالكترونى",
+      "emailInvalidError": "من فضلك ادخل بريد الكترونى صحيح",
+      "passwordMinLengthError": "من فضلك ادخل كلمة مرور اكثر من 8 حروف",
+      "passwordRequiredError": "من فضلك ادخل كلمة المرور",
+      "passwordInvalidError": "كلمة المرور يجب ان تحتوى على حرف كبير و حرف صغير و رقم و علامة خاصة"
+    },
+    "forgotPasswordLink": "هل نسيت كلمة المرور؟"
+  },
+  "resetPasswordPage": {
+    "formTitle": "اعادة تعيين كلمة المرور",
+    "form": {
+      "emailLabel": "البريد الالكترونى",
+      "sendCode": "ارسال الكود",
+      "emailRequiredError": "من فضلك قم بادخال البريد الالكترونى",
+      "emailInvalidError": "من فضلك ادخل بريد الكترونى صحيح",
+      "passwordMinLengthError": "من فضلك ادخل كلمة مرور اكثر من 8 حروف",
+      "passwordRequiredError": "من فضلك ادخل كلمة المرور",
+      "passwordInvalidError": "كلمة المرور يجب ان تحتوى على حرف كبير و حرف صغير و رقم و علامة خاصة",
+      "emailFormDescription": "من فضلك ادخل بريدك الالكترونى لنرسل اليه كود اعادة نعيين كلمة المرور",
+      "codeLabel": "الكود",
+      "passwordLabel": "كلمة المرور",
+      "passwordConfirmLabel": "تأكيد كلمة المرور",
+
+      "resetPassword": "اعادة تعيين",
+      "codeRequiredError": "من فضلك ادخل الكود",
+
+      "passwordConfirmRequiredError": "من فضلك اعد كتابة كلمة المرور",
+      "passwordNotMatchError": "كلمة المرور و تأكيد كلمة المرور غير متطابقتان"
+    },
+    "loginLink": "تسجيل الدخول"
+  },
+  "metadata": {
+    "auth": {
+      "title": "لوحة تحكم سكون | تسجيل الدخول"
+    }
+  },
+  "languageToggler": {
+    "lang": "العربية",
+    "changeLang": "تغيير اللغة"
+  },
+  "themeToggler": {
+    "light": "المظهر الفاتح",
+    "dark": "المظهر الداكن",
+    "changeTheme": "تغيير المظهر",
+    "system": "المظهر الافتراضى"
+  }
+}
