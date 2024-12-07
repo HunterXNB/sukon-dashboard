@@ -1,6 +1,7 @@
 "use server";
 
 import { fetchData } from "@/lib/utils";
+import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 type TError = {
@@ -14,9 +15,11 @@ type LoginStateType =
   | {
       type: "global";
       message: string;
+      locale: string;
     }
   | ({
       type: "validation";
+      locale: string;
     } & TError);
 export const login = async (
   state: LoginStateType | undefined,
@@ -24,12 +27,16 @@ export const login = async (
 ): Promise<LoginStateType | undefined> => {
   let isLoggedIn = false;
 
+  const locale = await getLocale();
   try {
     const request = await fetchData(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/admin/login`,
       {
         method: "POST",
         body: formData,
+        headers: {
+          "Accept-Language": locale,
+        },
       }
     );
     if (!request.ok) {
@@ -48,11 +55,13 @@ export const login = async (
       return {
         type: "global",
         message: error.message,
+        locale,
       };
     } else {
       return {
         type: "validation",
         ...(error as TError),
+        locale,
       };
     }
   } finally {

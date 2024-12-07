@@ -18,13 +18,14 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import PasswordInput from "./PasswordInput";
 import { login } from "@/actions/auth";
 function LoginForm() {
   const t = useTranslations("loginPage.form");
+  const locale = useLocale();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -49,6 +50,11 @@ function LoginForm() {
       });
     }
   }, [state, form]);
+  useEffect(() => {
+    if (state?.locale !== locale) {
+      form.clearErrors();
+    }
+  }, [locale, state, form]);
   return (
     <Form {...form}>
       <form
@@ -91,10 +97,8 @@ function LoginForm() {
             </FormItem>
           )}
         />
-        {state?.type === "global" && (
-          <p className="text-destructive" dir="ltr">
-            {state.message}
-          </p>
+        {state?.type === "global" && state.locale === locale && (
+          <p className="text-destructive">{state.message}</p>
         )}
         <Button disabled={isPending} className="w-full" type="submit">
           {t("loginButton")}

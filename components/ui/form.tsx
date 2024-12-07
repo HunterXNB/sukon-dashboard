@@ -161,7 +161,6 @@ const FormMessage = React.forwardRef<
   }
   return (
     <p
-      dir={error?.type === "backend" ? "ltr" : "auto"}
       ref={ref}
       id={formMessageId}
       className={cn("text-sm font-medium text-destructive", className)}
