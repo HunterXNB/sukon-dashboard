@@ -31,6 +31,7 @@ function LoginForm() {
     defaultValues: {
       email: "",
       password: "",
+      type: "admin",
     },
   });
   const formRef = useRef<HTMLFormElement | null>(null);

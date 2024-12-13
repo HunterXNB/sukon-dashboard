@@ -15,4 +15,5 @@ export const loginFormSchema = z.object({
     .regex(/[A-Z]/, "passwordInvalidError")
     .regex(/[0-9]/, "passwordInvalidError")
     .regex(/[^a-zA-Z0-9]/, "passwordInvalidError"),
+  type: z.literal("admin"),
 });
