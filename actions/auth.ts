@@ -37,14 +37,14 @@ export const login = async (
         headers: {
           "Accept-Language": locale,
         },
-      }
+      },
+      true
     );
+
     if (!request.ok) {
-      if (request.status === 404) {
-        throw new Error("Wrong email or password");
-      } else {
-        throw await request.json();
-      }
+      if (request.status === 401)
+        throw new Error((await request.json()).message);
+      throw await request.json();
     }
     const response = await request.json();
     const cookieStore = await cookies();
@@ -70,3 +70,13 @@ export const login = async (
     }
   }
 };
+
+export async function logout(fromLogin: boolean = false) {
+  const cookieStore = await cookies();
+  cookieStore.delete("token");
+  if (!fromLogin) return redirect("/login");
+}
+
+export async function handleForbidden() {
+  return redirect("/");
+}
