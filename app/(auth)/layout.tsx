@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import ThemeToggler from "@/components/ThemeToggler";
 import { cn } from "@/lib/utils";
 import LanguageToggler from "@/components/LanguageToggler";
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const t = await getTranslations({

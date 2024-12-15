@@ -37,6 +37,9 @@
   "metadata": {
     "auth": {
       "title": "Sukon Dashboard | Login"
+    },
+    "homePage": {
+      "title": "Sukon Dashboard"
     }
   },
   "languageToggler": {
@@ -49,5 +52,23 @@
     "dark": "Dark",
     "changeTheme": "Change Theme",
     "system": "System"
+  },
+  "sidebar": {
+    "header": {
+      "logout": "Logout"
+    },
+    "navigations": {
+      "dashboard": "Dashboard",
+      "roles": "Roles",
+      "admin": "Admins",
+      "home": "Home"
+    }
+  },
+  "logoutDialog": {
+    "title": "Are you sure you want to logout?",
+    "close": "Close",
+    "confirm": "Confirm",
+    "loading": "Logging out",
+    "trigger": "Logout"
   }
 }

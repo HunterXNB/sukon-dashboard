@@ -15,7 +15,10 @@ function LanguageToggler() {
   const locale = useLocale();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="bg-transparent" asChild>
+      <DropdownMenuTrigger
+        className="bg-transparent hover:bg-slate-500/30"
+        asChild
+      >
         <Button
           variant="outline"
           className="bg-transparent dark:bg-transparent w-fit px-2 py-1 border-none  focus-visible:ring-0 focus-visible:ring-offset-0"
