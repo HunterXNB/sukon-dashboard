@@ -39,6 +39,9 @@
   "metadata": {
     "auth": {
       "title": "لوحة تحكم سكون | تسجيل الدخول"
+    },
+    "homePage": {
+      "title": "لوحة تحكم سكون"
     }
   },
   "languageToggler": {
@@ -50,5 +53,23 @@
     "dark": "المظهر الداكن",
     "changeTheme": "تغيير المظهر",
     "system": "المظهر الافتراضى"
+  },
+  "sidebar": {
+    "header": {
+      "logout": "تسجيل الخروج"
+    },
+    "navigations": {
+      "dashboard": "لوحة التحكم",
+      "roles": "الادوار",
+      "admin": "المديرين",
+      "home": "الصفحة الرئيسية"
+    }
+  },
+  "logoutDialog": {
+    "title": "هل انت متأكد أنك تريد تسجيل الخروج ؟",
+    "close": "الغاء",
+    "confirm": "تأكيد",
+    "loading": "جارى تسجيل الخروج",
+    "trigger": "تسجيل الخروج"
   }
 }

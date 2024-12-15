@@ -1,6 +1,7 @@
 "use server";
 
 import { fetchData } from "@/lib/utils";
+import { User } from "@/types/user";
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -26,7 +27,6 @@ export const login = async (
   formData: FormData
 ): Promise<LoginStateType | undefined> => {
   let isLoggedIn = false;
-
   const locale = await getLocale();
   try {
     const request = await fetchData(
@@ -34,9 +34,6 @@ export const login = async (
       {
         method: "POST",
         body: formData,
-        headers: {
-          "Accept-Language": locale,
-        },
       },
       true
     );
@@ -71,12 +68,40 @@ export const login = async (
   }
 };
 
-export async function logout(fromLogin: boolean = false) {
+export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete("token");
+  return redirect("/login");
+}
+export async function handleUnauthenticated(fromLogin: boolean = false) {
   if (!fromLogin) return redirect("/login");
 }
 
 export async function handleForbidden() {
   return redirect("/");
+}
+
+export async function getUserToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get("token")?.value;
+}
+export async function isAuthenticated() {
+  const token = await getUserToken();
+  if (token) {
+    const req = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`);
+    if (req.ok) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export async function getUser() {
+  const req = await fetchData(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/view-profile`
+  );
+  if (req.ok) {
+    return (await req.json()).data.user as User;
+  }
+  return;
 }
