@@ -3,6 +3,8 @@ import "./globals.css";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import TanstackQueryClientProvider from "@/components/TanstackQueryClientProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const IBM = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -29,7 +31,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <TanstackQueryClientProvider>
+              {children}
+              <ReactQueryDevtools initialIsOpen={false} />
+            </TanstackQueryClientProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

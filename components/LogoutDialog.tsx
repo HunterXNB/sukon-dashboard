@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Dispatch, SetStateAction, useRef, useTransition } from "react";
@@ -36,11 +35,7 @@ export default function LogoutDialog({
         dir={locale === "en" ? "ltr" : "rtl"}
         className="sm:max-w-[425px]"
       >
-        <DialogHeader
-          className={cn("", {
-            "sm:text-right": locale === "ar",
-          })}
-        >
+        <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
         </DialogHeader>
         <DialogFooter>

@@ -26,7 +26,7 @@ export default async function DashboardLayout({ children }: IProps) {
     <AuthContextProvider user={user!}>
       <SidebarProvider>
         <AppSidebar />
-        <main className="mx-3 my-2">
+        <main className="px-3 py-2 min-h-screen w-full overflow-hidden flex flex-col">
           <div className="flex gap-2 items-center">
             <SidebarTrigger />
             <PageTitle />

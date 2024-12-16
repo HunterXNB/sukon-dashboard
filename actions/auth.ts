@@ -30,7 +30,7 @@ export const login = async (
   const locale = await getLocale();
   try {
     const request = await fetchData(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/admin/login`,
+      `/auth/admin/login`,
       {
         method: "POST",
         body: formData,
@@ -88,7 +88,7 @@ export async function getUserToken() {
 export async function isAuthenticated() {
   const token = await getUserToken();
   if (token) {
-    const req = await fetchData(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`);
+    const req = await fetchData(`/auth/me`);
     if (req.ok) {
       return true;
     }
@@ -97,9 +97,7 @@ export async function isAuthenticated() {
 }
 
 export async function getUser() {
-  const req = await fetchData(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/view-profile`
-  );
+  const req = await fetchData(`/auth/view-profile`);
   if (req.ok) {
     return (await req.json()).data.user as User;
   }

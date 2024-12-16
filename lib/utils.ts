@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function fetchData(
-  url: RequestInfo | URL | string,
+  endpoint: RequestInfo | URL | string,
   requestInit: RequestInit = {
     method: "GET",
     headers: {},
@@ -30,7 +30,10 @@ export async function fetchData(
     "Accept-Language": locale,
   };
 
-  const request = await fetch(url, requestInit);
+  const request = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+    requestInit
+  );
   if (request.status === 401) {
     await handleUnauthenticated(fromLogin);
   } else if (request.status === 403) {
