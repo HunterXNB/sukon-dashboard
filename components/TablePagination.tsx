@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { ResponseMeta } from "@/types/ResponseMeta";
-import { useLocale } from "next-intl";
+import { ResponseMeta } from "@/types/response-meta";
+import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import { Button } from "./ui/button";
 import {
@@ -23,19 +23,18 @@ function TablePagination({ meta }: { meta: ResponseMeta }) {
     urlSearchParams.set("page", `${page}`);
     router.replace(`./${pathname}?${urlSearchParams}`);
   }
+  const t = useTranslations("rolesTable.pagination");
   return (
     <div
-      className={cn("flex items-center gap-2 w-fit my-2 mx-2 ml-auto mr-2", {
-        "ml-2 mr-auto": locale === "ar",
+      className={cn("flex items-center gap-2 w-fit my-2 mr-0 ml-auto", {
+        "mr-auto ml-0": locale === "ar",
       })}
     >
-      <span>
-        Page {current_page} of {last_page}
-      </span>
-      <div className="space-x-2">
+      <span>{t("pageInfo", { num: current_page, total: last_page })}</span>
+      <div className="flex gap-2">
         <Button
           disabled={current_page === 1}
-          title="first"
+          title={t("first")}
           variant={"outline"}
           onClick={() => setPage(1)}
         >
@@ -43,7 +42,7 @@ function TablePagination({ meta }: { meta: ResponseMeta }) {
         </Button>
         <Button
           disabled={current_page === 1}
-          title="previous"
+          title={t("prev")}
           variant={"outline"}
           onClick={() => setPage(current_page - 1)}
         >
@@ -51,7 +50,7 @@ function TablePagination({ meta }: { meta: ResponseMeta }) {
         </Button>
         <Button
           disabled={current_page === last_page}
-          title="next"
+          title={t("next")}
           variant={"outline"}
           onClick={() => setPage(current_page + 1)}
         >
@@ -59,7 +58,7 @@ function TablePagination({ meta }: { meta: ResponseMeta }) {
         </Button>
         <Button
           disabled={current_page === last_page}
-          title="last"
+          title={t("last")}
           variant={"outline"}
           onClick={() => setPage(last_page)}
         >

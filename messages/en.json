@@ -70,5 +70,56 @@
     "confirm": "Confirm",
     "loading": "Logging out",
     "trigger": "Logout"
+  },
+  "rolesTable": {
+    "header": {
+      "id": "ID",
+      "name": "Name",
+      "is_active": "Status"
+    },
+    "body": {
+      "status": {
+        "active": "Active",
+        "notActive": "Not Active"
+      }
+    },
+    "search": {
+      "placeholder": "Search by name..."
+    },
+    "pagination": {
+      "pageInfo": "Page {num} from {total}",
+      "next": "التالى",
+      "prev": "السابق",
+      "first": "أول صفحة",
+      "last": "آخر صفحة"
+    },
+    "form": {
+      "createBtn": "Create Role",
+      "name": "Name",
+      "permissions": "Permissions",
+      "permissionsDescription": "Select the permissions you want to assign to this role",
+      "createTitle": "Create New Role",
+      "editTitle": "Edit Role",
+      "nameRequiredError": "Please enter a valid role name.",
+      "selectPermissionError": "Please select at least one permission for the role.",
+      "roles-show": "View Role",
+      "roles-create": "Create New Role",
+      "roles-delete": "Delete Roles",
+      "roles-edit": "Edit Roles",
+      "roles-list": "View All Roles",
+      "roles-activation-toggle": "Toggle Role Status",
+      "admin-users-create": "Create New Admin User",
+      "admin-users-show": "View Admin User",
+      "admin-users-delete": "Delete Admin Users",
+      "admin-users-edit": "Edit Admin Users",
+      "admin-users-list": "View All Admin Users",
+      "admin-users-activation-toggle": "Toggle Admin User Status",
+      "submitBtn": "Submit",
+      "submitLoadingBtn": "Submitting..."
+    },
+    "actions": {
+      "actions": "Actions",
+      "edit": "Edit Role"
+    }
   }
 }

@@ -3,8 +3,9 @@ import {
   handleForbidden,
   handleUnauthenticated,
 } from "@/actions/auth";
+import { getLocale } from "@/actions/intl";
 import { clsx, type ClassValue } from "clsx";
-import { getLocale } from "next-intl/server";
+
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -23,13 +24,13 @@ export async function fetchData(
   const token = await getUserToken();
   const locale = await getLocale();
   requestInit.headers = {
-    ...requestInit.headers,
     ["x-api-key"]: process.env.NEXT_PUBLIC_API_KEY as string,
     Accept: "application/json",
     Authorization: `Bearer ${token}`,
     "Accept-Language": locale,
+    "Content-Type": "application/json",
+    ...requestInit.headers,
   };
-
   const request = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
     requestInit

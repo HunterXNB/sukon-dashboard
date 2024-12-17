@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  startTransition,
-  useActionState,
-  useEffect,
-  useRef,
-} from "react";
+import React, { startTransition, useActionState, useRef } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,6 +18,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import PasswordInput from "./PasswordInput";
 import { login } from "@/actions/auth";
+import { useFormServerError } from "@/hooks/useFormServerError";
 function LoginForm() {
   const t = useTranslations("loginPage.form");
   const locale = useLocale();
@@ -36,38 +32,16 @@ function LoginForm() {
   });
   const formRef = useRef<HTMLFormElement | null>(null);
   const [state, action, isPending] = useActionState(login, undefined);
-
-  useEffect(() => {
-    if (state?.type === "validation") {
-      const errorsArr = Object.entries(state.data) as [
-        "email" | "password",
-        string[]
-      ][];
-      errorsArr.forEach(([key, err]) => {
-        form.setError(key, {
-          message: err[0],
-          type: "backend",
-        });
-      });
-    }
-  }, [state, form]);
-  useEffect(() => {
-    if (state?.locale !== locale) {
-      form.clearErrors();
-    }
-  }, [locale, state, form]);
+  useFormServerError(form, state);
   return (
     <Form {...form}>
       <form
         ref={formRef}
-        onSubmit={(e) => {
-          e.preventDefault();
-          form.handleSubmit(() => {
-            startTransition(() => {
-              action(new FormData(formRef.current!));
-            });
-          })(e);
-        }}
+        onSubmit={form.handleSubmit((v) => {
+          startTransition(() => {
+            action(v);
+          });
+        })}
         className="space-y-8"
       >
         <FormField
@@ -98,9 +72,11 @@ function LoginForm() {
             </FormItem>
           )}
         />
-        {state?.type === "global" && state.locale === locale && (
-          <p className="text-destructive">{state.message}</p>
-        )}
+        {state?.locale === locale &&
+          "error" in state &&
+          state.error.type === "global" && (
+            <p className="text-destructive">{state.error.message}</p>
+          )}
         <Button disabled={isPending} className="w-full" type="submit">
           {t("loginButton")}
         </Button>

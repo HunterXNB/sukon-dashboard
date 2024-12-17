@@ -127,4 +127,19 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::-webkit-scrollbar {
+    @apply w-0.5 md:w-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.2);
+    @apply rounded hover:bg-[rgba(136,136,136,0.5)];
+  }
+
+  /* Handle on hover */
 }

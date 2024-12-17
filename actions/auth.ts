@@ -1,63 +1,66 @@
 "use server";
 
 import { fetchData } from "@/lib/utils";
+import { ActionStateResult } from "@/types/action-state";
 import { User } from "@/types/user";
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-type TError = {
-  message: string;
-  data: {
-    email?: string[];
-    password?: string[];
-  };
-};
-type LoginStateType =
-  | {
-      type: "global";
-      message: string;
-      locale: string;
-    }
-  | ({
-      type: "validation";
-      locale: string;
-    } & TError);
+
 export const login = async (
-  state: LoginStateType | undefined,
-  formData: FormData
-): Promise<LoginStateType | undefined> => {
+  state: ActionStateResult<"email" | "password"> | undefined,
+  formData: {
+    email: string;
+    password: string;
+    type: "admin";
+  }
+): Promise<ActionStateResult<"email" | "password"> | undefined> => {
   let isLoggedIn = false;
-  const locale = await getLocale();
+  const locale = (await getLocale()) as "ar" | "en";
   try {
     const request = await fetchData(
       `/auth/admin/login`,
       {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(formData),
       },
       true
     );
 
     if (!request.ok) {
-      if (request.status === 401)
+      if (request.status !== 422)
         throw new Error((await request.json()).message);
       throw await request.json();
     }
     const response = await request.json();
     const cookieStore = await cookies();
-    cookieStore.set("token", response.data.token);
+    cookieStore.set("token", response.data.token, {
+      maxAge: 30 * 24 * 60 * 60,
+    });
     isLoggedIn = true;
   } catch (error) {
+    console.log(error);
     if (error instanceof Error) {
       return {
-        type: "global",
-        message: error.message,
+        error: {
+          type: "global",
+          message: error.message,
+        },
         locale,
       };
     } else {
+      const err = error as {
+        message: string;
+        data: {
+          [key in "password" | "email"]: string[];
+        };
+      };
       return {
-        type: "validation",
-        ...(error as TError),
+        error: {
+          type: "validation",
+          message: err.message,
+          fields: err.data,
+        },
         locale,
       };
     }

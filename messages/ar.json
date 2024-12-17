@@ -71,5 +71,56 @@
     "confirm": "تأكيد",
     "loading": "جارى تسجيل الخروج",
     "trigger": "تسجيل الخروج"
+  },
+  "rolesTable": {
+    "header": {
+      "id": "م",
+      "name": "الاسم",
+      "is_active": "الحالة"
+    },
+    "body": {
+      "status": {
+        "active": "مفعل",
+        "notActive": "غير مفعل"
+      }
+    },
+    "search": {
+      "placeholder": "بحث عن طريق الاسم..."
+    },
+    "pagination": {
+      "pageInfo": "صفحة {num} من {total}",
+      "next": "التالى",
+      "prev": "السابق",
+      "first": "أول صفحة",
+      "last": "آخر صفحة"
+    },
+    "form": {
+      "createBtn": "انشاء دور",
+      "name": "الاسم",
+      "permissions": "الصلاحيات",
+      "permissionsDescription": "اختر الصلاحيات التى تريد اعطائها لهذا الدور",
+      "createTitle": "انشاء دور جديد",
+      "editTitle": "تعديل الدور",
+      "nameRequiredError": "من فضلك ادخل اسم صالح للدور.",
+      "selectPermissionError": "من فضلك اختر صلاحية للدور.",
+      "roles-show": "رؤية دور",
+      "roles-create": "انشاء دور جديد",
+      "roles-delete": "حذف ادوار",
+      "roles-edit": "تعديل ادوار",
+      "roles-list": "رؤية جميع الادوار",
+      "roles-activation-toggle": "تغيرر حالة الادوار",
+      "admin-users-create": "انشاء مدير نظام جديد",
+      "admin-users-show": "رؤية مدير نظام",
+      "admin-users-delete": "حذف مديرى النظام",
+      "admin-users-edit": "تعديل مديرى النظام",
+      "admin-users-list": "رؤية جميع مديرى النظام",
+      "admin-users-activation-toggle": "تغيير حالة مدير النظام",
+      "submitBtn": "ارسال",
+      "submitLoadingBtn": "جارى الارسال..."
+    },
+    "actions": {
+      "actions": "العمليات",
+      "edit": "تعديل الدور"
+    }
   }
 }

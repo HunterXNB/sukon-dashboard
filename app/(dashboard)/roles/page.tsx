@@ -2,7 +2,7 @@ import RolesTable from "@/components/RolesTable";
 import { PermissionsContextProvider } from "@/context/PermissionsContext";
 import { fetchData } from "@/lib/utils";
 import { Permission } from "@/types/Permission";
-import { ResponseMeta } from "@/types/ResponseMeta";
+import { ResponseMeta } from "@/types/response-meta";
 import { Role } from "@/types/role";
 import React from "react";
 

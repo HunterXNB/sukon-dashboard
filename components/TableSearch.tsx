@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { X } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 function TableSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -15,6 +15,7 @@ function TableSearch() {
   const search = useDebouncedCallback((value: string) => {
     const urlSearchParams = new URLSearchParams(searchParams);
     urlSearchParams.set("search", value);
+    urlSearchParams.delete("page");
     router.replace(`${pathname}?${urlSearchParams}`);
   }, 800);
   const resetSearch = () => {
@@ -22,15 +23,15 @@ function TableSearch() {
     urlSearchParams.delete("search");
     router.replace(`${pathname}?${urlSearchParams}`);
   };
-
+  const t = useTranslations("rolesTable.search");
   const locale = useLocale();
   useEffect(() => {
     if (inputRef.current && !searchTerm) inputRef.current.value = "";
   }, [searchTerm]);
   return (
-    <div className="w-fit flex flex-col relative">
+    <div className="w-fit flex flex-col relative max-w-52">
       <Input
-        placeholder="Search"
+        placeholder={t("placeholder")}
         ref={inputRef}
         defaultValue={searchTerm || undefined}
         onChange={(e) => search(e.target.value)}

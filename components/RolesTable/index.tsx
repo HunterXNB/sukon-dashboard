@@ -17,10 +17,10 @@ import {
 } from "@/components/ui/table";
 import { useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
-import { ResponseMeta } from "@/types/ResponseMeta";
+import { ResponseMeta } from "@/types/response-meta";
 import TablePagination from "../TablePagination";
 import TableSearch from "../TableSearch";
-import CreateRoleForm from "../CreateRoleForm";
+import RoleDialog from "../RoleDialog";
 
 interface DataTableProps<TValue> {
   data: Role[];
@@ -43,7 +43,7 @@ export default function DataTable<TValue>({
     <div className=" w-full max-w-[900px]">
       <div className="flex justify-between mb-2">
         <TableSearch />
-        <CreateRoleForm />
+        <RoleDialog />
       </div>
       <div className="border rounded-md w-full overflow-x-auto">
         <Table>
