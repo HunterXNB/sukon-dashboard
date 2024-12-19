@@ -29,6 +29,7 @@ export async function fetchData(
     Authorization: `Bearer ${token}`,
     "Accept-Language": locale,
     "Content-Type": "application/json",
+    mode: "no-cors",
     ...requestInit.headers,
   };
   const request = await fetch(

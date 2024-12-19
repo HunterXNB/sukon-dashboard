@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createRole, editRole } from "@/actions/roles";
 import { useLocale, useTranslations } from "next-intl";
 import { useFormServerError } from "@/hooks/useFormServerError";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 import { Button } from "@/components/ui/button";
 import {
   Form,

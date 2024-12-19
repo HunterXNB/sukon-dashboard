@@ -14,7 +14,9 @@ function PageTitle() {
   const t = useTranslations("sidebar.navigations");
 
   return (
-    <h1 className="font-bold text-lg md:text-2xl">{t(pathnames[pathname])}</h1>
+    <h1 className="font-bold text-lg md:text-2xl">
+      {t(pathnames[pathname.split("/").slice(0, 2).join("/")])}
+    </h1>
   );
 }
 

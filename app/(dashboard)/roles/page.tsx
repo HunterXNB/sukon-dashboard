@@ -1,17 +1,17 @@
-import RolesTable from "@/components/RolesTable";
-import { PermissionsContextProvider } from "@/context/PermissionsContext";
-import { fetchData } from "@/lib/utils";
-import { Permission } from "@/types/Permission";
-import { ResponseMeta } from "@/types/response-meta";
-import { Role } from "@/types/role";
-import React from "react";
+import { getUser } from "@/actions/auth";
+import { LoadingTable } from "@/components/DataTable";
+import columns from "@/components/roles/columns";
+import EditRole from "@/components/roles/EditRole";
+import RoleActionDialog from "@/components/roles/RoleActionDialog";
+import RolesTable from "@/components/roles/RolesTable";
+import React, { Suspense } from "react";
 
 async function RolesPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { search, page } = await searchParams;
+  const { search, page, status } = await searchParams;
   const urlSearchParams = new URLSearchParams();
   if (search) {
     if (typeof search === "string") urlSearchParams.append("search", search);
@@ -25,21 +25,29 @@ async function RolesPage({
       urlSearchParams.append("page", page[0]);
     }
   }
-  const req = await fetchData(`/roles/index?${urlSearchParams}`);
-  if (!req.ok) throw new Error("An error occured, Please try again later.");
-  const data = (await req.json()).data;
-  const roles = data.data as Role[];
-  const rolesMeta: ResponseMeta = data.meta;
-  const permissionsReq = await fetchData("/permissions/list");
-  if (!permissionsReq.ok)
-    throw new Error("An error occured, Please try again later.");
-  const permissions = (await permissionsReq.json()).data as Permission[];
+  if (status) {
+    if (typeof status === "string") urlSearchParams.append("status", status);
+    else {
+      urlSearchParams.append("status", status[0]);
+    }
+  }
+  const user = await getUser();
   return (
-    <PermissionsContextProvider permissionsList={permissions}>
-      <div className="flex-1 flex items-center justify-center w-full">
-        <RolesTable data={roles} meta={rolesMeta} />
-      </div>
-    </PermissionsContextProvider>
+    <div className="flex-1 flex items-center justify-center w-full">
+      <Suspense
+        key={`${page}-${search}-${status}`}
+        fallback={<LoadingTable columns={columns} />}
+      >
+        <RolesTable searchParams={urlSearchParams} />
+      </Suspense>
+      {user?.permissions.includes("roles-delete") && (
+        <RoleActionDialog type="delete" />
+      )}
+      {user?.permissions.includes("roles-activation-toggle") && (
+        <RoleActionDialog type="activeToggle" />
+      )}
+      {user?.permissions.includes("roles-edit") && <EditRole />}
+    </div>
   );
 }
 

@@ -1,3 +1,5 @@
+import { PermissionName } from "./Permission";
+
 export type User = {
   avatar: string;
   email: string;
@@ -6,5 +8,5 @@ export type User = {
   mobile: string;
   name: string;
   role: string;
-  permissions: string[];
+  permissions: PermissionName[];
 };

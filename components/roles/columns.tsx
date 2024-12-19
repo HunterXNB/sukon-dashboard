@@ -1,0 +1,144 @@
+"use client";
+
+import { Role } from "@/types/role";
+import { CellContext, ColumnDef, HeaderContext } from "@tanstack/react-table";
+import { Badge } from "../ui/badge";
+import { useTranslations } from "next-intl";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { MoreHorizontal } from "lucide-react";
+import { parseAsInteger, useQueryState } from "nuqs";
+import { useUser } from "@/context/AuthContext";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+const columns: ColumnDef<Role>[] = [
+  {
+    accessorKey: "id",
+    header: HeaderCell,
+  },
+  {
+    accessorKey: "name",
+    header: HeaderCell,
+  },
+  {
+    accessorKey: "is_active",
+    header: StatusHeaderCell,
+    cell: StatusCell,
+  },
+  {
+    id: "actions",
+    cell: ActionCell,
+  },
+];
+function ActionCell({ row }: CellContext<Role, unknown>) {
+  const role = row.original;
+  const [, setRoleEditId] = useQueryState("roleEditId", parseAsInteger);
+  const [, setActiveToggleId] = useQueryState("activeToggleId", parseAsInteger);
+  const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
+  const user = useUser();
+  const t = useTranslations("rolesTable.actions");
+  return user.permissions.filter(
+    (el) =>
+      el === "roles-edit" ||
+      el === "roles-delete" ||
+      el === "roles-activation-toggle"
+  ).length > 0 ? (
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          {user.permissions.includes("roles-edit") && (
+            <DropdownMenuItem
+              onClick={() => {
+                setRoleEditId(role.id);
+              }}
+            >
+              {t("edit")}
+            </DropdownMenuItem>
+          )}
+          {user.permissions.includes("roles-activation-toggle") && (
+            <DropdownMenuItem onClick={() => setActiveToggleId(role.id)}>
+              {role.is_active ? t("status.inactive") : t("status.active")}
+            </DropdownMenuItem>
+          )}
+          {user.permissions.includes("roles-delete") && (
+            <DropdownMenuItem onClick={() => setDeleteId(role.id)}>
+              {t("delete")}
+            </DropdownMenuItem>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  ) : null;
+}
+function StatusCell({ row }: CellContext<Role, unknown>) {
+  const isActive = row.getValue("is_active");
+  const t = useTranslations("rolesTable.body.status");
+  return (
+    <Badge variant={isActive ? "default" : "destructive"}>
+      {isActive ? t("active") : t("notActive")}
+    </Badge>
+  );
+}
+function HeaderCell({ header }: HeaderContext<Role, unknown>) {
+  const t = useTranslations("rolesTable.header");
+  return <>{t(header.id)}</>;
+}
+function StatusHeaderCell() {
+  const t = useTranslations("rolesTable.header.isActive");
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const status = searchParams.get("status");
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant={"extra"}>{t("title")}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {[
+          {
+            value: "inactive",
+            label: t("notActive"),
+          },
+          {
+            value: "active",
+            label: t("active"),
+          },
+          { value: null, label: t("both") },
+        ].map((el) => (
+          <DropdownMenuItem
+            disabled={el.value === status}
+            onClick={() => {
+              const urlSearchParams = new URLSearchParams(searchParams);
+              urlSearchParams.delete("page");
+              if (el.value) {
+                urlSearchParams.set("status", el.value);
+              } else {
+                urlSearchParams.delete("status");
+              }
+              router.push(`${pathname}?${urlSearchParams}`);
+            }}
+            key={el.value}
+          >
+            {el.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+export default columns;

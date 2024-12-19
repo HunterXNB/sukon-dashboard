@@ -69,7 +69,7 @@ function SidebarContent() {
                 <SidebarMenuButton
                   className={cn("", {
                     " bg-sidebar-accent text-sidebar-accent-foreground":
-                      pathname === link.link,
+                      pathname.startsWith(link.link),
                   })}
                   asChild
                 >

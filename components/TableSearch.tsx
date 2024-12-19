@@ -21,6 +21,7 @@ function TableSearch() {
   const resetSearch = () => {
     const urlSearchParams = new URLSearchParams(searchParams);
     urlSearchParams.delete("search");
+    urlSearchParams.delete("page");
     router.replace(`${pathname}?${urlSearchParams}`);
   };
   const t = useTranslations("rolesTable.search");

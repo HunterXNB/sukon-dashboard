@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import TanstackQueryClientProvider from "@/components/TanstackQueryClientProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/toaster";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 const IBM = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -33,7 +34,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <TanstackQueryClientProvider>
-              {children}
+              <NuqsAdapter>{children}</NuqsAdapter>
               <Toaster />
               <ReactQueryDevtools
                 buttonPosition="top-right"

@@ -119,7 +119,29 @@
     },
     "actions": {
       "actions": "Actions",
-      "edit": "Edit Role"
+      "edit": "Edit Role",
+      "delete": "Delete Role",
+      "status": {
+        "active": "Deactivate Role",
+        "inactive": "Activate Role"
+      }
+    },
+    "table": {
+      "noResult": "No data to show.",
+      "noPermission": "You don't have permission to access this page."
+    },
+    "toggleStatusDialog": {
+      "active": {
+        "assignedToUser": "Role ({name}) is assigned to a system manager, do you want to deactivate this role?",
+        "notAssigned": "Are you sure want to deactivate role ({name})?"
+      },
+      "notActive": {
+        "title": "Do you want to activate this role ({name}) ?"
+      }
+    },
+    "deleteRoleDialog": {
+      "assigned": "Can't delete role ({name}) because it's assigned to a user.",
+      "notAssigned": "Are you sure want to delete role ({name})?"
     }
   }
 }

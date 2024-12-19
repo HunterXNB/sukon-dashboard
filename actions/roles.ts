@@ -101,3 +101,47 @@ export async function editRole(
     locale,
   };
 }
+export async function toggleRoleActiveStatus(
+  state:
+    | {
+        type: "success" | "error";
+        message: string;
+      }
+    | undefined,
+  id: number
+): Promise<{
+  type: "success" | "error";
+  message: string;
+}> {
+  const req = await fetchData(`/roles/${id}/activation/toggle`, {
+    method: "PUT",
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    return { type: "error", message: res.message };
+  }
+  revalidatePath("/roles");
+  return { type: "success", message: res.message };
+}
+export async function deleteRole(
+  state:
+    | {
+        type: "success" | "error";
+        message: string;
+      }
+    | undefined,
+  id: number
+): Promise<{
+  type: "success" | "error";
+  message: string;
+}> {
+  const req = await fetchData(`/roles/delete/${id}`, {
+    method: "DELETE",
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    return { type: "error", message: res.message };
+  }
+  revalidatePath("/roles");
+  return { type: "success", message: res.message };
+}

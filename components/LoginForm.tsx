@@ -1,5 +1,4 @@
 "use client";
-import React, { startTransition, useActionState, useRef } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,8 +16,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import PasswordInput from "./PasswordInput";
-import { login } from "@/actions/auth";
 import { useFormServerError } from "@/hooks/useFormServerError";
+import useLogin from "@/hooks/useLogin";
 function LoginForm() {
   const t = useTranslations("loginPage.form");
   const locale = useLocale();
@@ -30,17 +29,14 @@ function LoginForm() {
       type: "admin",
     },
   });
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const [state, action, isPending] = useActionState(login, undefined);
-  useFormServerError(form, state);
+  const { data, mutate, isPending, status } = useLogin();
+  useFormServerError(form, data);
+
   return (
     <Form {...form}>
       <form
-        ref={formRef}
         onSubmit={form.handleSubmit((v) => {
-          startTransition(() => {
-            action(v);
-          });
+          mutate(v);
         })}
         className="space-y-8"
       >
@@ -72,12 +68,16 @@ function LoginForm() {
             </FormItem>
           )}
         />
-        {state?.locale === locale &&
-          "error" in state &&
-          state.error.type === "global" && (
-            <p className="text-destructive">{state.error.message}</p>
+        {data?.locale === locale &&
+          "error" in data &&
+          data.error.type === "global" && (
+            <p className="text-destructive">{data.error.message}</p>
           )}
-        <Button disabled={isPending} className="w-full" type="submit">
+        <Button
+          disabled={isPending || (status === "success" && data === undefined)}
+          className="w-full"
+          type="submit"
+        >
           {t("loginButton")}
         </Button>
       </form>
