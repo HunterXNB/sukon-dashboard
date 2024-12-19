@@ -88,8 +88,8 @@ export async function logout() {
   cookieStore.delete("token");
   return redirect("/login");
 }
-export async function handleUnauthenticated(fromLogin: boolean = false) {
-  if (!fromLogin) return redirect("/login");
+export async function handleUnauthenticated() {
+  return redirect("/login");
 }
 
 export async function handleForbidden() {
@@ -122,5 +122,6 @@ export async function setAuthToken(token: string) {
   (await cookies()).set("token", token, {
     path: "/",
     maxAge: 30 * 24 * 60 * 60, // 30 days
+    httpOnly: true,
   });
 }

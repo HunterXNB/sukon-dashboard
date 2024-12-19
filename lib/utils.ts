@@ -21,15 +21,13 @@ export async function fetchData(
   fromLogin: boolean = false
 ): Promise<Response> {
   if (!requestInit.headers) requestInit.headers = {};
-  const token = await getUserToken();
-  const locale = await getLocale();
+  const [token, locale] = await Promise.all([getUserToken(), getLocale()]);
   requestInit.headers = {
     ["x-api-key"]: process.env.NEXT_PUBLIC_API_KEY as string,
     Accept: "application/json",
     Authorization: `Bearer ${token}`,
     "Accept-Language": locale,
     "Content-Type": "application/json",
-    mode: "no-cors",
     ...requestInit.headers,
   };
   const request = await fetch(
@@ -37,7 +35,7 @@ export async function fetchData(
     requestInit
   );
   if (request.status === 401) {
-    await handleUnauthenticated(fromLogin);
+    if (!fromLogin) await handleUnauthenticated();
   } else if (request.status === 403) {
     await handleForbidden();
   }

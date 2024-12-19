@@ -75,7 +75,12 @@
     "header": {
       "id": "ID",
       "name": "Name",
-      "is_active": "Status"
+      "isActive": {
+        "title": "Status",
+        "active": "Active",
+        "notActive": "Not Active",
+        "both": "Both"
+      }
     },
     "body": {
       "status": {
@@ -122,9 +127,10 @@
       "edit": "Edit Role",
       "delete": "Delete Role",
       "status": {
-        "active": "Deactivate Role",
-        "inactive": "Activate Role"
-      }
+        "active": "Activate Role",
+        "inactive": "Deactivate Role"
+      },
+      "show": "View Role"
     },
     "table": {
       "noResult": "No data to show.",
@@ -143,5 +149,36 @@
       "assigned": "Can't delete role ({name}) because it's assigned to a user.",
       "notAssigned": "Are you sure want to delete role ({name})?"
     }
+  },
+  "rolePage": {
+    "invalidId": "Invalid role id, please <a> click here </a> to go back to the home page.",
+    "notFound": "This role doesn't exis, please <a> click here </a> to go back to the home page.",
+    "roleName": "Role Name:",
+    "status": {
+      "statusLabel": "Status:",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "assignedToUser": {
+      "assignedToUserLabel": "Is assigned to user:",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "permissions": "Permissions",
+    "noPermissions": "No permissions available for this role."
+  },
+  "permissionsNames": {
+    "roles-show": "View Role",
+    "roles-create": "Create New Role",
+    "roles-delete": "Delete Roles",
+    "roles-edit": "Edit Roles",
+    "roles-list": "View All Roles",
+    "roles-activation-toggle": "Toggle Role Status",
+    "admin-users-create": "Create New Admin User",
+    "admin-users-show": "View Admin User",
+    "admin-users-delete": "Delete Admin Users",
+    "admin-users-edit": "Edit Admin Users",
+    "admin-users-list": "View All Admin Users",
+    "admin-users-activation-toggle": "Toggle Admin User Status"
   }
 }

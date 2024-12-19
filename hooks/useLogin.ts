@@ -24,7 +24,6 @@ export default function useLogin() {
           },
           true
         );
-
         if (!request.ok) {
           if (request.status !== 422)
             throw new Error((await request.json()).message);

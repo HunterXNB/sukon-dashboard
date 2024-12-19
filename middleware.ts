@@ -10,7 +10,11 @@ export default async function middleware(req: NextRequest) {
     if (authenticated) {
       return NextResponse.redirect(new URL("/", req.nextUrl));
     }
-  } else if (protectedRoutes.includes(req.nextUrl.pathname)) {
+  } else if (
+    protectedRoutes.includes(
+      req.nextUrl.pathname.split("/").slice(0, 2).join("/")
+    )
+  ) {
     if (!authenticated) {
       return NextResponse.redirect(new URL("/login", req.nextUrl));
     }

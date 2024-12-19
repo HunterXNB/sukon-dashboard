@@ -22,7 +22,7 @@ async function RolesTable({ searchParams }: { searchParams: URLSearchParams }) {
   return (
     <div className=" w-full max-w-[900px]">
       <div className="flex justify-between mb-2">
-        <TableSearch />
+        {req && <TableSearch />}
         {user?.permissions.includes("roles-create") && <RoleDialog />}
       </div>
       <div className="border rounded-md w-full overflow-x-auto">

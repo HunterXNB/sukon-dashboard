@@ -4,6 +4,7 @@ import columns from "@/components/roles/columns";
 import EditRole from "@/components/roles/EditRole";
 import RoleActionDialog from "@/components/roles/RoleActionDialog";
 import RolesTable from "@/components/roles/RolesTable";
+import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 
 async function RolesPage({
@@ -11,7 +12,14 @@ async function RolesPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { search, page, status } = await searchParams;
+  const [{ search, page, status }, user] = await Promise.all([
+    searchParams,
+    getUser(),
+  ]);
+  const rolesPermissions = user?.permissions.filter(
+    (el) => el.startsWith("roles") && el !== "roles-show"
+  );
+  if (rolesPermissions!.length === 0) return redirect("/");
   const urlSearchParams = new URLSearchParams();
   if (search) {
     if (typeof search === "string") urlSearchParams.append("search", search);
@@ -31,7 +39,6 @@ async function RolesPage({
       urlSearchParams.append("status", status[0]);
     }
   }
-  const user = await getUser();
   return (
     <div className="flex-1 flex items-center justify-center w-full">
       <Suspense

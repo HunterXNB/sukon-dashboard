@@ -18,7 +18,7 @@ function RoleActionDialogContent({
     type === "activeToggle" ? "activeToggleId" : "deleteId",
     parseAsInteger
   );
-  const { isFetching, data, isError, error } = useGetRole(id!, id !== null);
+  const { isFetching, data, isError, error } = useGetRole(id!);
   const closeDialog = useCallback(() => setId(null), [setId]);
   if (isFetching)
     return (

@@ -16,6 +16,7 @@ import { MoreHorizontal } from "lucide-react";
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useUser } from "@/context/AuthContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const columns: ColumnDef<Role>[] = [
   {
@@ -47,7 +48,8 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
     (el) =>
       el === "roles-edit" ||
       el === "roles-delete" ||
-      el === "roles-activation-toggle"
+      el === "roles-activation-toggle" ||
+      el === "roles-show"
   ).length > 0 ? (
     <>
       <DropdownMenu>
@@ -59,6 +61,11 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+          {user.permissions.includes("roles-show") && (
+            <DropdownMenuItem asChild>
+              <Link href={`/roles/${role.id}`}>{t("show")}</Link>
+            </DropdownMenuItem>
+          )}
           {user.permissions.includes("roles-edit") && (
             <DropdownMenuItem
               onClick={() => {

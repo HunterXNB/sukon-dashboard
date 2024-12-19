@@ -27,10 +27,8 @@
       "codeLabel": "الكود",
       "passwordLabel": "كلمة المرور",
       "passwordConfirmLabel": "تأكيد كلمة المرور",
-
       "resetPassword": "اعادة تعيين",
       "codeRequiredError": "من فضلك ادخل الكود",
-
       "passwordConfirmRequiredError": "من فضلك اعد كتابة كلمة المرور",
       "passwordNotMatchError": "كلمة المرور و تأكيد كلمة المرور غير متطابقتان"
     },
@@ -79,14 +77,14 @@
       "isActive": {
         "title": "الحالة",
         "active": "مفعل",
-        "notActive": "غير مفعل",
+        "notActive": "معطل",
         "both": "كلاهما"
       }
     },
     "body": {
       "status": {
         "active": "مفعل",
-        "notActive": "غير مفعل"
+        "notActive": "معطل"
       }
     },
     "search": {
@@ -130,7 +128,8 @@
       "status": {
         "active": "تفعيل",
         "inactive": "تعطيل"
-      }
+      },
+      "show": "عرض الدور"
     },
     "table": {
       "noResult": "لا توجد بيانات لعرضها.",
@@ -153,6 +152,32 @@
   "rolePage": {
     "invalidId": "رقم الدور غير صالح، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
     "notFound": "هذا الدور غير موجود، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
-    "roleName": "اسم الدور:"
+    "roleName": "اسم الدور:",
+    "status": {
+      "statusLabel": "الحالة:",
+      "active": "مفعل",
+      "inactive": "معطل"
+    },
+    "assignedToUser": {
+      "assignedToUserLabel": "لدى مستخدم:",
+      "yes": "نعم",
+      "no": "لا"
+    },
+    "permissions": "الصلاحيات",
+    "noPermissions": "لا يوجد صلاحيات لهذا الدور"
+  },
+  "permissionsNames": {
+    "roles-show": "رؤية دور",
+    "roles-create": "انشاء دور جديد",
+    "roles-delete": "حذف ادوار",
+    "roles-edit": "تعديل ادوار",
+    "roles-list": "رؤية جميع الادوار",
+    "roles-activation-toggle": "تغيرر حالة الادوار",
+    "admin-users-create": "انشاء مدير نظام جديد",
+    "admin-users-show": "رؤية مدير نظام",
+    "admin-users-delete": "حذف مديرى النظام",
+    "admin-users-edit": "تعديل مديرى النظام",
+    "admin-users-list": "رؤية جميع مديرى النظام",
+    "admin-users-activation-toggle": "تغيير حالة مدير النظام"
   }
 }

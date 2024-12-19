@@ -14,11 +14,13 @@ function RoleActiveToggleDialog({ type }: { type: "activeToggle" | "delete" }) {
     }
   }
   return (
-    <Dialog open={id !== null} onOpenChange={toggleDialog}>
-      <DialogContent>
-        <RoleActionDialogContent type={type} />
-      </DialogContent>
-    </Dialog>
+    id && (
+      <Dialog open={true} defaultOpen onOpenChange={toggleDialog}>
+        <DialogContent>
+          <RoleActionDialogContent type={type} />
+        </DialogContent>
+      </Dialog>
+    )
   );
 }
 

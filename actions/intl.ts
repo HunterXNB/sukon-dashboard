@@ -5,8 +5,11 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const setLanguage = async (locale: "en" | "ar") => {
-  const cookieStore = await cookies();
-  const currentLocale = await getMyLocale();
+  const [cookieStore, currentLocale] = await Promise.all([
+    cookies(),
+    getMyLocale(),
+  ]);
+
   if (currentLocale == locale) return;
   cookieStore.set("locale", locale, {
     httpOnly: true,
