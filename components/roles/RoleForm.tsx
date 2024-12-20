@@ -77,6 +77,7 @@ function RoleForm({
       id: role && role.id,
     },
   });
+  // const watched = form.watch("permissions");
   const locale = useLocale();
   const { toast } = useToast();
   const toasted = useRef(false);

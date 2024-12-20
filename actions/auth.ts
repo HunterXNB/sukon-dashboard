@@ -85,6 +85,7 @@ import { redirect } from "next/navigation";
 
 export async function logout() {
   const cookieStore = await cookies();
+  await fetchData("/auth/logout", { method: "POST" });
   cookieStore.delete("token");
   return redirect("/login");
 }

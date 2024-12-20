@@ -29,10 +29,12 @@ async function RolesTable({ searchParams }: { searchParams: URLSearchParams }) {
         {req ? (
           <DataTable columns={columns} data={roles} />
         ) : (
-          <p>{t("noPermission")}</p>
+          <p className="flex items-center justify-center h-[70dvh]">
+            {t("noPermission")}
+          </p>
         )}
       </div>
-      <TablePagination meta={rolesMeta} />
+      {req && <TablePagination meta={rolesMeta} />}
     </div>
   );
 }
