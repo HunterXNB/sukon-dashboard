@@ -119,7 +119,9 @@
       "admin-users-list": "رؤية جميع مديرى النظام",
       "admin-users-activation-toggle": "تغيير حالة مدير النظام",
       "submitBtn": "ارسال",
-      "submitLoadingBtn": "جارى الارسال..."
+      "submitLoadingBtn": "جارى الارسال...",
+      "selectShowRoleError": "من فضلك اختر صلاحية 'رؤية دور' .",
+      "selectShowAdminUserError": "من فضلك اختر صلاحية 'رؤية مدير نظام' ."
     },
     "actions": {
       "actions": "العمليات",

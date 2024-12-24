@@ -3,15 +3,16 @@ import { cn } from "@/lib/utils";
 import { ResponseMeta } from "@/types/response-meta";
 import { useLocale, useTranslations } from "next-intl";
 import React from "react";
-import { Button } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Skeleton } from "./ui/skeleton";
+import Link from "next/link";
 
 function TablePagination({
   meta,
@@ -20,7 +21,6 @@ function TablePagination({
   | { meta: ResponseMeta; isLoading?: false }
   | { meta?: ResponseMeta; isLoading: true }) {
   const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const t = useTranslations("rolesTable.pagination");
@@ -42,7 +42,7 @@ function TablePagination({
   function setPage(page: number) {
     const urlSearchParams = new URLSearchParams(searchParams);
     urlSearchParams.set("page", `${page}`);
-    router.replace(`./${pathname}?${urlSearchParams}`);
+    return urlSearchParams.toString();
   }
   const { current_page, last_page } = meta;
   return (
@@ -53,38 +53,60 @@ function TablePagination({
     >
       <span>{t("pageInfo", { num: current_page, total: last_page })}</span>
       <div className="flex gap-2">
-        <Button
-          disabled={current_page === 1}
+        <Link
           title={t("first")}
-          variant={"outline"}
-          onClick={() => setPage(1)}
+          aria-disabled={current_page === 1}
+          tabIndex={current_page === 1 ? -1 : 0}
+          className={cn(buttonVariants({ variant: "outline" }), {
+            "pointer-events-none bg-accent text-secondary-300 dark:text-white/40 opacity-50":
+              current_page === 1,
+          })}
+          prefetch
+          href={`${pathname}?${setPage(1)}`}
         >
           {locale === "en" ? <ChevronsLeft /> : <ChevronsRight />}
-        </Button>
-        <Button
-          disabled={current_page === 1}
+        </Link>
+
+        <Link
           title={t("prev")}
-          variant={"outline"}
-          onClick={() => setPage(current_page - 1)}
+          tabIndex={current_page === 1 ? -1 : 0}
+          aria-disabled={current_page === 1}
+          className={cn(buttonVariants({ variant: "outline" }), {
+            "pointer-events-none bg-accent text-secondary-300 dark:text-white/40 opacity-50":
+              current_page === 1,
+          })}
+          prefetch
+          href={`${pathname}?${setPage(current_page - 1)}`}
         >
           {locale === "en" ? <ChevronLeft /> : <ChevronRight />}
-        </Button>
-        <Button
-          disabled={current_page === last_page}
+        </Link>
+        <Link
+          tabIndex={current_page === last_page ? -1 : 0}
           title={t("next")}
-          variant={"outline"}
-          onClick={() => setPage(current_page + 1)}
+          aria-disabled={current_page === last_page}
+          className={cn(buttonVariants({ variant: "outline" }), {
+            "pointer-events-none bg-accent text-secondary-300 dark:text-white/40 opacity-50":
+              current_page === last_page,
+          })}
+          prefetch
+          href={`${pathname}?${setPage(current_page + 1)}`}
         >
           {locale === "en" ? <ChevronRight /> : <ChevronLeft />}
-        </Button>
-        <Button
-          disabled={current_page === last_page}
+        </Link>
+        <Link
+          tabIndex={current_page === last_page ? -1 : 0}
           title={t("last")}
-          variant={"outline"}
-          onClick={() => setPage(last_page)}
+          prefetch
+          aria-disabled={current_page === 1}
+          className={cn(buttonVariants({ variant: "outline" }), {
+            "pointer-events-none bg-accent text-secondary-300 dark:text-white/40 opacity-50":
+              current_page === last_page,
+          })}
+          href={`${pathname}?${setPage(last_page)}`}
         >
+          {" "}
           {locale === "en" ? <ChevronsRight /> : <ChevronsLeft />}
-        </Button>
+        </Link>
       </div>
     </div>
   );

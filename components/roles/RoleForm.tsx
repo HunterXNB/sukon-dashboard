@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from "react";
 import { usePermissionsList } from "@/context/PermissionsContext";
-import { useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -25,9 +25,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
-// import { PermissionName } from "@/types/Permission";
 import { useToast } from "@/hooks/use-toast";
 import { RoleFullData } from "@/types/role";
+import { Permission } from "@/types/Permission";
+import { roleFormSchema } from "@/schemas/roleFormSchema";
 
 // const permissionNames: {
 //   [key in PermissionName]: string;
@@ -46,17 +47,6 @@ import { RoleFullData } from "@/types/role";
 //   "admin-users-activation-toggle": "Toggle admin user activation status",
 // } as const;
 
-const formSchema = z.object({
-  name: z
-    .string({
-      required_error: "nameRequiredError",
-    })
-    .min(2, "nameRequiredError"),
-  permissions: z.array(z.number()).refine((value) => value.length > 0, {
-    message: "selectPermissionError",
-  }),
-  id: z.number().optional(),
-});
 function RoleForm({
   closeForm,
   role,
@@ -65,10 +55,12 @@ function RoleForm({
   role?: RoleFullData;
 }) {
   const permisions = usePermissionsList();
+
   const [state, action, isPending] = useActionState(
     role ? editRole : createRole,
     undefined
   );
+  const formSchema = roleFormSchema(permisions);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,7 +69,7 @@ function RoleForm({
       id: role && role.id,
     },
   });
-  // const watched = form.watch("permissions");
+  const checkedPermissions = form.watch("permissions");
   const locale = useLocale();
   const { toast } = useToast();
   const toasted = useRef(false);
@@ -97,7 +89,80 @@ function RoleForm({
       closeForm();
     }
   }, [state, toast, closeForm]);
+  useEffect(() => {
+    if (checkedPermissions.length === 0) return;
+    const permissionsById = Object.groupBy(permisions, ({ id }) => id);
+    // roles permissions filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "roles-edit" ||
+          permissionsById[id]?.[0].name === "roles-delete" ||
+          permissionsById[id]?.[0].name === "roles-activation-toggle"
+      ).length > 0
+    ) {
+      const showRoleId = permisions.find((p) => p.name === "roles-show")?.id;
+      if (!checkedPermissions.includes(showRoleId!)) {
+        form.setValue("permissions", [...checkedPermissions, showRoleId!]);
+      }
+    }
+    // admin users permissions filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "admin-users-activation-toggle" ||
+          permissionsById[id]?.[0].name === "admin-users-delete" ||
+          permissionsById[id]?.[0].name === "admin-users-edit"
+      ).length > 0
+    ) {
+      const showAdminUserId = permisions.find(
+        (p) => p.name === "admin-users-show"
+      )?.id;
+      if (!checkedPermissions.includes(showAdminUserId!)) {
+        form.setValue("permissions", [...checkedPermissions, showAdminUserId!]);
+      }
+    }
+  }, [checkedPermissions, permisions, form]);
 
+  function calculateDisabledState(
+    p: Permission,
+    fieldValue: ControllerRenderProps<
+      {
+        name: string;
+        permissions: number[];
+        id?: number | undefined;
+      },
+      "permissions"
+    >
+  ) {
+    if (fieldValue.value.length === 0) return false;
+    const groupByName = Object.groupBy(permisions, ({ name }) => name);
+    // handle roles
+    if (p.name === "roles-show") {
+      if (
+        fieldValue.value.includes(
+          groupByName["roles-activation-toggle"]![0].id
+        ) ||
+        fieldValue.value.includes(groupByName["roles-delete"]![0].id) ||
+        fieldValue.value.includes(groupByName["roles-edit"]![0].id)
+      ) {
+        return true;
+      }
+    }
+    // handle admin users
+    if (p.name === "admin-users-show") {
+      if (
+        fieldValue.value.includes(
+          groupByName["admin-users-activation-toggle"]![0].id
+        ) ||
+        fieldValue.value.includes(groupByName["admin-users-delete"]![0].id) ||
+        fieldValue.value.includes(groupByName["admin-users-edit"]![0].id)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
   return (
     <Form {...form}>
       <form
@@ -161,6 +226,10 @@ function RoleForm({
                                         )
                                       );
                                 }}
+                                disabled={calculateDisabledState(
+                                  permission,
+                                  field
+                                )}
                               />
                             </FormControl>
                             <FormLabel className="text-sm font-normal">

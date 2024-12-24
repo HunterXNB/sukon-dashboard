@@ -6,6 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 function TableSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const searchParams = useSearchParams();
@@ -22,7 +23,7 @@ function TableSearch() {
     const urlSearchParams = new URLSearchParams(searchParams);
     urlSearchParams.delete("search");
     urlSearchParams.delete("page");
-    router.replace(`${pathname}?${urlSearchParams}`);
+    return urlSearchParams;
   };
   const t = useTranslations("rolesTable.search");
   const locale = useLocale();
@@ -38,18 +39,18 @@ function TableSearch() {
         onChange={(e) => search(e.target.value)}
       />
       {searchTerm && (
-        <button
-          tabIndex={-1}
-          onClick={resetSearch}
-          type="button"
+        <Link
           className={cn(
             `absolute top-1/2 -translate-y-1/2 self-end ${
               locale === "ar" ? "translate-x-2" : "-translate-x-2"
             } text-gray-400 hover:text-destructive`
           )}
+          tabIndex={-1}
+          prefetch
+          href={`${pathname}?${resetSearch()}`}
         >
           <X />
-        </button>
+        </Link>
       )}
     </div>
   );
