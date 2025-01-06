@@ -168,6 +168,71 @@
     "permissions": "الصلاحيات",
     "noPermissions": "لا يوجد صلاحيات لهذا الدور"
   },
+  "adminsTable": {
+    "body": {
+      "status": {
+        "active": "مفعل",
+        "notActive": "معطل"
+      }
+    },
+    "header": {
+      "user_name": "الاسم",
+      "user_email": "البريد الالكترونى",
+      "user_mobile": "رقم الهاتف",
+      "user_is_active": "الحالة",
+      "user_id": "م",
+      "isActive": {
+        "active": "مفعل",
+        "notActive": "معطل",
+        "both": "كلاهما",
+        "title": "الحالة"
+      }
+    },
+    "form": {
+      "createBtn": "انشاء مدير",
+      "createTitle": "انشاء مدير جديد",
+      "name": "الاسم",
+      "email": "البريد الالكترونى",
+      "mobile": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "submitBtn": "حفظ",
+      "status": "تفعيل الحالة",
+      "avatar": "صورة الملف الشخصى",
+      "rolesSelector": {
+        "placeholder": "بحث عن طريق الاسم...",
+        "error": "حدث خطأ ما",
+        "noRoles": "لم نتمكن من العثور على أي ادوار"
+      },
+      "roles": "الادوار",
+      "nameInvalidError": "من فضلك ادخل اسم صالح.",
+      "emailInvalidError": "من فضلك ادخل بريد الكترونى صالح.",
+      "mobileInvalidError": "من فضلك ادخل رقم هاتف صالح.",
+      "invalidAvatarError": "من فضلك اختر صورة صالحة .",
+      "invalidActiveError": "من فضلك اختر حالة  الحساب .",
+      "passwordRequiredError": "من فضلك ادخل كلمة المرور",
+      "passwordInvalidError": "من فضلك ادخل كلمة مرور صالحة.",
+      "passwordMinLengthError": "من فضلك ادخل كلمة مرور اكثر من 8 حروف",
+      "passwordConfirmRequiredError": "من فضلك اعد كتابة كلمة المرور",
+      "invalidRoleTypeError": "من فضلك اختر دور صالح.",
+      "passwordMismatchError": "كلمة المرور غير متطابقة.",
+      "selector": {
+        "invalidRoleTypeError": "من فضلك اختر دور صالح.",
+        "undefined": "من فضلك اختر دور صالح."
+      },
+      "submitLoadingBtn": "جارى الارسال..."
+    },
+    "actions": {
+      "actions": "العمليات",
+      "show": "عرض البيانات",
+      "edit": "تعديل البيانات",
+      "delete": "حذف المدير",
+      "status": {
+        "active": "تفعيل",
+        "inactive": "تعطيل"
+      }
+    }
+  },
   "permissionsNames": {
     "roles-show": "رؤية دور",
     "roles-create": "انشاء دور جديد",

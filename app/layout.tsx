@@ -37,7 +37,7 @@ export default async function RootLayout({
               <NuqsAdapter>{children}</NuqsAdapter>
               <Toaster />
               <ReactQueryDevtools
-                buttonPosition="top-right"
+                buttonPosition="top-left"
                 initialIsOpen={false}
               />
             </TanstackQueryClientProvider>
