@@ -1,8 +1,8 @@
 "use client";
 import { Dialog, DialogContent } from "../../ui/dialog";
 import { parseAsInteger, useQueryState } from "nuqs";
-import RoleActionDialogContent from "./RoleActionDialogContent";
-function RoleActionDialog({ type }: { type: "activeToggle" | "delete" }) {
+import AdminActionDialogContent from "./AdminActionDialogContent";
+function AdminActionDialog({ type }: { type: "activeToggle" | "delete" }) {
   const [id, setId] = useQueryState(
     type === "activeToggle" ? "activeToggleId" : "deleteId",
     parseAsInteger
@@ -15,13 +15,13 @@ function RoleActionDialog({ type }: { type: "activeToggle" | "delete" }) {
   }
   return (
     id && (
-      <Dialog open={id !== null} defaultOpen onOpenChange={toggleDialog}>
+      <Dialog open={true} defaultOpen onOpenChange={toggleDialog}>
         <DialogContent>
-          <RoleActionDialogContent type={type} />
+          <AdminActionDialogContent type={type} />
         </DialogContent>
       </Dialog>
     )
   );
 }
 
-export default RoleActionDialog;
+export default AdminActionDialog;

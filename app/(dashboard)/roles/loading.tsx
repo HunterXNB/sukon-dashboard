@@ -5,7 +5,9 @@ import React from "react";
 function RolesTableLoadingPage() {
   return (
     <div className="flex-1 flex items-center justify-center w-full">
-      <LoadingTable columns={columns} />
+      <div className=" w-full max-w-[900px]">
+        <LoadingTable columns={columns} />
+      </div>
     </div>
   );
 }

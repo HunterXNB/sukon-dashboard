@@ -119,6 +119,11 @@
       "admin-users-edit": "Edit Admin Users",
       "admin-users-list": "View All Admin Users",
       "admin-users-activation-toggle": "Toggle Admin User Status",
+      "tiers-show": "Show Tier",
+      "tiers-list": "Show All Tiers",
+      "tiers-edit": "Edit Tier",
+      "tiers-delete": "Delete Tier",
+      "tiers-create": "Create New Tier",
       "submitBtn": "Submit",
       "submitLoadingBtn": "Submitting...",
 
@@ -170,6 +175,97 @@
     "permissions": "Permissions",
     "noPermissions": "No permissions available for this role."
   },
+  "adminsTable": {
+    "deleteAdminDialog": {
+      "title": "Are you sure you want to delete admin ({name})?"
+    },
+    "toggleStatusDialog": {
+      "active": {
+        "title": "Are you want to deactivate admin ({name})؟"
+      },
+      "notActive": {
+        "title": "Are you want to activate admin ({name})؟"
+      }
+    },
+    "body": {
+      "status": {
+        "active": "Active",
+        "notActive": "Not Active"
+      }
+    },
+    "header": {
+      "user_name": "Name",
+      "user_email": "Email",
+      "user_mobile": "Phone Number",
+      "user_is_active": "Status",
+      "user_id": "ID",
+      "isActive": {
+        "active": "Active",
+        "notActive": "Not Active",
+        "both": "Both",
+        "title": "Status"
+      }
+    },
+    "form": {
+      "createBtn": "Create Admin",
+      "createTitle": "Create New Admin",
+      "name": "Name",
+      "email": "Email",
+      "mobile": "Phone Number",
+      "password": "Password",
+      "passwordConfirm": "Password Confirm",
+      "submitBtn": "Submit",
+      "status": "Activate Account",
+      "avatar": "Avatar",
+      "rolesSelector": {
+        "placeholder": "Search by name...",
+        "error": "An error occurred while fetching roles.",
+        "noRoles": "No roles found."
+      },
+      "roles": "Roles",
+      "nameInvalidError": "Please enter a valid name.",
+      "emailInvalidError": "Please enter a valid email address.",
+      "mobileInvalidError": "Please enter a valid phone number.",
+      "invalidAvatarError": "Please upload a valid image.",
+      "invalidActiveError": "Please enter a valid status.",
+      "passwordRequiredError": "The password field is required.",
+      "passwordInvalidError": "Please enter a valid password.",
+      "passwordMinLengthError": "The password must be at least 8 characters long.",
+      "passwordConfirmRequiredError": "The password confirmation field is required.",
+      "invalidRoleTypeError": "Please enter a valid role.",
+      "passwordMismatchError": "The password confirmation does not match.",
+      "selector": {
+        "invalidRoleTypeError": "Please enter a valid role.",
+        "undefined": "Please enter a valid role."
+      },
+      "submitLoadingBtn": "Submitting..."
+    },
+    "actions": {
+      "actions": "Actions",
+      "show": "Show Details",
+      "edit": "Edit Admin",
+      "delete": "Delete Admin",
+      "status": {
+        "active": "Activate",
+        "inactive": "Deactivate"
+      }
+    }
+  },
+  "adminPage": {
+    "invalidId": "Invalid admin id, please <a> click here </a> to go back to the home page.",
+    "notFound": "This admin doesn't exist, please <a> click here </a> to go back to the home page.",
+    "adminName": "Admin Name:",
+    "status": {
+      "statusLabel": "Status:",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "roleName": "Role Name:",
+    "noRole": "No role assigned to this admin.",
+    "email": "Email:",
+    "mobile": "Phone Number:"
+  },
+
   "permissionsNames": {
     "roles-show": "View Role",
     "roles-create": "Create New Role",
@@ -182,6 +278,11 @@
     "admin-users-delete": "Delete Admin Users",
     "admin-users-edit": "Edit Admin Users",
     "admin-users-list": "View All Admin Users",
-    "admin-users-activation-toggle": "Toggle Admin User Status"
+    "admin-users-activation-toggle": "Toggle Admin User Status",
+    "tiers-show": "Show Tier",
+    "tiers-list": "Show All Tiers",
+    "tiers-edit": "Edit Tier",
+    "tiers-delete": "Delete Tier",
+    "tiers-create": "Create New Tier"
   }
 }

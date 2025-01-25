@@ -12,7 +12,8 @@ import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import AdminForm from "./AdminForm";
+
+import CreateAdminForm from "./CreateAdminForm";
 
 function AdminDialog() {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ function AdminDialog() {
         <DialogHeader>
           <DialogTitle>{t("createTitle")}</DialogTitle>
         </DialogHeader>
-        <AdminForm closeForm={() => setOpen(false)} />
+        <CreateAdminForm closeForm={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );

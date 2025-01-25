@@ -53,7 +53,7 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
   const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
   const user = useUser();
   const t = useTranslations("adminsTable.actions");
-  return user.permissions.filter(
+  return user.permissions.AdminUsers.filter(
     (el) =>
       el === "admin-users-edit" ||
       el === "admin-users-delete" ||
@@ -70,12 +70,12 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-          {user.permissions.includes("admin-users-show") && (
+          {user.permissions.AdminUsers.includes("admin-users-show") && (
             <DropdownMenuItem asChild>
               <Link href={`/admin/${admin.user.id}`}>{t("show")}</Link>
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("admin-users-edit") && (
+          {user.permissions.AdminUsers.includes("admin-users-edit") && (
             <DropdownMenuItem
               onClick={() => {
                 setAdminEditId(admin.user.id);
@@ -84,12 +84,14 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
               {t("edit")}
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("admin-users-activation-toggle") && (
+          {user.permissions.AdminUsers.includes(
+            "admin-users-activation-toggle"
+          ) && (
             <DropdownMenuItem onClick={() => setActiveToggleId(admin.user.id)}>
               {admin.user.is_active ? t("status.inactive") : t("status.active")}
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("admin-users-delete") && (
+          {user.permissions.AdminUsers.includes("admin-users-delete") && (
             <DropdownMenuItem onClick={() => setDeleteId(admin.user.id)}>
               {t("delete")}
             </DropdownMenuItem>

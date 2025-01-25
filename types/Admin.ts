@@ -6,5 +6,9 @@ export type Admin = {
     is_active: boolean;
     name: string;
     avatar: string;
+    role: {
+      id: number;
+      name: string;
+    };
   };
 };
