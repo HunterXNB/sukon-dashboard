@@ -1,4 +1,4 @@
-import RoleLoading from "../../../[id]/loading";
+import { RoleLoading } from "@/components/roles/RoleLoading";
 
 function loading() {
   return <RoleLoading isModal />;

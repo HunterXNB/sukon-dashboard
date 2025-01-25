@@ -12,7 +12,7 @@ function AdminLayout({
       <div className="flex-1 flex items-center justify-center w-full">
         {children}
       </div>
-      {modal}
+      <div className="hidden">{modal}</div>
     </>
   );
 }
