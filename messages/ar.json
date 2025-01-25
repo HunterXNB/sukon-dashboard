@@ -117,6 +117,11 @@
       "admin-users-delete": "حذف مديرى النظام",
       "admin-users-edit": "تعديل مديرى النظام",
       "admin-users-list": "رؤية جميع مديرى النظام",
+      "tiers-show": "رؤية باقة",
+      "tiers-list": "رؤية جميع الباقات",
+      "tiers-edit": "تعديل باقة",
+      "tiers-delete": "حذف باقة",
+      "tiers-create": "انشاء باقة",
       "admin-users-activation-toggle": "تغيير حالة مدير النظام",
       "submitBtn": "ارسال",
       "submitLoadingBtn": "جارى الارسال...",
@@ -231,7 +236,32 @@
         "active": "تفعيل",
         "inactive": "تعطيل"
       }
+    },
+    "toggleStatusDialog": {
+      "active": {
+        "title": "هل تريد تعطيل المدير ({name})؟"
+      },
+      "notActive": {
+        "title": "هل تريد تفعيل المدير ({name})؟"
+      }
+    },
+    "deleteAdminDialog": {
+      "title": "هل تريد حذف المدير ({name}) ؟"
     }
+  },
+  "adminPage": {
+    "invalidId": "رقم المدير غير صالح، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "notFound": "هذا المدير غير موجود، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "adminName": "اسم المدير:",
+    "status": {
+      "statusLabel": "الحالة:",
+      "active": "مفعل",
+      "inactive": "معطل"
+    },
+    "roleName": "اسم الدور:",
+    "noRole": "لا يوجد دور لهذا المدير",
+    "email": "البريد الالكترونى:",
+    "mobile": "رقم الهاتف:"
   },
   "permissionsNames": {
     "roles-show": "رؤية دور",
@@ -245,6 +275,11 @@
     "admin-users-delete": "حذف مديرى النظام",
     "admin-users-edit": "تعديل مديرى النظام",
     "admin-users-list": "رؤية جميع مديرى النظام",
-    "admin-users-activation-toggle": "تغيير حالة مدير النظام"
+    "admin-users-activation-toggle": "تغيير حالة مدير النظام",
+    "tiers-show": "رؤية باقة",
+    "tiers-list": "رؤية جميع الباقات",
+    "tiers-edit": "تعديل باقة",
+    "tiers-delete": "حذف باقة",
+    "tiers-create": "انشاء باقة"
   }
 }

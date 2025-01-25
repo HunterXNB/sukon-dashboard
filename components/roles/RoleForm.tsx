@@ -106,6 +106,18 @@ function RoleForm({
         form.setValue("permissions", [...checkedPermissions, showRoleId!]);
       }
     }
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "admin-users-create" ||
+          permissionsById[id]?.[0].name === "admin-users-edit"
+      ).length > 0
+    ) {
+      const listRolesId = permisions.find((p) => p.name === "roles-list")?.id;
+      if (!checkedPermissions.includes(listRolesId!)) {
+        form.setValue("permissions", [...checkedPermissions, listRolesId!]);
+      }
+    }
     // admin users permissions filter
     if (
       checkedPermissions.filter(
@@ -145,6 +157,15 @@ function RoleForm({
         ) ||
         fieldValue.value.includes(groupByName["roles-delete"]![0].id) ||
         fieldValue.value.includes(groupByName["roles-edit"]![0].id)
+      ) {
+        return true;
+      }
+    }
+
+    if (p.name === "roles-list") {
+      if (
+        fieldValue.value.includes(groupByName["admin-users-edit"]![0].id) ||
+        fieldValue.value.includes(groupByName["admin-users-create"]![0].id)
       ) {
         return true;
       }

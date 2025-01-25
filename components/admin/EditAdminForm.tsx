@@ -3,13 +3,14 @@ import React, {
   useActionState,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useLocale, useTranslations } from "next-intl";
 import { useFormServerError } from "@/hooks/useFormServerError";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,44 +20,43 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Loader2, Paperclip } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Admin } from "@/types/Admin";
-import { createAdminFormSchema } from "@/schemas/adminFormSchema";
-import { createAdmin } from "@/actions/admins";
+import { editAdminFormSchema } from "@/schemas/adminFormSchema";
+import { editAdmin } from "@/actions/admins";
 import { useForm } from "react-hook-form";
 import { Switch } from "../ui/switch";
-import {
-  FileInput,
-  FileUploader,
-  FileUploaderContent,
-  FileUploaderItem,
-} from "../ui/extension/file";
-import { cn } from "@/lib/utils";
-import { AspectRatio } from "../ui/aspect-ratio";
-import Image from "next/image";
+
 import RolesSelector from "./RolesSelector";
 import PasswordInput from "../PasswordInput";
 
-function AdminForm({
+function EditAdminForm({
   closeForm,
-}: //   admin,
-{
+  adminData,
+}: {
   closeForm: () => void;
-  admin?: Admin;
+  adminData: Admin;
 }) {
-  const [state, action, isPending] = useActionState(createAdmin, undefined);
-  const formSchema = createAdminFormSchema;
+  const [admin] = useState(adminData);
+  const [state, action, isPending] = useActionState(editAdmin, undefined);
+  const formSchema = editAdminFormSchema;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      role_ids: [],
-      is_active: 0,
-      avatar: [],
-      email: "",
+      role_ids: admin.user.role
+        ? [
+            {
+              label: admin.user.role.name,
+              value: admin.user.role.id,
+            },
+          ]
+        : [],
+      is_active: admin.user.is_active ? 1 : 0,
+      email: admin.user.email,
+      mobile: admin.user.mobile,
+      name: admin.user.name,
       password: "",
-      mobile: "",
-      name: "",
       passwordConfirm: "",
     },
   });
@@ -90,9 +90,10 @@ function AdminForm({
               email,
               is_active,
               password,
-              role_ids,
+              role_ids: role_ids[0]?.value ? [role_ids[0]?.value] : [],
               name,
               mobile,
+              id: admin?.user?.id,
             });
           });
         })}
@@ -199,64 +200,6 @@ function AdminForm({
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="avatar"
-          translation="adminsTable.form"
-          render={({ field }) => (
-            <FormItem>
-              <FileUploader
-                value={field.value}
-                onValueChange={field.onChange}
-                dropzoneOptions={{
-                  multiple: false,
-                  maxSize: 50 * 1024 * 1024,
-                }}
-                reSelect={true}
-              >
-                <FormLabel>{t("avatar")}</FormLabel>
-                <div className="flex *:!w-fit gap-2 items-center h-20">
-                  <FileInput
-                    className={cn(
-                      buttonVariants({
-                        size: "icon",
-                      }),
-                      "size-8"
-                    )}
-                  >
-                    <Paperclip className="size-4" />
-                    <span className="sr-only">Select your files</span>
-                  </FileInput>
-
-                  {field.value && field.value.length > 0 && (
-                    <FileUploaderContent className=" p-2 rounded-b-none rounded-t-md flex-row gap-2 ">
-                      {field.value.map((file, i) => (
-                        <FileUploaderItem
-                          key={i}
-                          index={i}
-                          aria-roledescription={`file ${i + 1} containing ${
-                            file.name
-                          }`}
-                          className="p-0 rounded-full size-20"
-                        >
-                          <AspectRatio className="size-full">
-                            <Image
-                              src={URL.createObjectURL(file)}
-                              alt={file.name}
-                              className="object-cover rounded-full"
-                              fill
-                            />
-                          </AspectRatio>
-                        </FileUploaderItem>
-                      ))}
-                    </FileUploaderContent>
-                  )}
-                </div>
-              </FileUploader>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         {state?.locale === locale &&
           "error" in state &&
           state.error.type === "global" && (
@@ -278,4 +221,4 @@ function AdminForm({
   );
 }
 
-export default AdminForm;
+export default EditAdminForm;

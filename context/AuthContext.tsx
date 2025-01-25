@@ -1,14 +1,14 @@
 "use client";
-import { User } from "@/types/user";
+import { LoggedInUser } from "@/types/user";
 import { createContext, ReactNode, useContext } from "react";
 
-const AuthContext = createContext<User>({} as User);
+const AuthContext = createContext<LoggedInUser>({} as LoggedInUser);
 
 export default function AuthContextProvider({
   children,
   user,
 }: {
-  user: User;
+  user: LoggedInUser;
   children: ReactNode;
 }) {
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;

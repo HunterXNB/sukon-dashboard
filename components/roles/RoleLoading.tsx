@@ -1,9 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import React from "react";
-function Loading() {
-  return <RoleLoading />;
-}
 export function RoleLoading({ isModal }: { isModal?: boolean }) {
   return (
     <div className="py-3 flex-1 flex flex-col gap-2">
@@ -37,5 +33,3 @@ export function RoleLoading({ isModal }: { isModal?: boolean }) {
     </div>
   );
 }
-
-export default Loading;

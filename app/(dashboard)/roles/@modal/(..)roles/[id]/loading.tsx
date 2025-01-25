@@ -1,4 +1,4 @@
-import RoleLoading from "../../../[id]/loading";
+import { RoleLoading } from "../../../[id]/loading";
 
 function loading() {
   return <RoleLoading isModal />;

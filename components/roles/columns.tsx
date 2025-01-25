@@ -44,7 +44,7 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
   const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
   const user = useUser();
   const t = useTranslations("rolesTable.actions");
-  return user.permissions.filter(
+  return user.permissions.Roles.filter(
     (el) =>
       el === "roles-edit" ||
       el === "roles-delete" ||
@@ -61,12 +61,12 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-          {user.permissions.includes("roles-show") && (
+          {user.permissions.Roles.includes("roles-show") && (
             <DropdownMenuItem asChild>
               <Link href={`/roles/${role.id}`}>{t("show")}</Link>
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("roles-edit") && (
+          {user.permissions.Roles.includes("roles-edit") && (
             <DropdownMenuItem
               onClick={() => {
                 setRoleEditId(role.id);
@@ -75,12 +75,12 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
               {t("edit")}
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("roles-activation-toggle") && (
+          {user.permissions.Roles.includes("roles-activation-toggle") && (
             <DropdownMenuItem onClick={() => setActiveToggleId(role.id)}>
               {role.is_active ? t("status.inactive") : t("status.active")}
             </DropdownMenuItem>
           )}
-          {user.permissions.includes("roles-delete") && (
+          {user.permissions.Roles.includes("roles-delete") && (
             <DropdownMenuItem onClick={() => setDeleteId(role.id)}>
               {t("delete")}
             </DropdownMenuItem>

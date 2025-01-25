@@ -95,11 +95,7 @@ export function LoadingTable<TData, TValue>({
   });
   const locale = useLocale();
   return (
-    <div className=" w-full max-w-[900px]">
-      <div className="flex justify-between mb-2">
-        <Skeleton className="w-52 h-10" />
-        <Skeleton className="w-24 h-10" />
-      </div>
+    <>
       <div className="border rounded-md w-full overflow-x-auto">
         <Table>
           <TableHeader>
@@ -143,6 +139,6 @@ export function LoadingTable<TData, TValue>({
         </Table>
       </div>
       <TablePagination isLoading />
-    </div>
+    </>
   );
 }

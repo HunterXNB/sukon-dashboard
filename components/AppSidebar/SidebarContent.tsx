@@ -20,11 +20,11 @@ const links: {
     name?: string;
   };
 } = {
-  roles: {
+  Roles: {
     name: "roles",
     link: "/roles",
   },
-  admin: {
+  AdminUsers: {
     name: "admin",
     link: "/admin",
   },
@@ -33,9 +33,9 @@ function SidebarContent() {
   const user = useUser();
   const navigationList = useMemo(() => {
     const list: (typeof links)[keyof typeof links][] = [];
-    const userPermissions = [
-      ...new Set(user.permissions.map((p) => p.split("-")[0])),
-    ];
+    const userPermissions = Object.entries(user.permissions)
+      .filter((el) => el[1].length > 0)
+      .map((el) => el[0]);
     userPermissions.forEach((p) => {
       if (links.hasOwnProperty(p)) {
         list.push(links[p]);

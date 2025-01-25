@@ -35,7 +35,9 @@ function SidebarHeader() {
               />
               <div className="-space-y-1">
                 <p>{user.name}</p>
-                <p className="text-slate-500 text-sm font-light">{user.role}</p>
+                <p className="text-slate-500 text-sm font-light">
+                  {user.role.name}
+                </p>
               </div>
             </div>
             {locale === "en" ? <ChevronRight /> : <ChevronLeft />}

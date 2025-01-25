@@ -1,7 +1,11 @@
 import { getUser } from "@/actions/auth";
+import AdminActionDialog from "@/components/admin/AdminActionDialog";
+import AdminDialog from "@/components/admin/AdminDialog";
 import AdminsTable from "@/components/admin/AdminsTable";
 import columns from "@/components/admin/columns";
+import EditAdmin from "@/components/admin/EditAdmin";
 import { LoadingTable } from "@/components/DataTable";
+import TableSearch from "@/components/TableSearch";
 import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 
@@ -14,8 +18,8 @@ async function AdminPage({
     searchParams,
     getUser(),
   ]);
-  const adminPermissions = user?.permissions.filter(
-    (el) => el.startsWith("admin-users") && el !== "admin-users-show"
+  const adminPermissions = user?.permissions.AdminUsers.filter(
+    (el) => el !== "admin-users-show"
   );
   if (adminPermissions!.length === 0) return redirect("/");
   const urlSearchParams = new URLSearchParams();
@@ -39,19 +43,31 @@ async function AdminPage({
   }
   return (
     <div className="flex-1 flex items-center justify-center w-full">
-      <Suspense
-        key={`${page}-${search}-${status}`}
-        fallback={<LoadingTable columns={columns} />}
-      >
-        <AdminsTable searchParams={urlSearchParams} />
-      </Suspense>
-      {/* {user?.permissions.includes("roles-delete") && (
-        <RoleActionDialog type="delete" />
+      <div className=" w-full max-w-[900px]">
+        <div className="flex justify-between mb-2">
+          {user?.permissions.AdminUsers.includes("admin-users-list") && (
+            <TableSearch />
+          )}
+          {user?.permissions.AdminUsers.includes("admin-users-create") && (
+            <AdminDialog />
+          )}
+        </div>
+        <Suspense
+          key={`${page}-${search}-${status}`}
+          fallback={<LoadingTable columns={columns} />}
+        >
+          <AdminsTable searchParams={urlSearchParams} />
+        </Suspense>
+      </div>
+      {user?.permissions.AdminUsers.includes("admin-users-delete") && (
+        <AdminActionDialog type="delete" />
       )}
-      {user?.permissions.includes("roles-activation-toggle") && (
-        <RoleActionDialog type="activeToggle" />
+      {user?.permissions.AdminUsers.includes(
+        "admin-users-activation-toggle"
+      ) && <AdminActionDialog type="activeToggle" />}
+      {user?.permissions.AdminUsers.includes("admin-users-edit") && (
+        <EditAdmin />
       )}
-      {user?.permissions.includes("roles-edit") && <EditRole />} */}
     </div>
   );
 }

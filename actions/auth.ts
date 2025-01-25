@@ -2,7 +2,7 @@
 
 import { fetchData } from "@/lib/utils";
 // import { ActionStateResult } from "@/types/action-state";
-import { User } from "@/types/user";
+import { LoggedInUser } from "@/types/user";
 // import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -115,7 +115,7 @@ export async function isAuthenticated() {
 export async function getUser() {
   const req = await fetchData(`/auth/view-profile`);
   if (req.ok) {
-    return (await req.json()).data.user as User;
+    return (await req.json()).data.user as LoggedInUser;
   }
   return;
 }

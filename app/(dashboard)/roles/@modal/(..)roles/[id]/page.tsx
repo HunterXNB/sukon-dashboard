@@ -1,9 +1,8 @@
+import RolePage from "@/components/roles/RolePage";
 import React from "react";
-import RolePage from "../../../[id]/page";
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  return <RolePage isModal params={Promise.resolve({ id })} />;
+  return <RolePage isModal params={params} />;
 }
 
 export default page;

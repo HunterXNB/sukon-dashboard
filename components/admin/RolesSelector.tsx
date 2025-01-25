@@ -13,6 +13,7 @@ function RolesSelector<T>({ field }: { field: T }) {
 
   return (
     <MultipleSelector
+      maxSelected={1}
       {...field}
       onSearch={async (value) => {
         const req = await fetchData(`/roles/index?search=${value}`);

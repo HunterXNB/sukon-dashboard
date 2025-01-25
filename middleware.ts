@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "./actions/auth";
-const protectedRoutes = ["/", "/roles"];
+const protectedRoutes = ["/", "/roles", "/admin"];
 export default async function middleware(req: NextRequest) {
   const authenticated = await isAuthenticated();
   if (
