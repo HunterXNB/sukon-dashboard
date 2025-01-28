@@ -30,7 +30,7 @@ function SidebarHeader() {
                 width={40}
                 height={40}
                 src={user.avatar || UserImg}
-                alt={user.name}
+                alt={user.name ?? "User"}
                 className="rounded-full object-cover object-center size-10"
               />
               <div className="-space-y-1">

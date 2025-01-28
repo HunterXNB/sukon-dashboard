@@ -17,6 +17,7 @@ import { useUser } from "@/context/AuthContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Admin } from "@/types/Admin";
+import { useState } from "react";
 
 const columns: ColumnDef<Admin>[] = [
   {
@@ -52,6 +53,7 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
   const [, setActiveToggleId] = useQueryState("activeToggleId", parseAsInteger);
   const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
   const user = useUser();
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const t = useTranslations("adminsTable.actions");
   return user.permissions.AdminUsers.filter(
     (el) =>
@@ -61,7 +63,7 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
       el === "admin-users-show"
   ).length > 0 ? (
     <>
-      <DropdownMenu>
+      <DropdownMenu open={isDropDownOpen} onOpenChange={setIsDropDownOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
@@ -77,7 +79,10 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
           )}
           {user.permissions.AdminUsers.includes("admin-users-edit") && (
             <DropdownMenuItem
-              onClick={() => {
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
                 setAdminEditId(admin.user.id);
               }}
             >
@@ -87,12 +92,26 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
           {user.permissions.AdminUsers.includes(
             "admin-users-activation-toggle"
           ) && (
-            <DropdownMenuItem onClick={() => setActiveToggleId(admin.user.id)}>
+            <DropdownMenuItem
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
+                setActiveToggleId(admin.user.id);
+              }}
+            >
               {admin.user.is_active ? t("status.inactive") : t("status.active")}
             </DropdownMenuItem>
           )}
           {user.permissions.AdminUsers.includes("admin-users-delete") && (
-            <DropdownMenuItem onClick={() => setDeleteId(admin.user.id)}>
+            <DropdownMenuItem
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
+                setDeleteId(admin.user.id);
+              }}
+            >
               {t("delete")}
             </DropdownMenuItem>
           )}

@@ -17,6 +17,7 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import { useUser } from "@/context/AuthContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 
 const columns: ColumnDef<Role>[] = [
   {
@@ -43,6 +44,8 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
   const [, setActiveToggleId] = useQueryState("activeToggleId", parseAsInteger);
   const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
   const user = useUser();
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
   const t = useTranslations("rolesTable.actions");
   return user.permissions.Roles.filter(
     (el) =>
@@ -52,7 +55,7 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
       el === "roles-show"
   ).length > 0 ? (
     <>
-      <DropdownMenu>
+      <DropdownMenu open={isDropDownOpen} onOpenChange={setIsDropDownOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
@@ -68,7 +71,10 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
           )}
           {user.permissions.Roles.includes("roles-edit") && (
             <DropdownMenuItem
-              onClick={() => {
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
                 setRoleEditId(role.id);
               }}
             >
@@ -76,12 +82,26 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
             </DropdownMenuItem>
           )}
           {user.permissions.Roles.includes("roles-activation-toggle") && (
-            <DropdownMenuItem onClick={() => setActiveToggleId(role.id)}>
+            <DropdownMenuItem
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
+                setActiveToggleId(role.id);
+              }}
+            >
               {role.is_active ? t("status.inactive") : t("status.active")}
             </DropdownMenuItem>
           )}
           {user.permissions.Roles.includes("roles-delete") && (
-            <DropdownMenuItem onClick={() => setDeleteId(role.id)}>
+            <DropdownMenuItem
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
+                setDeleteId(role.id);
+              }}
+            >
               {t("delete")}
             </DropdownMenuItem>
           )}

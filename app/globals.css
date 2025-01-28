@@ -125,7 +125,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground !pointer-events-auto;
+    @apply bg-background text-foreground;
   }
   ::-webkit-scrollbar {
     @apply w-0.5 md:w-1;

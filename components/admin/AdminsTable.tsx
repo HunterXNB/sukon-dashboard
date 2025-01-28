@@ -20,6 +20,7 @@ async function AdminsTable({
   const admins = data ? (data.data as Admin[]) : [];
   const adminsMeta: ResponseMeta = data.meta;
   const t = await getTranslations("rolesTable.table");
+
   return (
     <>
       <div className="border rounded-md w-full overflow-x-auto">

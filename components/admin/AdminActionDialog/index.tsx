@@ -13,15 +13,13 @@ function AdminActionDialog({ type }: { type: "activeToggle" | "delete" }) {
       setId(null);
     }
   }
-  return (
-    id && (
-      <Dialog open={true} defaultOpen onOpenChange={toggleDialog}>
-        <DialogContent>
-          <AdminActionDialogContent type={type} />
-        </DialogContent>
-      </Dialog>
-    )
-  );
+  return id ? (
+    <Dialog open={!!id} onOpenChange={toggleDialog}>
+      <DialogContent>
+        <AdminActionDialogContent type={type} />
+      </DialogContent>
+    </Dialog>
+  ) : null;
 }
 
 export default AdminActionDialog;

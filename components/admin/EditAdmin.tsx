@@ -14,9 +14,9 @@ function EditAdmin() {
   }
   const t = useTranslations("rolesTable.form");
 
-  return (
+  return adminId ? (
     <Dialog
-      open={adminId !== null}
+      open={!!adminId}
       onOpenChange={(s) => {
         if (!s) {
           closeDialog();
@@ -30,7 +30,7 @@ function EditAdmin() {
         <EditAdminFormContainer closeForm={closeDialog} adminId={adminId!} />
       </DialogContent>
     </Dialog>
-  );
+  ) : null;
 }
 function EditAdminFormContainer({
   adminId,

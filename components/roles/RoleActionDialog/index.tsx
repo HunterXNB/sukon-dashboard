@@ -13,15 +13,13 @@ function RoleActionDialog({ type }: { type: "activeToggle" | "delete" }) {
       setId(null);
     }
   }
-  return (
-    id && (
-      <Dialog open={id !== null} defaultOpen onOpenChange={toggleDialog}>
-        <DialogContent>
-          <RoleActionDialogContent type={type} />
-        </DialogContent>
-      </Dialog>
-    )
-  );
+  return id ? (
+    <Dialog open={!!id} onOpenChange={toggleDialog}>
+      <DialogContent>
+        <RoleActionDialogContent type={type} />
+      </DialogContent>
+    </Dialog>
+  ) : null;
 }
 
 export default RoleActionDialog;
