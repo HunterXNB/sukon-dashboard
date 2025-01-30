@@ -47,7 +47,8 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const t = useTranslations("rolesTable.actions");
-  return user.permissions.Roles.filter(
+  if (!user.permissions) return null;
+  return user?.permissions.Roles.filter(
     (el) =>
       el === "roles-edit" ||
       el === "roles-delete" ||
@@ -64,12 +65,12 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
-          {user.permissions.Roles.includes("roles-show") && (
+          {user?.permissions?.Roles.includes("roles-show") && (
             <DropdownMenuItem asChild>
               <Link href={`/roles/${role.id}`}>{t("show")}</Link>
             </DropdownMenuItem>
           )}
-          {user.permissions.Roles.includes("roles-edit") && (
+          {user.permissions?.Roles.includes("roles-edit") && (
             <DropdownMenuItem
               onPointerDown={(e) => e.preventDefault()}
               onSelect={(e) => {
@@ -81,7 +82,7 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
               {t("edit")}
             </DropdownMenuItem>
           )}
-          {user.permissions.Roles.includes("roles-activation-toggle") && (
+          {user.permissions?.Roles.includes("roles-activation-toggle") && (
             <DropdownMenuItem
               onPointerDown={(e) => e.preventDefault()}
               onSelect={(e) => {
@@ -93,7 +94,7 @@ function ActionCell({ row }: CellContext<Role, unknown>) {
               {role.is_active ? t("status.inactive") : t("status.active")}
             </DropdownMenuItem>
           )}
-          {user.permissions.Roles.includes("roles-delete") && (
+          {user.permissions?.Roles.includes("roles-delete") && (
             <DropdownMenuItem
               onPointerDown={(e) => e.preventDefault()}
               onSelect={(e) => {

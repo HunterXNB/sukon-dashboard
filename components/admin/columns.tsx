@@ -27,6 +27,7 @@ const columns: ColumnDef<Admin>[] = [
   {
     accessorKey: "user.name",
     header: HeaderCell,
+    cell: NameCell,
   },
   {
     accessorKey: "user.email",
@@ -55,6 +56,7 @@ function ActionCell({ row }: CellContext<Admin, unknown>) {
   const user = useUser();
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const t = useTranslations("adminsTable.actions");
+  if (!user.permissions) return null;
   return user.permissions.AdminUsers.filter(
     (el) =>
       el === "admin-users-edit" ||
@@ -129,10 +131,19 @@ function StatusCell({ row }: CellContext<Admin, unknown>) {
     </Badge>
   );
 }
+function NameCell({ row }: CellContext<Admin, unknown>) {
+  const first_name = row.original.user.first_name;
+  const last_name = row.original.user.last_name;
+
+  return (
+    [first_name, last_name].filter((name) => name !== null).join(" ") || "_"
+  );
+}
 function HeaderCell({ header }: HeaderContext<Admin, unknown>) {
   const t = useTranslations("adminsTable.header");
   return <>{t(header.id)}</>;
 }
+
 function StatusHeaderCell() {
   const t = useTranslations("adminsTable.header.isActive");
   const searchParams = useSearchParams();

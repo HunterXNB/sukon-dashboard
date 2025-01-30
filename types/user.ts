@@ -1,4 +1,8 @@
-import { AdminUsersPermissionName, RolesPermissionName } from "./Permission";
+import {
+  AdminUsersPermissionName,
+  RolesPermissionName,
+  TiersPermissionName,
+} from "./Permission";
 
 export type User = {
   avatar: string;
@@ -16,10 +20,12 @@ export type LoggedInUser = {
   id: number;
   is_active: boolean;
   mobile: string;
-  name: string;
-  role: { id: number; name: string };
+  first_name: string;
+  last_name: string | null;
+  role: { is_active: boolean; name: string };
   permissions: {
     Roles: RolesPermissionName[];
     AdminUsers: AdminUsersPermissionName[];
-  };
+    Tiers: TiersPermissionName[];
+  } | null;
 };

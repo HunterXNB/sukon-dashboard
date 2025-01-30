@@ -18,10 +18,10 @@ async function AdminPage({
     searchParams,
     getUser(),
   ]);
-  const adminPermissions = user?.permissions.AdminUsers.filter(
+  const adminPermissions = user?.permissions?.AdminUsers.filter(
     (el) => el !== "admin-users-show"
   );
-  if (adminPermissions!.length === 0) return redirect("/");
+  if ((adminPermissions?.length ?? 0) === 0) return redirect("/");
   const urlSearchParams = new URLSearchParams();
   if (search) {
     if (typeof search === "string") urlSearchParams.append("search", search);
@@ -45,10 +45,10 @@ async function AdminPage({
     <div className="flex-1 flex items-center justify-center w-full">
       <div className=" w-full max-w-[900px]">
         <div className="flex justify-between mb-2">
-          {user?.permissions.AdminUsers.includes("admin-users-list") && (
+          {user?.permissions?.AdminUsers.includes("admin-users-list") && (
             <TableSearch />
           )}
-          {user?.permissions.AdminUsers.includes("admin-users-create") && (
+          {user?.permissions?.AdminUsers.includes("admin-users-create") && (
             <AdminDialog />
           )}
         </div>
@@ -59,13 +59,13 @@ async function AdminPage({
           <AdminsTable searchParams={urlSearchParams} />
         </Suspense>
       </div>
-      {user?.permissions.AdminUsers.includes("admin-users-delete") && (
+      {user?.permissions?.AdminUsers.includes("admin-users-delete") && (
         <AdminActionDialog type="delete" />
       )}
-      {user?.permissions.AdminUsers.includes(
+      {user?.permissions?.AdminUsers.includes(
         "admin-users-activation-toggle"
       ) && <AdminActionDialog type="activeToggle" />}
-      {user?.permissions.AdminUsers.includes("admin-users-edit") && (
+      {user?.permissions?.AdminUsers.includes("admin-users-edit") && (
         <EditAdmin />
       )}
     </div>

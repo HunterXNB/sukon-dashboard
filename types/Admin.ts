@@ -4,7 +4,8 @@ export type Admin = {
     email: string;
     mobile: string;
     is_active: boolean;
-    name: string;
+    first_name: string | null;
+    last_name: string | null;
     avatar: string;
     role: {
       id: number;

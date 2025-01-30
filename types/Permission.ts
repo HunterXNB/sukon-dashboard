@@ -12,8 +12,17 @@ export type AdminUsersPermissionName =
   | "admin-users-edit"
   | "admin-users-delete"
   | "admin-users-activation-toggle";
+export type TiersPermissionName =
+  | "tiers-list"
+  | "tiers-show"
+  | "tiers-create"
+  | "tiers-edit"
+  | "tiers-delete";
 
-export type PermissionName = RolesPermissionName | AdminUsersPermissionName;
+export type PermissionName =
+  | RolesPermissionName
+  | AdminUsersPermissionName
+  | TiersPermissionName;
 
 export type Permission = {
   id: number;

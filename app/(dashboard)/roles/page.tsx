@@ -18,8 +18,8 @@ async function RolesPage({
     searchParams,
     getUser(),
   ]);
-  const rolesPermissions = user?.permissions.Roles;
-  if (rolesPermissions!.length === 0) return redirect("/");
+  const rolesPermissions = user?.permissions?.Roles;
+  if ((rolesPermissions?.length ?? 0) === 0) return redirect("/");
   const urlSearchParams = new URLSearchParams();
   if (search) {
     if (typeof search === "string") urlSearchParams.append("search", search);
@@ -43,8 +43,8 @@ async function RolesPage({
     <div className="flex-1 flex items-center justify-center w-full">
       <div className=" w-full max-w-[900px]">
         <div className="flex justify-between mb-2">
-          {user?.permissions.Roles.includes("roles-list") && <TableSearch />}
-          {user?.permissions.Roles.includes("roles-create") && <RoleDialog />}
+          {user?.permissions?.Roles.includes("roles-list") && <TableSearch />}
+          {user?.permissions?.Roles.includes("roles-create") && <RoleDialog />}
         </div>
         <Suspense
           key={`${urlSearchParams.get("page")}-${urlSearchParams.get(
@@ -54,14 +54,14 @@ async function RolesPage({
         >
           <RolesTable searchParams={urlSearchParams} />
         </Suspense>
-        {user?.permissions.Roles.includes("roles-delete") && (
+        {user?.permissions?.Roles.includes("roles-delete") && (
           <RoleActionDialog type="delete" />
         )}
       </div>
-      {user?.permissions.Roles.includes("roles-activation-toggle") && (
+      {user?.permissions?.Roles.includes("roles-activation-toggle") && (
         <RoleActionDialog type="activeToggle" />
       )}
-      {user?.permissions.Roles.includes("roles-edit") && <EditRole />}
+      {user?.permissions?.Roles.includes("roles-edit") && <EditRole />}
     </div>
   );
 }

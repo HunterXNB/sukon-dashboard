@@ -20,14 +20,24 @@ function ActiveToggleTitle({ admin }: { admin: Admin }) {
     return (
       <DialogHeader>
         <DialogTitle>
-          {t("active.title", { name: admin.user?.name })}
+          {t("active.title", {
+            name:
+              [admin.user?.first_name, admin.user?.last_name]
+                .filter((val) => val !== null)
+                .join(" ") || "_",
+          })}
         </DialogTitle>
       </DialogHeader>
     );
   return (
     <DialogHeader>
       <DialogTitle>
-        {t("notActive.title", { name: admin.user?.name })}
+        {t("notActive.title", {
+          name:
+            [admin.user?.first_name, admin.user?.last_name]
+              .filter((val) => val !== null)
+              .join(" ") || "_",
+        })}
       </DialogTitle>
     </DialogHeader>
   );
@@ -38,7 +48,10 @@ function DeleteAdminTitle({ admin }: { admin: Admin }) {
     <DialogHeader>
       <DialogTitle>
         {t("title", {
-          name: admin.user?.name,
+          name:
+            [admin.user?.first_name, admin.user?.last_name]
+              .filter((val) => val !== null)
+              .join(" ") || "_",
         })}
       </DialogTitle>
     </DialogHeader>

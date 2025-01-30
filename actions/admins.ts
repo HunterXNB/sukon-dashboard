@@ -1,9 +1,6 @@
 "use server";
 import { fetchData } from "@/lib/utils";
-import {
-  createAdminFormSchema,
-  editAdminFormSchema,
-} from "@/schemas/adminFormSchema";
+import { createAdminFormSchema } from "@/schemas/adminFormSchema";
 import { ActionStateResult } from "@/types/action-state";
 import { Admin } from "@/types/Admin";
 import { getLocale } from "next-intl/server";
@@ -27,6 +24,7 @@ export async function createAdmin(
     body: JSON.stringify(adminData),
   });
   const res = await req.json();
+
   if (!req.ok) {
     if (req.status === 400) {
       return {
@@ -110,11 +108,9 @@ export async function getAdmin(adminId: number) {
 
 export async function editAdmin(
   state: ActionStateResult<Fields> | undefined,
-  adminData: Partial<
-    Omit<z.infer<typeof editAdminFormSchema>, "passwordConfirm" | "role_ids">
-  > & {
+  adminData: {
     id: number;
-    role_ids: number[];
+    [k: string]: unknown;
   }
 ): Promise<ActionStateResult<Fields>> {
   const locale = (await getLocale()) as "ar" | "en";

@@ -13,8 +13,8 @@ interface IProps {
 }
 export default async function RolePage({ params, isModal }: IProps) {
   const user = await getUser();
-  const hasRolesRelatedPermissions = (user?.permissions.Roles.length ?? 0) > 0;
-  if (!user?.permissions.Roles.includes("roles-show")) {
+  const hasRolesRelatedPermissions = (user?.permissions?.Roles.length ?? 0) > 0;
+  if (!user?.permissions?.Roles.includes("roles-show")) {
     if (hasRolesRelatedPermissions) {
       return redirect("/roles");
     }

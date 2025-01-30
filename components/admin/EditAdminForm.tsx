@@ -44,7 +44,7 @@ function EditAdminForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      role_ids: admin.user.role
+      role_id: admin.user.role
         ? [
             {
               label: admin.user.role.name,
@@ -55,7 +55,8 @@ function EditAdminForm({
       is_active: admin.user.is_active ? 1 : 0,
       email: admin.user.email,
       mobile: admin.user.mobile,
-      name: admin.user.name,
+      first_name: admin.user.first_name ?? "",
+      last_name: admin.user.last_name ?? "",
       password: "",
       passwordConfirm: "",
     },
@@ -85,16 +86,18 @@ function EditAdminForm({
       <form
         onSubmit={form.handleSubmit((data: z.infer<typeof formSchema>) => {
           startTransition(async () => {
-            const { email, is_active, password, role_ids, name, mobile } = data;
-            await action({
-              email,
-              is_active,
-              password,
-              role_ids: role_ids[0]?.value ? [role_ids[0]?.value] : [],
-              name,
-              mobile,
-              id: admin?.user?.id,
-            });
+            const { role_id } = data;
+            const body: Record<string, unknown> = {};
+            const dirtyFields = Object.keys(
+              form.formState.dirtyFields
+            ) as (keyof typeof data)[];
+            for (const val of dirtyFields) {
+              body[val] = data[val];
+            }
+            if (body.hasOwnProperty("role_id")) {
+              body.role_id = role_id[0]?.value;
+            }
+            await action({ ...body, id: admin?.user?.id });
           });
         })}
         className="space-y-8 w-full"
@@ -102,12 +105,26 @@ function EditAdminForm({
         <FormField
           control={form.control}
           translation="adminsTable.form"
-          name="name"
+          name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("name")}</FormLabel>
+              <FormLabel>{t("first_name")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("name")} {...field} />
+                <Input placeholder={t("first_name")} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          translation="adminsTable.form"
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("last_name")}</FormLabel>
+              <FormControl>
+                <Input placeholder={t("last_name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -127,7 +144,7 @@ function EditAdminForm({
         />
         <FormField
           control={form.control}
-          name="role_ids"
+          name="role_id"
           translation="adminsTable.form.selector"
           render={({ field }) => (
             <FormItem>

@@ -6,6 +6,7 @@ import TablePagination from "../TablePagination";
 import { Admin } from "@/types/Admin";
 import DataTable from "../DataTable";
 import columns from "./columns";
+import { redirect } from "next/navigation";
 
 async function AdminsTable({
   searchParams,
@@ -14,9 +15,11 @@ async function AdminsTable({
 }) {
   const user = await getUser();
   const req =
-    user?.permissions.AdminUsers.includes("admin-users-list") &&
+    user?.permissions?.AdminUsers.includes("admin-users-list") &&
     (await fetchData(`/admin-users/index?${searchParams}`));
+
   const data = req && (await req.json()).data;
+  if (!data) return redirect("/");
   const admins = data ? (data.data as Admin[]) : [];
   const adminsMeta: ResponseMeta = data.meta;
   const t = await getTranslations("rolesTable.table");

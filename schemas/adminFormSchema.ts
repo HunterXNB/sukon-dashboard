@@ -2,7 +2,12 @@ import { z } from "zod";
 import validator from "validator";
 export const createAdminFormSchema = z
   .object({
-    name: z
+    first_name: z
+      .string({
+        required_error: "nameInvalidError",
+      })
+      .min(3, "nameInvalidError"),
+    last_name: z
       .string({
         required_error: "nameInvalidError",
       })
@@ -34,7 +39,7 @@ export const createAdminFormSchema = z
         required_error: "passwordConfirmRequiredError",
       })
       .min(1, "passwordConfirmRequiredError"),
-    role_ids: z
+    role_id: z
       .array(
         z
           .object({
@@ -50,7 +55,8 @@ export const createAdminFormSchema = z
         }
       )
       .min(1, "invalidRoleTypeError")
-      .max(1, "invalidRoleTypeError"),
+      .max(1, "invalidRoleTypeError")
+      .transform(([value]) => value),
   })
   .superRefine(({ password, passwordConfirm }, ctx) => {
     if (password != passwordConfirm)
@@ -63,7 +69,12 @@ export const createAdminFormSchema = z
 
 export const editAdminFormSchema = z
   .object({
-    name: z
+    first_name: z
+      .string({
+        required_error: "nameInvalidError",
+      })
+      .min(3, "nameInvalidError"),
+    last_name: z
       .string({
         required_error: "nameInvalidError",
       })
@@ -95,7 +106,7 @@ export const editAdminFormSchema = z
       z.string().min(1, "passwordConfirmRequiredError"),
       z.literal("").transform(() => undefined),
     ]),
-    role_ids: z
+    role_id: z
       .array(
         z.object({
           value: z.coerce.number({

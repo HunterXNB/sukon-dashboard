@@ -36,12 +36,12 @@ function CreateAdminForm({ closeForm }: { closeForm: () => void }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      role_ids: [],
       is_active: 0,
       email: "",
       password: "",
       mobile: "",
-      name: "",
+      first_name: "",
+      last_name: "",
       passwordConfirm: "",
     },
   });
@@ -70,13 +70,22 @@ function CreateAdminForm({ closeForm }: { closeForm: () => void }) {
       <form
         onSubmit={form.handleSubmit((data: z.infer<typeof formSchema>) => {
           startTransition(async () => {
-            const { email, is_active, password, role_ids, name, mobile } = data;
+            const {
+              email,
+              is_active,
+              password,
+              role_id,
+              first_name,
+              last_name,
+              mobile,
+            } = data;
             await action({
               email,
               is_active,
               password,
-              role_ids,
-              name,
+              role_id,
+              first_name,
+              last_name,
               mobile,
             });
           });
@@ -86,12 +95,26 @@ function CreateAdminForm({ closeForm }: { closeForm: () => void }) {
         <FormField
           control={form.control}
           translation="adminsTable.form"
-          name="name"
+          name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("name")}</FormLabel>
+              <FormLabel>{t("first_name")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("name")} {...field} />
+                <Input placeholder={t("first_name")} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          translation="adminsTable.form"
+          name="last_name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("last_name")}</FormLabel>
+              <FormControl>
+                <Input placeholder={t("last_name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -111,7 +134,7 @@ function CreateAdminForm({ closeForm }: { closeForm: () => void }) {
         />
         <FormField
           control={form.control}
-          name="role_ids"
+          name="role_id"
           translation="adminsTable.form.selector"
           render={({ field }) => (
             <FormItem>

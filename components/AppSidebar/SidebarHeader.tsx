@@ -30,11 +30,15 @@ function SidebarHeader() {
                 width={40}
                 height={40}
                 src={user.avatar || UserImg}
-                alt={user.name ?? "User"}
+                alt={"User"}
                 className="rounded-full object-cover object-center size-10"
               />
               <div className="-space-y-1">
-                <p>{user.name}</p>
+                <p>
+                  {[user.first_name, user.last_name]
+                    .filter((el) => el !== null)
+                    .join(" ")}
+                </p>
                 <p className="text-slate-500 text-sm font-light">
                   {user.role.name}
                 </p>

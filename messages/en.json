@@ -61,7 +61,8 @@
       "dashboard": "Dashboard",
       "roles": "Roles",
       "admin": "Admins",
-      "home": "Home"
+      "home": "Home",
+      "tiers": "Tiers"
     }
   },
   "logoutDialog": {
@@ -209,7 +210,8 @@
     "form": {
       "createBtn": "Create Admin",
       "createTitle": "Create New Admin",
-      "name": "Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
       "email": "Email",
       "mobile": "Phone Number",
       "password": "Password",

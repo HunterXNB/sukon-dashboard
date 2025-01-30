@@ -12,8 +12,8 @@ interface IProps {
 }
 async function AdminPage({ params }: IProps) {
   const user = await getUser();
-  const hasRolesRelatedPermissions = (user?.permissions.Roles.length ?? 0) > 0;
-  if (!user?.permissions.AdminUsers.includes("admin-users-show")) {
+  const hasRolesRelatedPermissions = (user?.permissions?.Roles.length ?? 0) > 0;
+  if (!user?.permissions?.AdminUsers.includes("admin-users-show")) {
     if (hasRolesRelatedPermissions) {
       return redirect("/roles");
     }
@@ -80,7 +80,9 @@ async function AdminPage({ params }: IProps) {
     <div className="py-3 flex-1 flex flex-col gap-2">
       <p className="flex gap-1 items-center text-xl">
         <span className="font-bold ">{t("adminName")}</span>
-        {admin.user.name}
+        {[admin.user?.first_name, admin.user?.last_name]
+          .filter((val) => val !== null)
+          .join(" ") || "_"}
       </p>
 
       <p className="flex gap-1 items-center text-xl">

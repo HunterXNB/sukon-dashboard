@@ -28,21 +28,32 @@ const links: {
     name: "admin",
     link: "/admin",
   },
+  Tiers: {
+    name: "tiers",
+    link: "/tiers",
+  },
 };
 function SidebarContent() {
   const user = useUser();
   const navigationList = useMemo(() => {
-    const list: (typeof links)[keyof typeof links][] = [];
-    const userPermissions = Object.entries(user.permissions)
-      .filter((el) => el[1].length > 0)
-      .map((el) => el[0]);
-    userPermissions.forEach((p) => {
-      if (links.hasOwnProperty(p)) {
-        list.push(links[p]);
-      }
-    });
-    return list;
-  }, [user.permissions]);
+    if (user.permissions) {
+      const list: (typeof links)[keyof typeof links][] = [];
+      const userPermissions = Object.entries(user.permissions)
+        .filter(
+          (el) =>
+            el[1].length > 0 &&
+            !(el[1].length === 1 && el[1][0].endsWith("show"))
+        )
+        .map((el) => el[0]);
+      userPermissions.forEach((p) => {
+        if (links.hasOwnProperty(p)) {
+          list.push(links[p]);
+        }
+      });
+      return list;
+    }
+    return null;
+  }, [user?.permissions]);
   const pathname = usePathname();
   const t = useTranslations("sidebar.navigations");
   return (
@@ -64,21 +75,23 @@ function SidebarContent() {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            {navigationList.map((link) => (
-              <SidebarMenuItem key={link.name}>
-                <SidebarMenuButton
-                  className={cn("", {
-                    " bg-sidebar-accent text-sidebar-accent-foreground":
-                      pathname.startsWith(link.link),
-                  })}
-                  asChild
-                >
-                  <Link href={link.link}>
-                    <span>{t(link.name)}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {navigationList
+              ? navigationList.map((link) => (
+                  <SidebarMenuItem key={link.name}>
+                    <SidebarMenuButton
+                      className={cn("", {
+                        " bg-sidebar-accent text-sidebar-accent-foreground":
+                          pathname.startsWith(link.link),
+                      })}
+                      asChild
+                    >
+                      <Link href={link.link}>
+                        <span>{t(link.name)}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))
+              : null}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>

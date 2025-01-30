@@ -11,7 +11,7 @@ import { getTranslations } from "next-intl/server";
 async function RolesTable({ searchParams }: { searchParams: URLSearchParams }) {
   const user = await getUser();
   const req =
-    user?.permissions.Roles.includes("roles-list") &&
+    user?.permissions?.Roles.includes("roles-list") &&
     (await fetchData(`/roles/index?${searchParams}`));
   const data = req && (await req.json()).data;
   const roles = data ? (data.data as Role[]) : [];
