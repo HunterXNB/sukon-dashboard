@@ -20,9 +20,15 @@ function SidebarHeader() {
   const locale = useLocale();
   const t = useTranslations("sidebar.header");
   const [isLogoutOpen, setLogoutOpen] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+
   return (
     <ShadSidebarHeader>
-      <DropdownMenu dir={locale === "en" ? "ltr" : "rtl"}>
+      <DropdownMenu
+        open={isDropDownOpen}
+        onOpenChange={setIsDropDownOpen}
+        dir={locale === "en" ? "ltr" : "rtl"}
+      >
         <DropdownMenuTrigger asChild>
           <div className="w-full flex items-center justify-between max-w-full cursor-pointer select-none  py-1 px-2 rounded transition-colors duration-500 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
             <div className="flex h-full gap-1">
@@ -48,7 +54,14 @@ function SidebarHeader() {
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-52">
-          <DropdownMenuItem onClick={() => setLogoutOpen(true)}>
+          <DropdownMenuItem
+            onPointerDown={(e) => e.preventDefault()}
+            onSelect={(e) => {
+              e.preventDefault();
+              setIsDropDownOpen(false);
+              setLogoutOpen(true);
+            }}
+          >
             <LogOut />
             <span>{t("logout")}</span>
           </DropdownMenuItem>
