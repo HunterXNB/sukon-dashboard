@@ -181,7 +181,7 @@ export async function ResetPassword(
 ): Promise<ActionStateResult<ResetPasswordFields>> {
   const locale = (await getLocale()) as "ar" | "en";
 
-  const req = await fetchData("/auth/reset-password/request", {
+  const req = await fetchData("/auth/reset-password", {
     method: "POST",
     body: JSON.stringify(userData),
   });
