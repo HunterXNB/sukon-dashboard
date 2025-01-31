@@ -1,11 +1,13 @@
 "use server";
 
 import { fetchData } from "@/lib/utils";
+import { ActionStateResult } from "@/types/action-state";
 // import { ActionStateResult } from "@/types/action-state";
 import { LoggedInUser } from "@/types/user";
 // import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getLocale } from "./intl";
 
 // export const login = async (
 //   state: ActionStateResult<"email" | "password"> | undefined,
@@ -125,4 +127,136 @@ export async function setAuthToken(token: string) {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     httpOnly: true,
   });
+}
+type SendResetPasswordEmailFields = "email";
+export async function sendResetPasswordEmail(
+  state: ActionStateResult<SendResetPasswordEmailFields> | undefined,
+  userData: {
+    email: string;
+  }
+): Promise<ActionStateResult<SendResetPasswordEmailFields>> {
+  const locale = (await getLocale()) as "ar" | "en";
+
+  const req = await fetchData("/auth/reset-password/request", {
+    method: "POST",
+    body: JSON.stringify(userData),
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    if (req.status === 400) {
+      return {
+        error: {
+          type: "validation",
+          fields: res.data,
+          message: res.message,
+        },
+        locale,
+      };
+    } else {
+      return {
+        error: {
+          type: "global",
+          message: res.message,
+        },
+        locale,
+      };
+    }
+  }
+  return {
+    success: {
+      message: res.message,
+    },
+    locale,
+  };
+}
+
+type ResetPasswordFields = "email" | "new_password" | "code";
+export async function ResetPassword(
+  state: ActionStateResult<ResetPasswordFields> | undefined,
+  userData: {
+    email: string;
+    new_password: string;
+    code: string;
+  }
+): Promise<ActionStateResult<ResetPasswordFields>> {
+  const locale = (await getLocale()) as "ar" | "en";
+
+  const req = await fetchData("/auth/reset-password/request", {
+    method: "POST",
+    body: JSON.stringify(userData),
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    if (req.status === 400) {
+      return {
+        error: {
+          type: "validation",
+          fields: res.data,
+          message: res.message,
+        },
+        locale,
+      };
+    } else {
+      return {
+        error: {
+          type: "global",
+          message: res.message,
+        },
+        locale,
+      };
+    }
+  }
+  return {
+    success: {
+      message: res.message,
+    },
+    locale,
+  };
+}
+type ChangePasswordFields =
+  | "current_password"
+  | "password"
+  | "password_confirmation";
+export async function changePassword(
+  state: ActionStateResult<ChangePasswordFields> | undefined,
+  userData: {
+    current_password: string;
+    password: string;
+    password_confirmation: string;
+  }
+): Promise<ActionStateResult<ChangePasswordFields>> {
+  const locale = (await getLocale()) as "ar" | "en";
+
+  const req = await fetchData("/auth/update-password", {
+    method: "POST",
+    body: JSON.stringify(userData),
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    if (req.status === 400) {
+      return {
+        error: {
+          type: "validation",
+          fields: res.data,
+          message: res.message,
+        },
+        locale,
+      };
+    } else {
+      return {
+        error: {
+          type: "global",
+          message: res.message,
+        },
+        locale,
+      };
+    }
+  }
+  setAuthToken(res.data.token);
+  return {
+    success: {
+      message: res.message,
+    },
+    locale,
+  };
 }

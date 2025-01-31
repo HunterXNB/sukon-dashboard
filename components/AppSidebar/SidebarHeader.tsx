@@ -12,8 +12,9 @@ import {
 import { useUser } from "@/context/AuthContext";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut, Settings } from "lucide-react";
 import LogoutDialog from "../LogoutDialog";
+import ChangePasswordDialog from "../CahngePasswordDialog";
 
 function SidebarHeader() {
   const user = useUser();
@@ -21,6 +22,8 @@ function SidebarHeader() {
   const t = useTranslations("sidebar.header");
   const [isLogoutOpen, setLogoutOpen] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] =
+    useState<boolean>(false);
 
   return (
     <ShadSidebarHeader>
@@ -65,9 +68,25 @@ function SidebarHeader() {
             <LogOut />
             <span>{t("logout")}</span>
           </DropdownMenuItem>
+          <DropdownMenuItem
+            onPointerDown={(e) => e.preventDefault()}
+            onSelect={(e) => {
+              e.preventDefault();
+              setIsDropDownOpen(false);
+              setIsChangePasswordOpen(true);
+            }}
+          >
+            <Settings />
+            <span>{t("changePassword")}</span>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <LogoutDialog isOpen={isLogoutOpen} setIsOpen={setLogoutOpen} />
+      <ChangePasswordDialog
+        key={isChangePasswordOpen.toString()}
+        isOpen={isChangePasswordOpen}
+        setIsOpen={setIsChangePasswordOpen}
+      />
     </ShadSidebarHeader>
   );
 }

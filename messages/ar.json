@@ -1,4 +1,19 @@
 {
+  "changePasswordDialog": {
+    "title": "تغيير كلمة المرور",
+    "close": "اغلاق",
+    "confirm": "تأكيد",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور الجديدة",
+    "loading": "جارى تغيير كلمة المرور ...",
+    "trigger": "تغيير كلمة المرور",
+    "passwordMinLengthError": "من فضلك ادخل كلمة مرور اكثر من 8 حروف",
+    "passwordRequiredError": "من فضلك ادخل كلمة المرور",
+    "passwordInvalidError": "كلمة المرور يجب ان تحتوى على حرف كبير و حرف صغير و رقم و علامة خاصة",
+    "passwordConfirmRequiredError": "من فضلك اعد كتابة كلمة المرور",
+    "passwordNotMatchError": "كلمة المرور و تأكيد كلمة المرور غير متطابقتان"
+  },
   "loginPage": {
     "formTitle": "تسجيل الدخول",
     "form": {
@@ -54,7 +69,8 @@
   },
   "sidebar": {
     "header": {
-      "logout": "تسجيل الخروج"
+      "logout": "تسجيل الخروج",
+      "changePassword": "تغيير كلمة المرور"
     },
     "navigations": {
       "dashboard": "لوحة التحكم",

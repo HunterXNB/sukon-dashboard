@@ -1,6 +1,12 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, {
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -14,9 +20,13 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { loginFormSchema } from "@/schemas/loginFormSchema";
 import PasswordInput from "./PasswordInput";
+import { ResetPassword, sendResetPasswordEmail } from "@/actions/auth";
+import { useFormServerError } from "@/hooks/useFormServerError";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 const emailSchema = loginFormSchema.pick({
   email: true,
 });
@@ -32,15 +42,39 @@ function ResetPasswordForm() {
 
 function SendEmailForm({ setEmail }: { setEmail: (value: string) => void }) {
   const t = useTranslations("resetPasswordPage.form");
+  const [state, action, isPending] = useActionState(
+    sendResetPasswordEmail,
+    undefined
+  );
   const form = useForm<z.infer<typeof emailSchema>>({
     resolver: zodResolver(emailSchema),
     defaultValues: {
       email: "",
     },
   });
+  const { toast } = useToast();
+  const locale = useLocale();
+  const toasted = useRef(false);
+  useFormServerError(form, state);
+  useEffect(() => {
+    if (
+      state &&
+      "success" in state &&
+      state.success.message &&
+      !toasted.current
+    ) {
+      toast({
+        title: state.success.message,
+      });
+      toasted.current = true;
+      setEmail(form.getValues().email);
+    }
+  }, [state, toast, setEmail, form]);
 
-  function onSubmit(values: z.infer<typeof emailSchema>) {
-    setEmail(values.email);
+  function onSubmit(data: z.infer<typeof emailSchema>) {
+    startTransition(async () => {
+      await action(data);
+    });
   }
 
   return (
@@ -64,14 +98,19 @@ function SendEmailForm({ setEmail }: { setEmail: (value: string) => void }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="self-end">
+        {state?.locale === locale &&
+          "error" in state &&
+          state.error.type === "global" && (
+            <p className="text-destructive">{state.error.message}</p>
+          )}
+        <Button disabled={isPending} type="submit" className="self-end">
           {t("sendCode")}
         </Button>
       </form>
     </Form>
   );
 }
-const changePasswordFormSchema = loginFormSchema
+const changePasswordFormSchema = emailSchema
   .extend({
     code: z.string({
       required_error: "codeRequiredError",
@@ -79,22 +118,45 @@ const changePasswordFormSchema = loginFormSchema
     passwordConfirm: z.string({
       required_error: "passwordConfirmRequiredError",
     }),
+    new_password: loginFormSchema.shape.password,
   })
-  .refine((data) => data.password === data.passwordConfirm, {
+  .refine((data) => data.new_password === data.passwordConfirm, {
     message: "passwordNotMatchError",
     path: ["passwordConfirm"],
   });
 
 function ChangePasswordForm({ email }: { email: string }) {
   const t = useTranslations("resetPasswordPage.form");
+  const [state, action, isPending] = useActionState(ResetPassword, undefined);
   const form = useForm<z.infer<typeof changePasswordFormSchema>>({
     resolver: zodResolver(changePasswordFormSchema),
     defaultValues: {
       email,
     },
   });
-  function onSubmit(values: z.infer<typeof changePasswordFormSchema>) {
-    console.log("onSubmit", values);
+  const { toast } = useToast();
+  const locale = useLocale();
+  const toasted = useRef(false);
+  const router = useRouter();
+  useFormServerError(form, state);
+  useEffect(() => {
+    if (
+      state &&
+      "success" in state &&
+      state.success.message &&
+      !toasted.current
+    ) {
+      toast({
+        title: state.success.message,
+      });
+      toasted.current = true;
+      router.push("/login");
+    }
+  }, [state, toast, router]);
+  function onSubmit(data: z.infer<typeof changePasswordFormSchema>) {
+    startTransition(async function () {
+      await action(data);
+    });
   }
   return (
     <Form {...form}>
@@ -129,7 +191,7 @@ function ChangePasswordForm({ email }: { email: string }) {
         />
         <FormField
           control={form.control}
-          name="password"
+          name="new_password"
           translation="resetPasswordPage.form"
           render={({ field }) => (
             <FormItem>
@@ -158,7 +220,12 @@ function ChangePasswordForm({ email }: { email: string }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        {state?.locale === locale &&
+          "error" in state &&
+          state.error.type === "global" && (
+            <p className="text-destructive">{state.error.message}</p>
+          )}
+        <Button disabled={isPending} type="submit" className="w-full">
           {t("resetPassword")}
         </Button>
       </form>

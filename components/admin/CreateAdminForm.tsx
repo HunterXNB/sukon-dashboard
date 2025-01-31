@@ -41,7 +41,6 @@ function CreateAdminForm({ closeForm }: { closeForm: () => void }) {
       password: "",
       mobile: "",
       first_name: "",
-      last_name: "",
       passwordConfirm: "",
     },
   });

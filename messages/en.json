@@ -55,7 +55,8 @@
   },
   "sidebar": {
     "header": {
-      "logout": "Logout"
+      "logout": "Logout",
+      "changePassword": "Change Password"
     },
     "navigations": {
       "dashboard": "Dashboard",
@@ -71,6 +72,21 @@
     "confirm": "Confirm",
     "loading": "Logging out",
     "trigger": "Logout"
+  },
+  "changePasswordDialog": {
+    "title": "Change Password",
+    "close": "Close",
+    "confirm": "Confirm",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "loading": "Changing password...",
+    "trigger": "Change Password",
+    "passwordMinLengthError": "The password field must be at least 8 characters.",
+    "passwordRequiredError": "The password field is required.",
+    "passwordInvalidError": "The password field must contain at one uppercase character, one lowercase character, a number and a special character.",
+    "passwordConfirmRequiredError": "The confirm password field is required.",
+    "passwordNotMatchError": "The confirm password field must match the password."
   },
   "rolesTable": {
     "header": {

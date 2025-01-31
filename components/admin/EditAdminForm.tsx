@@ -56,7 +56,7 @@ function EditAdminForm({
       email: admin.user.email,
       mobile: admin.user.mobile,
       first_name: admin.user.first_name ?? "",
-      last_name: admin.user.last_name ?? "",
+      last_name: admin.user.last_name ?? undefined,
       password: "",
       passwordConfirm: "",
     },

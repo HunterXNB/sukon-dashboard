@@ -8,10 +8,15 @@ export const createAdminFormSchema = z
       })
       .min(3, "nameInvalidError"),
     last_name: z
-      .string({
-        required_error: "nameInvalidError",
-      })
-      .min(3, "nameInvalidError"),
+      .union([
+        z
+          .string({
+            required_error: "nameInvalidError",
+          })
+          .min(3, "nameInvalidError"),
+        z.literal("").transform(() => undefined),
+      ])
+      .optional(),
     email: z
       .string({
         required_error: "emailInvalidError",
@@ -75,10 +80,15 @@ export const editAdminFormSchema = z
       })
       .min(3, "nameInvalidError"),
     last_name: z
-      .string({
-        required_error: "nameInvalidError",
-      })
-      .min(3, "nameInvalidError"),
+      .union([
+        z
+          .string({
+            required_error: "nameInvalidError",
+          })
+          .min(3, "nameInvalidError"),
+        z.literal("").transform(() => undefined),
+      ])
+      .optional(),
     email: z
       .string({
         required_error: "emailInvalidError",
