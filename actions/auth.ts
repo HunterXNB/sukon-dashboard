@@ -108,10 +108,15 @@ export async function isAuthenticated() {
   if (token) {
     const req = await fetchData(`/auth/me`, undefined, true);
     if (req.ok) {
-      return true;
+      const res = await req.json();
+
+      return res.data as {
+        is_active: boolean;
+        is_role_active: boolean;
+      };
     }
   }
-  return false;
+  return null;
 }
 
 export async function getUser() {

@@ -18,6 +18,12 @@ export default async function middleware(req: NextRequest) {
     if (!authenticated) {
       return NextResponse.redirect(new URL("/login", req.nextUrl));
     }
+    if (
+      authenticated &&
+      !(authenticated.is_active && authenticated.is_role_active) &&
+      req.nextUrl.pathname !== "/"
+    )
+      return NextResponse.redirect(new URL("/", req.nextUrl));
   }
   return NextResponse.next();
 }

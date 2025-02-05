@@ -8,8 +8,6 @@ import { usePermissionsList } from "@/context/PermissionsContext";
 import { ControllerRenderProps, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { createRole, editRole } from "@/actions/roles";
 import { useLocale, useTranslations } from "next-intl";
 import { useFormServerError } from "@/hooks/useFormServerError";
 import { Checkbox } from "../ui/checkbox";
@@ -26,9 +24,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { RoleFullData } from "@/types/role";
 import { Permission } from "@/types/Permission";
-import { roleFormSchema } from "@/schemas/roleFormSchema";
+import { TierFullData } from "@/types/Tiers";
+import { tierFormSchema } from "@/schemas/tierFormSchema";
+import { Textarea } from "../ui/textarea";
+import { createTier, editTier } from "@/actions/tiers";
 
 // const permissionNames: {
 //   [key in PermissionName]: string;
@@ -47,35 +47,41 @@ import { roleFormSchema } from "@/schemas/roleFormSchema";
 //   "admin-users-activation-toggle": "Toggle admin user activation status",
 // } as const;
 
-function RoleForm({
+function TierForm({
   closeForm,
-  role,
+  tier,
 }: {
   closeForm: () => void;
-  role?: RoleFullData;
+  tier?: TierFullData;
 }) {
   const permisions = usePermissionsList();
 
   const [state, action, isPending] = useActionState(
-    role ? editRole : createRole,
+    tier ? editTier : createTier,
     undefined
   );
-  const formSchema = roleFormSchema(permisions);
+  const formSchema = tierFormSchema(permisions);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: role?.name || "",
-      permissions: role?.permissions ? role.permissions.map((p) => p.id) : [],
-      id: role && role.id,
+      name: tier?.name || "",
+      permission_ids: tier?.permissions
+        ? tier.permissions.map((p) => p.id)
+        : [],
+      id: tier && tier.id,
+      commission: parseFloat(tier?.commission ?? "0") || 0,
+      egp_price: parseFloat(tier?.egp_price ?? "0") || 0,
+      usd_price: parseFloat(tier?.usd_price ?? "0") || 0,
+      description: tier?.description ?? "",
     },
   });
-  const checkedPermissions = form.watch("permissions");
+  const checkedPermissions = form.watch("permission_ids");
   const locale = useLocale();
   const { toast } = useToast();
   const toasted = useRef(false);
-  const t = useTranslations("rolesTable.form");
-  useFormServerError(form, state);
+  const t = useTranslations("tiersTable.form");
   const tp = useTranslations("permissionsNames");
+  useFormServerError(form, state);
   useEffect(() => {
     if (
       state &&
@@ -104,7 +110,7 @@ function RoleForm({
     ) {
       const showRoleId = permisions.find((p) => p.name === "roles-show")?.id;
       if (!checkedPermissions.includes(showRoleId!)) {
-        form.setValue("permissions", [...checkedPermissions, showRoleId!]);
+        form.setValue("permission_ids", [...checkedPermissions, showRoleId!]);
       }
     }
     if (
@@ -116,7 +122,7 @@ function RoleForm({
     ) {
       const listRolesId = permisions.find((p) => p.name === "roles-list")?.id;
       if (!checkedPermissions.includes(listRolesId!)) {
-        form.setValue("permissions", [...checkedPermissions, listRolesId!]);
+        form.setValue("permission_ids", [...checkedPermissions, listRolesId!]);
       }
     }
     // admin users permissions filter
@@ -132,7 +138,10 @@ function RoleForm({
         (p) => p.name === "admin-users-show"
       )?.id;
       if (!checkedPermissions.includes(showAdminUserId!)) {
-        form.setValue("permissions", [...checkedPermissions, showAdminUserId!]);
+        form.setValue("permission_ids", [
+          ...checkedPermissions,
+          showAdminUserId!,
+        ]);
       }
     }
     // tiers permissions filter
@@ -145,21 +154,7 @@ function RoleForm({
     ) {
       const showTierId = permisions.find((p) => p.name === "tiers-show")?.id;
       if (!checkedPermissions.includes(showTierId!)) {
-        form.setValue("permissions", [...checkedPermissions, showTierId!]);
-      }
-    }
-
-    // settings permissions filter
-    if (
-      checkedPermissions.filter(
-        (id) => permissionsById[id]?.[0].name === "settings-edit"
-      ).length > 0
-    ) {
-      const listSettingsId = permisions.find(
-        (p) => p.name === "settings-list"
-      )?.id;
-      if (!checkedPermissions.includes(listSettingsId!)) {
-        form.setValue("permissions", [...checkedPermissions, listSettingsId!]);
+        form.setValue("permission_ids", [...checkedPermissions, showTierId!]);
       }
     }
   }, [checkedPermissions, permisions, form]);
@@ -169,10 +164,14 @@ function RoleForm({
     fieldValue: ControllerRenderProps<
       {
         name: string;
-        permissions: number[];
+        permission_ids: number[];
         id?: number | undefined;
+        description: string;
+        usd_price: number;
+        egp_price: number;
+        commission: number;
       },
-      "permissions"
+      "permission_ids"
     >
   ) {
     if (fieldValue.value.length === 0) return false;
@@ -218,12 +217,6 @@ function RoleForm({
         return true;
       }
     }
-    // handle settings
-    if (p.name === "settings-list") {
-      if (fieldValue.value.includes(groupByName["settings-edit"]![0].id)) {
-        return true;
-      }
-    }
     return false;
   }
   return (
@@ -238,7 +231,7 @@ function RoleForm({
       >
         <FormField
           control={form.control}
-          translation="rolesTable.form"
+          translation="tiersTable.form"
           name="name"
           render={({ field }) => (
             <FormItem>
@@ -252,8 +245,79 @@ function RoleForm({
         />
         <FormField
           control={form.control}
-          name="permissions"
-          translation="rolesTable.form"
+          translation="tiersTable.form"
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("description")}</FormLabel>
+              <FormControl>
+                <Textarea placeholder={t("description")} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          translation="tiersTable.form"
+          name="usd_price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("usd_price")}</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min={0}
+                  placeholder={t("usd_price")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          translation="tiersTable.form"
+          name="egp_price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("egp_price")}</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min={0}
+                  placeholder={t("egp_price")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          translation="tiersTable.form"
+          name="commission"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("commission")}</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  min={0}
+                  placeholder={t("commission")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="permission_ids"
+          translation="tiersTable.form"
           render={() => (
             <FormItem>
               <div className="mb-4">
@@ -266,7 +330,7 @@ function RoleForm({
                     key={permission.id}
                     control={form.control}
                     translation="rolesTable.form"
-                    name="permissions"
+                    name="permission_ids"
                     render={({ field }) => {
                       return (
                         <FormItem
@@ -330,4 +394,4 @@ function RoleForm({
   );
 }
 
-export default RoleForm;
+export default TierForm;

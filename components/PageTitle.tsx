@@ -8,6 +8,7 @@ const pathnames: {
   "/": "home",
   "/roles": "roles",
   "/admin": "admin",
+  "/tiers": "tiers",
 };
 function PageTitle() {
   const pathname = usePathname();

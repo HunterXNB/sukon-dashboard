@@ -123,27 +123,15 @@
       "editTitle": "تعديل الدور",
       "nameRequiredError": "من فضلك ادخل اسم صالح للدور.",
       "selectPermissionError": "من فضلك اختر صلاحية للدور.",
-      "roles-show": "رؤية دور",
-      "roles-create": "انشاء دور جديد",
-      "roles-delete": "حذف ادوار",
-      "roles-edit": "تعديل ادوار",
-      "roles-list": "رؤية جميع الادوار",
-      "roles-activation-toggle": "تغيرر حالة الادوار",
-      "admin-users-create": "انشاء مدير نظام جديد",
-      "admin-users-show": "رؤية مدير نظام",
-      "admin-users-delete": "حذف مديرى النظام",
-      "admin-users-edit": "تعديل مديرى النظام",
-      "admin-users-list": "رؤية جميع مديرى النظام",
-      "tiers-show": "رؤية باقة",
-      "tiers-list": "رؤية جميع الباقات",
-      "tiers-edit": "تعديل باقة",
-      "tiers-delete": "حذف باقة",
-      "tiers-create": "انشاء باقة",
+
       "admin-users-activation-toggle": "تغيير حالة مدير النظام",
       "submitBtn": "ارسال",
       "submitLoadingBtn": "جارى الارسال...",
       "selectShowRoleError": "من فضلك اختر صلاحية 'رؤية دور' .",
-      "selectShowAdminUserError": "من فضلك اختر صلاحية 'رؤية مدير نظام' ."
+      "selectShowAdminUserError": "من فضلك اختر صلاحية 'رؤية مدير نظام' .",
+
+      "selectShowTierError": "من فضلك اختر صلاحية ’رؤية باقة' ",
+      "selectSettingsListError": "من فضلك اختر صلاحية 'رؤية الاعدادات' "
     },
     "actions": {
       "actions": "العمليات",
@@ -281,6 +269,64 @@
     "email": "البريد الالكترونى:",
     "mobile": "رقم الهاتف:"
   },
+  "tierPage": {
+    "invalidId": "رقم الباقة غير صالح، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "notFound": "هذه الباقة غير موجودة، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "tierName": "اسم الباقة:",
+    "usd_price": "السعر بالدولار:",
+    "egp_price": "السعر بالجنيه:",
+    "commission": "العمولة:",
+    "tierDescription": "الوصف:",
+    "permissions": "الصلاحيات",
+    "noPermissions": "لا يوجد صلاحيات لهذه الباقة"
+  },
+  "tiersTable": {
+    "deleteTierDialog": {
+      "title": "هل انت متأكد أنك تريد حذف الباقة ({name}) ؟"
+    },
+    "header": {
+      "id": "م",
+      "name": "الاسم",
+      "usd_price": "السعر بالدولار",
+      "egp_price": "السعر بالجنيه",
+      "commission": "العمولة"
+    },
+    "actions": {
+      "show": "رؤية تفاصيل الباقة",
+      "edit": "تعديل الباقة",
+      "delete": "حذف الباقة",
+      "actions": "العمليات"
+    },
+    "form": {
+      "createBtn": "انشاء باقة",
+      "createTitle": "انشاء باقة جديدة",
+      "name": "الاسم",
+      "description": "الوصف",
+      "usd_price": "السعر بالدولار",
+      "egp_price": "السعر بالجنيه",
+      "commission": "العمولة",
+      "permissions": "الصلاحيات",
+      "permissionsDescription": "اختر الصلاحيات التى تريد اعطائها لهذه الباقة",
+      "submitBtn": "حفظ",
+      "nameRequiredError": "من فضلك ادخل اسم صالح للباقة.",
+      "selectPermissionError": "من فضلك اختر صلاحية للباقة.",
+      "selectShowRoleError": "من فضلك اختر صلاحية 'رؤية دور' .",
+      "selectShowAdminUserError": "من فضلك اختر صلاحية 'رؤية مدير نظام' .",
+      "selectShowTierError": "من فضلك اختر صلاحية ’رؤية باقة' ",
+      "usdPriceRequiredError": "من فضلك سعر بالدولار",
+      "egpPriceRequiredError": "من فضلك ادخل سعر بالجنيه",
+      "commissionRequiredError": "من فضلك ادخل عمولة",
+      "descriptionRequiredError": "من فضلك ادخل وصف",
+      "descriptionMinLengthError": "الوصف يجب ان لا يقل عن 10 احرف",
+      "descriptionMaxLengthError": "الوصف يجب ان لا يزيد عن 500 حرف",
+      "submitLoadingBtn": "جارى الارسال...",
+      "editTitle": "تعديل الباقة"
+    },
+    "table": {
+      "noPermission": "لا يوجد صلاحية لعرض هذه البيانات.",
+      "noResult": "لا توجد بيانات لعرضها."
+    }
+  },
   "permissionsNames": {
     "roles-show": "رؤية دور",
     "roles-create": "انشاء دور جديد",
@@ -298,6 +344,8 @@
     "tiers-list": "رؤية جميع الباقات",
     "tiers-edit": "تعديل باقة",
     "tiers-delete": "حذف باقة",
-    "tiers-create": "انشاء باقة"
+    "tiers-create": "انشاء باقة",
+    "settings-list": "رؤية الإعدادات",
+    "settings-edit": "تعديل الإعدادات"
   }
 }

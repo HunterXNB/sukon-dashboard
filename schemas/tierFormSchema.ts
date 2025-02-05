@@ -1,14 +1,14 @@
 import { z } from "zod";
 import { Permission } from "@/types/Permission";
 
-export const roleFormSchema = (permissions: Permission[]) =>
+export const tierFormSchema = (permissions: Permission[]) =>
   z.object({
     name: z
       .string({
         required_error: "nameRequiredError",
       })
       .min(2, "nameRequiredError"),
-    permissions: z
+    permission_ids: z
       .array(z.number())
       .refine((value) => value.length > 0, {
         message: "selectPermissionError",
@@ -21,11 +21,29 @@ export const roleFormSchema = (permissions: Permission[]) =>
       })
       .refine((value) => validateTiersPermissions(value, permissions), {
         message: "selectShowTierError",
-      })
-      .refine((value) => validateSettingsPermissions(value, permissions), {
-        message: "selectSettingsListError",
       }),
     id: z.number().optional(),
+    usd_price: z.coerce
+      .number({
+        required_error: "usdPriceRequiredError",
+      })
+      .min(0, "usdPriceRequiredError"),
+    egp_price: z.coerce
+      .number({
+        required_error: "egpPriceRequiredError",
+      })
+      .min(0, "egpPriceRequiredError"),
+    commission: z.coerce
+      .number({
+        required_error: "commissionRequiredError",
+      })
+      .min(0, "commissionRequiredError"),
+    description: z
+      .string({
+        required_error: "descriptionRequiredError",
+      })
+      .min(10, "descriptionMinLengthError")
+      .max(500, "descriptionMaxLengthError"),
   });
 
 function validateRolePermissions(value: number[], permissions: Permission[]) {
@@ -64,7 +82,6 @@ function validateAdminUserPermissions(
   }
   return true;
 }
-
 function validateTiersPermissions(value: number[], permissions: Permission[]) {
   const permissionsById = Object.groupBy(permissions, ({ id }) => id);
   if (
@@ -74,22 +91,6 @@ function validateTiersPermissions(value: number[], permissions: Permission[]) {
   ) {
     const showTierId = permissions.find((p) => p.name === "tiers-show")?.id;
     return value.includes(showTierId!);
-  }
-  return true;
-}
-
-function validateSettingsPermissions(
-  value: number[],
-  permissions: Permission[]
-) {
-  const permissionsById = Object.groupBy(permissions, ({ id }) => id);
-  if (
-    value.some((id) => ["settings-edit"].includes(permissionsById[id]![0].name))
-  ) {
-    const listSettingsId = permissions.find(
-      (p) => p.name === "settings-list"
-    )?.id;
-    return value.includes(listSettingsId!);
   }
   return true;
 }

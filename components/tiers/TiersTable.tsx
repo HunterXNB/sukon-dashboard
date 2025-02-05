@@ -3,38 +3,35 @@ import { fetchData } from "@/lib/utils";
 import { ResponseMeta } from "@/types/response-meta";
 import { getTranslations } from "next-intl/server";
 import TablePagination from "../TablePagination";
-import { Admin } from "@/types/Admin";
 import DataTable from "../DataTable";
 import columns from "./columns";
-async function AdminsTable({
-  searchParams,
-}: {
-  searchParams: URLSearchParams;
-}) {
+import { Tier } from "@/types/Tiers";
+
+async function TiersTable({ searchParams }: { searchParams: URLSearchParams }) {
   const user = await getUser();
   const req =
-    user?.permissions?.AdminUsers.includes("admin-users-list") &&
-    (await fetchData(`/admin-users/index?${searchParams}`));
+    user?.permissions?.Tiers.includes("tiers-list") &&
+    (await fetchData(`/tiers/index?${searchParams}`));
 
   const data = req && (await req.json()).data;
-  const admins = data ? (data.data as Admin[]) : [];
-  const adminsMeta: ResponseMeta = data.meta;
-  const t = await getTranslations("rolesTable.table");
+  const tiers = data ? (data.data as Tier[]) : [];
+  const tiersMeta: ResponseMeta = data.meta;
+  const t = await getTranslations("tiersTable.table");
 
   return (
     <>
       <div className="border rounded-md w-full overflow-x-auto">
         {req ? (
-          <DataTable columns={columns} data={admins} />
+          <DataTable columns={columns} data={tiers} />
         ) : (
           <p className="flex items-center justify-center h-[70dvh]">
             {t("noPermission")}
           </p>
         )}
       </div>
-      {req && <TablePagination meta={adminsMeta} />}
+      {req && <TablePagination meta={tiersMeta} />}
     </>
   );
 }
 
-export default AdminsTable;
+export default TiersTable;

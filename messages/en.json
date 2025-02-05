@@ -124,28 +124,14 @@
       "editTitle": "Edit Role",
       "nameRequiredError": "Please enter a valid role name.",
       "selectPermissionError": "Please select at least one permission for the role.",
-      "roles-show": "View Role",
-      "roles-create": "Create New Role",
-      "roles-delete": "Delete Roles",
-      "roles-edit": "Edit Roles",
-      "roles-list": "View All Roles",
-      "roles-activation-toggle": "Toggle Role Status",
-      "admin-users-create": "Create New Admin User",
-      "admin-users-show": "View Admin User",
-      "admin-users-delete": "Delete Admin Users",
-      "admin-users-edit": "Edit Admin Users",
-      "admin-users-list": "View All Admin Users",
-      "admin-users-activation-toggle": "Toggle Admin User Status",
-      "tiers-show": "Show Tier",
-      "tiers-list": "Show All Tiers",
-      "tiers-edit": "Edit Tier",
-      "tiers-delete": "Delete Tier",
-      "tiers-create": "Create New Tier",
+
       "submitBtn": "Submit",
       "submitLoadingBtn": "Submitting...",
 
       "selectShowRoleError": "Please select 'View Role' permission.",
-      "selectShowAdminUserError": "Please select 'View Admin User' permission."
+      "selectShowAdminUserError": "Please select 'View Admin User' permission.",
+      "selectShowTierError": "Please select 'View Tier' permission.",
+      "selectSettingsListError": "Please select 'View Settings' permission."
     },
     "actions": {
       "actions": "Actions",
@@ -283,6 +269,64 @@
     "email": "Email:",
     "mobile": "Phone Number:"
   },
+  "tierPage": {
+    "invalidId": "Invalid tier id, please <a> click here </a> to go back to the home page.",
+    "notFound": "This tier doesn't exist, please <a> click here </a> to go back to the home page.",
+    "tierName": "Tier Name:",
+    "usd_price": "USD Price :",
+    "egp_price": "EGP Price :",
+    "commission": "Commission:",
+    "tierDescription": "Description:",
+    "permissions": "Permissions",
+    "noPermissions": "No permissions available for this Tier."
+  },
+  "tiersTable": {
+    "deleteTierDialog": {
+      "title": "Are you sure you want to delete tier ({name})?"
+    },
+    "header": {
+      "id": "ID",
+      "name": "Name",
+      "usd_price": "USD Price",
+      "egp_price": "EGP Price",
+      "commission": "commission"
+    },
+    "actions": {
+      "show": "Show Tier Details",
+      "edit": "Edit Tier",
+      "delete": "Delete Tier",
+      "actions": "Actions"
+    },
+    "form": {
+      "createBtn": "Create Tier",
+      "createTitle": "Create New Tier",
+      "name": "Name",
+      "description": "Description",
+      "usd_price": "USD Price",
+      "egp_price": "EGP Price",
+      "commission": "Commission",
+      "permissions": "Permissions",
+      "permissionsDescription": "Select the permissions you want to assign to this Tier",
+      "submitBtn": "Submit",
+      "nameRequiredError": "Please enter a valid tier name.",
+      "selectPermissionError": "Please select at least one permission for the Tier.",
+      "selectShowRoleError": "Please select 'View Role' permission.",
+      "selectShowAdminUserError": "Please select 'View Role' permission.",
+      "selectShowTierError": "Please select 'View Tier' permission.",
+      "usdPriceRequiredError": "Please enter a valid USD price.",
+      "egpPriceRequiredError": "Please enter a valid EGP price.",
+      "commissionRequiredError": "Please enter a valid commission.",
+      "descriptionRequiredError": "Please enter a valid description.",
+      "descriptionMinLengthError": "Description must be at least 10 characters long.",
+      "descriptionMaxLengthError": "Description must not exceed 500 characters long.",
+      "submitLoadingBtn": "Submitting...",
+      "editTitle": "Edit Tier"
+    },
+    "table": {
+      "noPermission": "You don't have permission to access this page.",
+      "noResult": "No data to show."
+    }
+  },
 
   "permissionsNames": {
     "roles-show": "View Role",
@@ -301,6 +345,8 @@
     "tiers-list": "Show All Tiers",
     "tiers-edit": "Edit Tier",
     "tiers-delete": "Delete Tier",
-    "tiers-create": "Create New Tier"
+    "tiers-create": "Create New Tier",
+    "settings-list": "View Settings",
+    "settings-edit": "Change Settings"
   }
 }

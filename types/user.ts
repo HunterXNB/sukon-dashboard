@@ -1,6 +1,7 @@
 import {
   AdminUsersPermissionName,
   RolesPermissionName,
+  SettingsPermissionName,
   TiersPermissionName,
 } from "./Permission";
 
@@ -27,5 +28,6 @@ export type LoggedInUser = {
     Roles: RolesPermissionName[];
     AdminUsers: AdminUsersPermissionName[];
     Tiers: TiersPermissionName[];
+    Settings: SettingsPermissionName[];
   } | null;
 };

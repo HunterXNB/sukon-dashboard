@@ -37,7 +37,7 @@ export async function fetchData(
   if (request.status === 401) {
     if (!fromLogin) await handleUnauthenticated();
   } else if (request.status === 403) {
-    await handleForbidden();
+    if (!fromLogin) await handleForbidden();
   }
   return request;
 }
