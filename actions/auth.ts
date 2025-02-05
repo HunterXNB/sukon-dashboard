@@ -170,49 +170,49 @@ export async function sendResetPasswordEmail(
   };
 }
 
-type ResetPasswordFields = "email" | "new_password" | "code";
-export async function ResetPassword(
-  state: ActionStateResult<ResetPasswordFields> | undefined,
-  userData: {
-    email: string;
-    new_password: string;
-    code: string;
-  }
-): Promise<ActionStateResult<ResetPasswordFields>> {
-  const locale = (await getLocale()) as "ar" | "en";
+// type ResetPasswordFields = "email" | "new_password" | "code";
+// export async function ResetPassword(
+//   state: ActionStateResult<ResetPasswordFields> | undefined,
+//   userData: {
+//     email: string;
+//     new_password: string;
+//     code: string;
+//   }
+// ): Promise<ActionStateResult<ResetPasswordFields>> {
+//   const locale = (await getLocale()) as "ar" | "en";
 
-  const req = await fetchData("/auth/reset-password", {
-    method: "POST",
-    body: JSON.stringify(userData),
-  });
-  const res = await req.json();
-  if (!req.ok) {
-    if (req.status === 400) {
-      return {
-        error: {
-          type: "validation",
-          fields: res.data,
-          message: res.message,
-        },
-        locale,
-      };
-    } else {
-      return {
-        error: {
-          type: "global",
-          message: res.message,
-        },
-        locale,
-      };
-    }
-  }
-  return {
-    success: {
-      message: res.message,
-    },
-    locale,
-  };
-}
+//   const req = await fetchData("/auth/reset-password", {
+//     method: "POST",
+//     body: JSON.stringify(userData),
+//   });
+//   const res = await req.json();
+//   if (!req.ok) {
+//     if (req.status === 400) {
+//       return {
+//         error: {
+//           type: "validation",
+//           fields: res.data,
+//           message: res.message,
+//         },
+//         locale,
+//       };
+//     } else {
+//       return {
+//         error: {
+//           type: "global",
+//           message: res.message,
+//         },
+//         locale,
+//       };
+//     }
+//   }
+//   return {
+//     success: {
+//       message: res.message,
+//     },
+//     locale,
+//   };
+// }
 type ChangePasswordFields =
   | "current_password"
   | "password"

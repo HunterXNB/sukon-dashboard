@@ -23,10 +23,11 @@ import { Button } from "./ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import { loginFormSchema } from "@/schemas/loginFormSchema";
 import PasswordInput from "./PasswordInput";
-import { ResetPassword, sendResetPasswordEmail } from "@/actions/auth";
+import { sendResetPasswordEmail } from "@/actions/auth";
 import { useFormServerError } from "@/hooks/useFormServerError";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import useResetPassword from "@/hooks/useResetPassword";
 const emailSchema = loginFormSchema.pick({
   email: true,
 });
@@ -127,7 +128,7 @@ const changePasswordFormSchema = emailSchema
 
 function ChangePasswordForm({ email }: { email: string }) {
   const t = useTranslations("resetPasswordPage.form");
-  const [state, action, isPending] = useActionState(ResetPassword, undefined);
+  const { data: state, isPending, mutate: action } = useResetPassword();
   const form = useForm<z.infer<typeof changePasswordFormSchema>>({
     resolver: zodResolver(changePasswordFormSchema),
     defaultValues: {

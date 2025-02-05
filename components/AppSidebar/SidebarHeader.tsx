@@ -62,22 +62,22 @@ function SidebarHeader() {
             onSelect={(e) => {
               e.preventDefault();
               setIsDropDownOpen(false);
-              setLogoutOpen(true);
+              setIsChangePasswordOpen(true);
             }}
           >
-            <LogOut />
-            <span>{t("logout")}</span>
+            <Settings />
+            <span>{t("changePassword")}</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             onPointerDown={(e) => e.preventDefault()}
             onSelect={(e) => {
               e.preventDefault();
               setIsDropDownOpen(false);
-              setIsChangePasswordOpen(true);
+              setLogoutOpen(true);
             }}
           >
-            <Settings />
-            <span>{t("changePassword")}</span>
+            <LogOut />
+            <span>{t("logout")}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

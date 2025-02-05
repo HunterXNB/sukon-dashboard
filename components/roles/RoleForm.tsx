@@ -134,6 +134,19 @@ function RoleForm({
         form.setValue("permissions", [...checkedPermissions, showAdminUserId!]);
       }
     }
+    // tiers permissions filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "tiers-delete" ||
+          permissionsById[id]?.[0].name === "tiers-edit"
+      ).length > 0
+    ) {
+      const showTierId = permisions.find((p) => p.name === "tiers-show")?.id;
+      if (!checkedPermissions.includes(showTierId!)) {
+        form.setValue("permissions", [...checkedPermissions, showTierId!]);
+      }
+    }
   }, [checkedPermissions, permisions, form]);
 
   function calculateDisabledState(
@@ -178,6 +191,14 @@ function RoleForm({
         ) ||
         fieldValue.value.includes(groupByName["admin-users-delete"]![0].id) ||
         fieldValue.value.includes(groupByName["admin-users-edit"]![0].id)
+      ) {
+        return true;
+      }
+    }
+    if (p.name === "tiers-show") {
+      if (
+        fieldValue.value.includes(groupByName["tiers-edit"]![0].id) ||
+        fieldValue.value.includes(groupByName["tiers-delete"]![0].id)
       ) {
         return true;
       }
