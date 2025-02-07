@@ -46,7 +46,17 @@
     "lang": "English",
     "changeLang": "Change Language"
   },
-
+  "homePage": {
+    "statisticsCard": {
+      "patientsStatisticsCardTitle": "Total Patients",
+      "doctorsStatisticsCardTitle": "Total Doctors",
+      "totalAppointmentsCardTitle": "Total Appointments",
+      "cardFooter": "<msg></msg> vs LM"
+    },
+    "topDoctors": {
+      "topDoctorsCardTitle": "Top Doctors"
+    }
+  },
   "themeToggler": {
     "light": "Light",
     "dark": "Dark",

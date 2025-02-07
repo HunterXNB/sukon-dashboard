@@ -57,6 +57,17 @@
       "title": "لوحة تحكم سكون"
     }
   },
+  "homePage": {
+    "statisticsCard": {
+      "patientsStatisticsCardTitle": "اجمالى المرضى",
+      "doctorsStatisticsCardTitle": "اجمالى الاطباء",
+      "totalAppointmentsCardTitle": "اجمالى الحجوزات",
+      "cardFooter": "<msg></msg> من الشهر الماضى"
+    },
+    "topDoctors": {
+      "topDoctorsCardTitle": "افضل الاطباء"
+    }
+  },
   "languageToggler": {
     "lang": "العربية",
     "changeLang": "تغيير اللغة"
