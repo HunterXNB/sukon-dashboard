@@ -28,12 +28,7 @@ export function TopDoctorChart() {
   const locale = useLocale();
   return (
     <ChartContainer className="flex-1 aspect-auto" config={chartConfig}>
-      <BarChart
-        className="rtl"
-        accessibilityLayer
-        data={chartData}
-        layout="vertical"
-      >
+      <BarChart accessibilityLayer data={chartData} layout="vertical">
         <XAxis
           reversed={locale === "ar"}
           type="number"

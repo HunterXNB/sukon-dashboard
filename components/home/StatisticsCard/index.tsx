@@ -18,7 +18,7 @@ export async function NumberOfDoctorsStatisticsCard() {
   });
 
   return (
-    <Card className="dark:bg-slate-900 border-none min-w-[250px]">
+    <Card className="dark:bg-slate-900 bg-muted border-none min-w-[250px]">
       <CardContent className="p-4 relative">
         <div className="space-y-2">
           <p className="text-lg font-bold">{t("doctorsStatisticsCardTitle")}</p>
@@ -50,7 +50,7 @@ export async function NumberOfPatientsStatisticsCard() {
   });
 
   return (
-    <Card className="dark:bg-slate-900 border-none min-w-[250px]">
+    <Card className="dark:bg-slate-900 bg-muted border-none min-w-[250px]">
       <CardContent className="p-4 relative">
         <div className="space-y-2">
           <p className="text-lg font-bold">
@@ -83,7 +83,7 @@ export async function NumberOfAppointmentsStatisticsCard() {
   });
 
   return (
-    <Card className="dark:bg-slate-900 border-none min-w-[250px]">
+    <Card className="dark:bg-slate-900 bg-muted border-none min-w-[250px]">
       <CardContent className="p-4 relative">
         <div className="space-y-2">
           <p className="text-lg font-bold">{t("totalAppointmentsCardTitle")}</p>

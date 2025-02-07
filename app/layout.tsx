@@ -4,7 +4,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import TanstackQueryClientProvider from "@/components/TanstackQueryClientProvider";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "@/components/ui/toaster";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 const IBM = IBM_Plex_Sans_Arabic({
@@ -36,10 +36,10 @@ export default async function RootLayout({
             <TanstackQueryClientProvider>
               <NuqsAdapter>{children}</NuqsAdapter>
               <Toaster />
-              <ReactQueryDevtools
+              {/* <ReactQueryDevtools
                 buttonPosition="top-left"
                 initialIsOpen={false}
-              />
+              /> */}
             </TanstackQueryClientProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

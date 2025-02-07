@@ -10,7 +10,7 @@ export default async function TopDoctors() {
     namespace: "homePage.topDoctors",
   });
   return (
-    <Card className="border-none h-full flex-col flex overflow-hidden dark:bg-slate-900">
+    <Card className="border-none h-full flex-col bg-muted flex overflow-hidden  dark:bg-slate-900">
       <CardHeader>
         <CardTitle>{t("topDoctorsCardTitle")}</CardTitle>
       </CardHeader>

@@ -14,7 +14,7 @@ export default async function Home() {
           <NumberOfPatientsStatisticsCard />
           <NumberOfAppointmentsStatisticsCard />
         </div>
-        <div className="flex-1 grid overflow-hidden">
+        <div className="flex-1 min-h-[400px] grid overflow-hidden">
           <TopDoctors />
         </div>
       </div>
