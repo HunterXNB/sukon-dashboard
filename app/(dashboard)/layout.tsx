@@ -24,7 +24,6 @@ export default async function DashboardLayout({ children }: IProps) {
   if (!permissionsReq.ok)
     throw new Error("An error occured, Please try again later.");
   const permissions = (await permissionsReq.json()).data as Permission[];
-  permissions.length = 19;
   return (
     <PermissionsContextProvider permissionsList={permissions}>
       <SidebarProvider>{children}</SidebarProvider>

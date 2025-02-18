@@ -32,6 +32,10 @@ const links: {
     name: "tiers",
     link: "/tiers",
   },
+  Users: {
+    name: "users",
+    link: "/users",
+  },
 };
 function SidebarContent() {
   const user = useUser();

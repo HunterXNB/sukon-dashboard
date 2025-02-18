@@ -1,15 +1,13 @@
 import { getUser } from "@/actions/auth";
 import { LoadingTable } from "@/components/DataTable";
 import columns from "@/components/roles/columns";
-import EditRole from "@/components/roles/EditRole";
-import RoleActionDialog from "@/components/roles/RoleActionDialog";
-import RoleDialog from "@/components/roles/RoleDialog";
-import RolesTable from "@/components/roles/RolesTable";
 import TableSearch from "@/components/TableSearch";
+import UserActionDialog from "@/components/users/UserActionDialog";
+import UsersTable from "@/components/users/UsersTable";
 import { redirect } from "next/navigation";
 import React, { Suspense } from "react";
 
-async function RolesPage({
+async function UsersPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -18,10 +16,10 @@ async function RolesPage({
     searchParams,
     getUser(),
   ]);
-  const rolesPermissions = user?.permissions?.Roles.filter(
-    (el) => el !== "roles-show"
+  const usersPermissions = user?.permissions?.Users.filter(
+    (el) => el !== "users-show"
   );
-  if ((rolesPermissions?.length ?? 0) === 0) return redirect("/");
+  if ((usersPermissions?.length ?? 0) === 0) return redirect("/");
   const urlSearchParams = new URLSearchParams();
   if (search) {
     if (typeof search === "string") urlSearchParams.append("search", search);
@@ -46,7 +44,6 @@ async function RolesPage({
       <div className=" w-full max-w-[900px]">
         <div className="flex justify-between mb-2">
           {user?.permissions?.Roles.includes("roles-list") && <TableSearch />}
-          {user?.permissions?.Roles.includes("roles-create") && <RoleDialog />}
         </div>
         <Suspense
           key={`${urlSearchParams.get("page")}-${urlSearchParams.get(
@@ -54,18 +51,20 @@ async function RolesPage({
           )}-${urlSearchParams.get("status")}`}
           fallback={<LoadingTable columns={columns} />}
         >
-          <RolesTable searchParams={urlSearchParams} />
+          <UsersTable searchParams={urlSearchParams} />
         </Suspense>
-        {user?.permissions?.Roles.includes("roles-delete") && (
-          <RoleActionDialog type="delete" />
+        {user?.permissions?.Users.includes("users-delete") && (
+          <UserActionDialog type="delete" />
         )}
       </div>
-      {user?.permissions?.Roles.includes("roles-activation-toggle") && (
-        <RoleActionDialog type="activeToggle" />
+      {user?.permissions?.Users.includes("users-activate") && (
+        <UserActionDialog type="activate" />
       )}
-      {user?.permissions?.Roles.includes("roles-edit") && <EditRole />}
+      {user?.permissions?.Users.includes("users-deactivate") && (
+        <UserActionDialog type="deactivate" />
+      )}
     </div>
   );
 }
 
-export default RolesPage;
+export default UsersPage;

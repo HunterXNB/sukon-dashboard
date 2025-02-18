@@ -73,7 +73,8 @@
       "roles": "Roles",
       "admin": "Admins",
       "home": "Home",
-      "tiers": "Tiers"
+      "tiers": "Tiers",
+      "users": "Users"
     }
   },
   "logoutDialog": {
@@ -337,7 +338,55 @@
       "noResult": "No data to show."
     }
   },
+  "usersTable": {
+    "table": {},
+    "header": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "created_at": "Created At",
+      "status": "Status"
+    },
+    "actions": {
+      "actions": "Actions",
+      "show": "Show Details",
+      "activate": "Activate Account",
+      "deactivate": "Deactivate Account",
+      "delete": "Delete Account"
+    },
+    "actionDialog": {
+      "activate": "Are you sure you want to activate this account ({name}) ?",
+      "deactivate": "Are you sure you want to deactivate this account ({name}) ?",
+      "delete": "Are you sure you want to delete this account ({name}) ?"
+    },
+    "form": {
+      "deleteBtn": "delete",
+      "deleteLoadingBtn": "deleting..."
+    },
+    "activateForm": {
+      "reason": "Activation Reason",
+      "sendNotification": "Send Notification",
+      "reasonMinLengthError": "Activation reason must be at least 5 characters long.",
+      "submitBtn": "Activate",
+      "submitLoadingBtn": "Activating..."
+    },
+    "deactivateForm": {
+      "reason": "Deactivation Reason",
+      "reasonMinLengthError": "Deactivation reason must be at least 5 characters long.",
 
+      "reasonRequiredError": "Deactivation reason is required.",
+      "submitBtn": "Deactivate",
+      "submitLoadingBtn": "Deactivating..."
+    }
+  },
+  "userPage": {
+    "invalidId": "Invalid user id, please <a> click here </a> to go back to the home page.",
+    "notFound": "This user doesn't exist, please <a> click here </a> to go back to the home page.",
+    "email": "Email: ",
+    "status": "Status: ",
+    "active": "Active",
+    "inactive": "Not Active"
+  },
   "permissionsNames": {
     "roles-show": "View Role",
     "roles-create": "Create New Role",
@@ -357,6 +406,12 @@
     "tiers-delete": "Delete Tier",
     "tiers-create": "Create New Tier",
     "settings-list": "View Settings",
-    "settings-edit": "Change Settings"
+    "settings-edit": "Change Settings",
+    "users-show": "View User",
+    "users-delete": "Delete Users",
+    "users-edit": "Edit Users",
+    "users-list": "View All Users",
+    "users-activate": "Activate User",
+    "users-deactivate": "Deactivate User"
   }
 }

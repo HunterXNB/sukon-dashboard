@@ -88,7 +88,8 @@
       "roles": "الادوار",
       "admin": "المديرين",
       "home": "الصفحة الرئيسية",
-      "tiers": "الباقات"
+      "tiers": "الباقات",
+      "users": "المستخدمين"
     }
   },
   "logoutDialog": {
@@ -338,6 +339,54 @@
       "noResult": "لا توجد بيانات لعرضها."
     }
   },
+  "usersTable": {
+    "table": {},
+    "header": {
+      "id": "م",
+      "name": "الاسم",
+      "email": "البريد سالالكترونى",
+      "created_at": "تاريخ الانشاء",
+      "status": "الحالة"
+    },
+    "actions": {
+      "actions": "العمليات",
+      "show": "رؤية بيانات الحساب",
+      "activate": "تفعيل الحساب",
+      "deactivate": "تعطيل الحساب",
+      "delete": "حذف الحساب"
+    },
+    "actionDialog": {
+      "activate": "هل انت متأكد انك تريد تفعيل الحساب ({name}) .",
+      "deactivate": "هل انت متأكد انك تريد تعطيل الحساب ({name}) .",
+      "delete": "هل انت متأكد انك تريد حذف الحساب ({name}) ."
+    },
+    "form": {
+      "deleteBtn": "حذف",
+      "deleteLoadingBtn": "جارى الحذف..."
+    },
+    "activateForm": {
+      "reason": "سبب التفعيل",
+      "sendNotification": "ارسال اشعار",
+      "reasonMinLengthError": "يجب ان لا يقل سبب التفعيل عن 5 احرف",
+      "submitBtn": "تفعيل",
+      "submitLoadingBtn": "جارى التفعيل..."
+    },
+    "deactivateForm": {
+      "reason": "سبب التعطيل",
+      "reasonMinLengthError": "يجب ان لا يقل سبب التعطيل عن 5 احرف",
+      "reasonRequiredError": "سبب التعطيل مطلوب",
+      "submitBtn": "تعطيل",
+      "submitLoadingBtn": "جارى التعطيل..."
+    }
+  },
+  "userPage": {
+    "invalidId": "رقم المستخدم غير صالح، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "notFound": "هذا المستخدم غير موجود، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "email": "البريد الالكترونى: ",
+    "status": "الحالة: ",
+    "active": "مفعل",
+    "inactive": "معطل"
+  },
   "permissionsNames": {
     "roles-show": "رؤية دور",
     "roles-create": "انشاء دور جديد",
@@ -357,6 +406,12 @@
     "tiers-delete": "حذف باقة",
     "tiers-create": "انشاء باقة",
     "settings-list": "رؤية الإعدادات",
-    "settings-edit": "تعديل الإعدادات"
+    "settings-edit": "تعديل الإعدادات",
+    "users-show": "رؤية مستخدم",
+    "users-delete": "حذف مستخدم",
+    "users-edit": "تعديل مستخدم",
+    "users-list": "رؤية جميع المستخدمين",
+    "users-activate": "تفعيل مستخدم",
+    "users-deactivate": "تعطيل مستخدم"
   }
 }

@@ -3,6 +3,7 @@ import {
   RolesPermissionName,
   SettingsPermissionName,
   TiersPermissionName,
+  UsersPermissionName,
 } from "./Permission";
 
 export type User = {
@@ -14,6 +15,33 @@ export type User = {
   name: string;
   role: string;
   permissions: PermissionName[];
+};
+export type AppUser = {
+  id: number;
+  first_name: string;
+  last_name: string | null;
+  email: string;
+  created_at: string;
+  is_active: boolean;
+};
+export type AppUserFull = {
+  id: number;
+  first_name: string;
+  last_name: string | null;
+  mobile: string;
+  email: string;
+  avatar: string;
+  type: string;
+  date_of_birth: string;
+  gender: "male" | "female";
+  is_active: boolean;
+  is_email_verified: boolean;
+  has_completed_signup: boolean;
+  role: {
+    id: number;
+    name: string;
+    is_active: boolean;
+  };
 };
 export type LoggedInUser = {
   avatar: string;
@@ -29,5 +57,6 @@ export type LoggedInUser = {
     AdminUsers: AdminUsersPermissionName[];
     Tiers: TiersPermissionName[];
     Settings: SettingsPermissionName[];
+    Users: UsersPermissionName[];
   } | null;
 };

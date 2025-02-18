@@ -18,12 +18,21 @@ export type TiersPermissionName =
   | "tiers-create"
   | "tiers-edit"
   | "tiers-delete";
+export type UsersPermissionName =
+  | "users-list"
+  | "users-show"
+  | "users-edit"
+  | "users-delete"
+  | "users-activate"
+  | "users-deactivate";
+
 export type SettingsPermissionName = "settings-list" | "settings-edit";
 export type PermissionName =
   | RolesPermissionName
   | AdminUsersPermissionName
   | TiersPermissionName
-  | SettingsPermissionName;
+  | SettingsPermissionName
+  | UsersPermissionName;
 
 export type Permission = {
   id: number;

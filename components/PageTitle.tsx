@@ -9,6 +9,7 @@ const pathnames: {
   "/roles": "roles",
   "/admin": "admin",
   "/tiers": "tiers",
+  "/users": "users",
 };
 function PageTitle() {
   const pathname = usePathname();

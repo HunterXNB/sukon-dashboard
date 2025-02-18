@@ -107,6 +107,7 @@ function RoleForm({
         form.setValue("permissions", [...checkedPermissions, showRoleId!]);
       }
     }
+    // admin users with roles permissions filter
     if (
       checkedPermissions.filter(
         (id) =>
@@ -160,6 +161,21 @@ function RoleForm({
       )?.id;
       if (!checkedPermissions.includes(listSettingsId!)) {
         form.setValue("permissions", [...checkedPermissions, listSettingsId!]);
+      }
+    }
+    // users permissions filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "users-edit" ||
+          permissionsById[id]?.[0].name === "users-delete" ||
+          permissionsById[id]?.[0].name === "users-deactivate" ||
+          permissionsById[id]?.[0].name === "users-activate"
+      ).length > 0
+    ) {
+      const showUserId = permisions.find((p) => p.name === "users-show")?.id;
+      if (!checkedPermissions.includes(showUserId!)) {
+        form.setValue("permissions", [...checkedPermissions, showUserId!]);
       }
     }
   }, [checkedPermissions, permisions, form]);
@@ -221,6 +237,17 @@ function RoleForm({
     // handle settings
     if (p.name === "settings-list") {
       if (fieldValue.value.includes(groupByName["settings-edit"]![0].id)) {
+        return true;
+      }
+    }
+    // handle users
+    if (p.name === "users-show") {
+      if (
+        fieldValue.value.includes(groupByName["users-edit"]![0].id) ||
+        fieldValue.value.includes(groupByName["users-delete"]![0].id) ||
+        fieldValue.value.includes(groupByName["users-activate"]![0].id) ||
+        fieldValue.value.includes(groupByName["users-deactivate"]![0].id)
+      ) {
         return true;
       }
     }
