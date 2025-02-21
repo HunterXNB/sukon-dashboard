@@ -74,7 +74,8 @@
       "admin": "Admins",
       "home": "Home",
       "tiers": "Tiers",
-      "users": "Users"
+      "users": "Users",
+      "settings": "Settings"
     }
   },
   "logoutDialog": {
@@ -386,6 +387,18 @@
     "status": "Status: ",
     "active": "Active",
     "inactive": "Not Active"
+  },
+  "settings": {
+    "form": {
+      "taxes": "Taxes",
+      "taxesRequiredError": "Please enter a valid taxes.",
+      "submitBtn": "Submit",
+      "taxesInvalidError": "Please enter a valid taxes.",
+      "minorAgeRequiredError": "Please enter a valid minor age.",
+      "minorAgeInvalidError": "Please enter a valid minor age.",
+      "minor_age": "Minor Age",
+      "submitLoadingBtn": "Submitting..."
+    }
   },
   "permissionsNames": {
     "roles-show": "View Role",

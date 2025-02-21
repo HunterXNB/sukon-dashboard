@@ -36,6 +36,10 @@ const links: {
     name: "users",
     link: "/users",
   },
+  Settings:{
+    name: "settings",
+    link: "/settings",
+  }
 };
 function SidebarContent() {
   const user = useUser();

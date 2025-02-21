@@ -89,7 +89,8 @@
       "admin": "المديرين",
       "home": "الصفحة الرئيسية",
       "tiers": "الباقات",
-      "users": "المستخدمين"
+      "users": "المستخدمين",
+      "settings": "الإعدادات"
     }
   },
   "logoutDialog": {
@@ -386,6 +387,18 @@
     "status": "الحالة: ",
     "active": "مفعل",
     "inactive": "معطل"
+  },
+  "settings": {
+    "form": {
+      "taxes": "الضرائب",
+      "taxesRequiredError": "مطلوب ادخال الضرائب",
+      "submitBtn": "حفظ",
+      "taxesInvalidError": "من فضلك ادخل ضريبة صحيحة",
+      "minorAgeRequiredError": "من افضل ادخل الحد الادنى من الاعمار ",
+      "minorAgeInvalidError": "من فضلك ادخل عمر صحيح",
+      "minor_age": "الحد الادنى من الاعمار",
+      "submitLoadingBtn": "جارى الارسال..."
+    }
   },
   "permissionsNames": {
     "roles-show": "رؤية دور",
