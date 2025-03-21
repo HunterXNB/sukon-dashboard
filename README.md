@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sukon Admin Dashboard
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Sukon Admin Dashboard is a web-based admin panel designed to manage the Sukon platform, which connects doctors with patients. The dashboard provides administrators with essential tools to manage users, roles, and app settings efficiently.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ✅ Authentication
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Secure login and logout functionality
+- Forgot password and reset password logic
+- Change password feature for enhanced security
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📊 Dashboard Home
 
-## Learn More
+- Displays key platform statistics for better insights
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠️ Management Tables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Roles Management** – Manage different user roles and permissions
+- **Admins Management** – Handle admin users with appropriate access control
+- **Tiers Management** – Manage subscription or service tiers
+- **Users Management** – View and manage platform users
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ⚙️ App Settings
 
-## Deploy on Vercel
+- A dedicated form to modify platform settings
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🌍 Multi-Language Support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Supports **English** and **Arabic** for a better user experience
+
+### 🌗 Theme Support
+
+- **Dark Mode** and **Light Mode** toggle for accessibility and user preference
