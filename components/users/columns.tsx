@@ -54,11 +54,13 @@ function ActionCell({ row }: CellContext<AppUser, unknown>) {
   const [, setDeactivateId] = useQueryState("deactivateId", parseAsInteger);
   const [, setActivateId] = useQueryState("activateId", parseAsInteger);
   const [, setDeleteId] = useQueryState("deleteId", parseAsInteger);
+  const [, setUserEditId] = useQueryState("userEditId", parseAsInteger);
   const user = useUser();
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const t = useTranslations("usersTable.actions");
   if (!user.permissions) return null;
+
   return user?.permissions.Users.filter(
     (el) =>
       el === "users-activate" ||
@@ -117,6 +119,18 @@ function ActionCell({ row }: CellContext<AppUser, unknown>) {
               }}
             >
               {t("delete")}
+            </DropdownMenuItem>
+          )}{" "}
+          {user.permissions?.Users.includes("users-edit") && (
+            <DropdownMenuItem
+              onPointerDown={(e) => e.preventDefault()}
+              onSelect={(e) => {
+                e.preventDefault();
+                setIsDropDownOpen(false);
+                setUserEditId(rowUser.id);
+              }}
+            >
+              {t("edit")}
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>

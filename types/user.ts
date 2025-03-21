@@ -42,6 +42,8 @@ export type AppUserFull = {
     name: string;
     is_active: boolean;
   };
+  last_login_at: string;
+  login_count: number;
 };
 export type LoggedInUser = {
   avatar: string;

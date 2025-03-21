@@ -353,7 +353,9 @@
       "show": "Show Details",
       "activate": "Activate Account",
       "deactivate": "Deactivate Account",
-      "delete": "Delete Account"
+      "delete": "Delete Account",
+
+      "edit": "Edit user data"
     },
     "actionDialog": {
       "activate": "Are you sure you want to activate this account ({name}) ?",
@@ -362,7 +364,17 @@
     },
     "form": {
       "deleteBtn": "delete",
-      "deleteLoadingBtn": "deleting..."
+      "deleteLoadingBtn": "deleting...",
+      "editTitle": "Edit user data",
+      "name": "Name",
+      "email": "Email",
+      "nameRequiredError": "Please enter a username",
+      "nameMinLengthError": "Username length should not be less than 6 characters",
+      "nameMaxLengthError": "Username length should not exceed 25 characters",
+      "emailRequiredError": "Please enter an email address",
+      "emailInvalidError": "Invalid email address format",
+      "submitBtn": "Submit",
+      "submitLoadingBtn": "Submitting..."
     },
     "activateForm": {
       "reason": "Activation Reason",
@@ -386,7 +398,9 @@
     "email": "Email: ",
     "status": "Status: ",
     "active": "Active",
-    "inactive": "Not Active"
+    "inactive": "Not Active",
+    "lastLogin": "Last Login: ",
+    "loginCount": "Login Count: "
   },
   "settings": {
     "form": {

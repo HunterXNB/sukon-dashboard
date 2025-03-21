@@ -125,3 +125,52 @@ export async function deactivateUser(
     locale,
   };
 }
+type Fields = "first_name" | "last_name" | "email";
+export async function editUser(
+  state: ActionStateResult<Fields> | undefined,
+  userData: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    id: number;
+  }
+): Promise<ActionStateResult<Fields>> {
+  const locale = (await getLocale()) as "ar" | "en";
+
+  const req = await fetchData("/users/edit/" + userData.id, {
+    method: "PUT",
+    body: JSON.stringify({
+      first_name: userData.first_name,
+      last_name: userData.last_name,
+      email: userData.email,
+    }),
+  });
+  const res = await req.json();
+  if (!req.ok) {
+    if (req.status === 400) {
+      return {
+        error: {
+          type: "validation",
+          fields: res.data,
+          message: res.message,
+        },
+        locale,
+      };
+    } else {
+      return {
+        error: {
+          type: "global",
+          message: res.message,
+        },
+        locale,
+      };
+    }
+  }
+  revalidatePath("/users");
+  return {
+    success: {
+      message: res.message,
+    },
+    locale,
+  };
+}

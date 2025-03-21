@@ -14,6 +14,14 @@ export function UserLoading({}: { isModal?: boolean }) {
         <Skeleton className="w-16 h-[16px]" />
         <Skeleton className="w-10 h-[16px]" />
       </p>
+      <p className="flex gap-1 items-center text-xl">
+        <Skeleton className="w-16 h-[16px]" />
+        <Skeleton className="w-10 h-[16px]" />
+      </p>
+      <p className="flex gap-1 items-center text-xl">
+        <Skeleton className="w-16 h-[16px]" />
+        <Skeleton className="w-10 h-[16px]" />
+      </p>
     </div>
   );
 }

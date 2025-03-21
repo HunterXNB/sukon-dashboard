@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import DefaultAvatar from "@/assets/user.webp";
 import { Badge } from "../ui/badge";
+import { format } from "date-fns";
 interface IProps {
   params: Promise<{ id: string }>;
   isModal?: boolean;
@@ -108,6 +109,14 @@ export default async function UserPage({ params }: IProps) {
         <Badge variant={pageUser.is_active ? "default" : "destructive"}>
           {t(pageUser.is_active ? "active" : "inactive")}
         </Badge>
+      </p>{" "}
+      <p className="flex gap-1 items-center text-xl">
+        <span className="font-bold ">{t("lastLogin")}</span>
+        <span>{format(pageUser.last_login_at, "dd/MM/yyyy")}</span>
+      </p>
+      <p className="flex gap-1 items-center text-xl">
+        <span className="font-bold ">{t("loginCount")}</span>
+        <span>{pageUser.login_count}</span>
       </p>
     </div>
   );

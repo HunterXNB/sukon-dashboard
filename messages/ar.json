@@ -345,7 +345,7 @@
     "header": {
       "id": "م",
       "name": "الاسم",
-      "email": "البريد سالالكترونى",
+      "email": "البريد الالكترونى",
       "created_at": "تاريخ الانشاء",
       "status": "الحالة"
     },
@@ -354,7 +354,8 @@
       "show": "رؤية بيانات الحساب",
       "activate": "تفعيل الحساب",
       "deactivate": "تعطيل الحساب",
-      "delete": "حذف الحساب"
+      "delete": "حذف الحساب",
+      "edit": "تعديل بيانات المستخدم"
     },
     "actionDialog": {
       "activate": "هل انت متأكد انك تريد تفعيل الحساب ({name}) .",
@@ -363,7 +364,17 @@
     },
     "form": {
       "deleteBtn": "حذف",
-      "deleteLoadingBtn": "جارى الحذف..."
+      "deleteLoadingBtn": "جارى الحذف...",
+      "editTitle": "تعديل بيانات المستخدم",
+      "name": "الاسم",
+      "email": "البريد الالكترونى",
+      "nameRequiredError": "من فضلك ادخل اسم المستخدم",
+      "nameMinLengthError": "اسم المستخدم يجب ان لا يقل عن 6 حروف",
+      "nameMaxLengthError": "اسم المستخدم يجب ان لا يزيد عن 25 حرف",
+      "emailRequiredError": "من فضلك ادخل بريد الالكترونى",
+      "emailInvalidError": "بريد الالكترونى غير صحيح",
+      "submitBtn": "ارسال",
+      "submitLoadingBtn": "جارى الارسال..."
     },
     "activateForm": {
       "reason": "سبب التفعيل",
@@ -386,7 +397,9 @@
     "email": "البريد الالكترونى: ",
     "status": "الحالة: ",
     "active": "مفعل",
-    "inactive": "معطل"
+    "inactive": "معطل",
+    "lastLogin": "آخر تسجيل دخول: ",
+    "loginCount": "عدد مرات تسجيل الدخول: "
   },
   "settings": {
     "form": {

@@ -2,6 +2,7 @@ import { getUser } from "@/actions/auth";
 import { LoadingTable } from "@/components/DataTable";
 import columns from "@/components/roles/columns";
 import TableSearch from "@/components/TableSearch";
+import EditUser from "@/components/users/EditUser";
 import UserActionDialog from "@/components/users/UserActionDialog";
 import UsersTable from "@/components/users/UsersTable";
 import { redirect } from "next/navigation";
@@ -63,6 +64,7 @@ async function UsersPage({
       {user?.permissions?.Users.includes("users-deactivate") && (
         <UserActionDialog type="deactivate" />
       )}
+      {user?.permissions?.Users.includes("users-edit") && <EditUser />}
     </div>
   );
 }
