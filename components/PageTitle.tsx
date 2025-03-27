@@ -11,6 +11,7 @@ const pathnames: {
   "/tiers": "tiers",
   "/users": "users",
   "/settings": "settings",
+  "/specializations": "specializations",
 };
 function PageTitle() {
   const pathname = usePathname();

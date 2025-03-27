@@ -90,7 +90,8 @@
       "home": "الصفحة الرئيسية",
       "tiers": "الباقات",
       "users": "المستخدمين",
-      "settings": "الإعدادات"
+      "settings": "الإعدادات",
+      "specializations": "التخصصات"
     }
   },
   "logoutDialog": {
@@ -340,6 +341,36 @@
       "noResult": "لا توجد بيانات لعرضها."
     }
   },
+  "specializationsTable": {
+    "form": {
+      "createBtn": "انشاء تخصص",
+      "createTitle": "انشاء تخصص جديد",
+      "nameEn": "اسم التخصص باللغة الانجليزية",
+      "nameAr": "اسم التخصص باللغة العربية",
+      "submitBtn": "ارسال",
+      "submitLoadingBtn": "جارى الارسال...",
+      "enNameRequired": "اسم التخصص باللغة الانجليزية مطلوب.",
+      "arNameRequired": "اسم التخصص باللغة العربية مطلوب.",
+      "enNameMinLength": "اسم التخصص باللغة الانجليزية لا يقل عن 3 حروف.",
+      "arNameMinLength": "اسم التخصص باللغة العربية لا يقل عن 3 حروف.",
+      "editTitle": "تعديل التخصص"
+    },
+    "header": {
+      "id": "م",
+      "name": "الاسم"
+    },
+    "actions": {
+      "actions": "العمليات",
+      "edit": "تعديل البيانات",
+      "delete": "حذف التخصص"
+    },
+    "table": {
+      "noPermission": "لا يوجد صلاحية لعرض هذه البيانات."
+    },
+    "deleteSpecializationDialog": {
+      "msg": "هل أنت متأكد من حذف ({name})؟"
+    }
+  },
   "usersTable": {
     "table": {},
     "header": {
@@ -438,6 +469,11 @@
     "users-edit": "تعديل مستخدم",
     "users-list": "رؤية جميع المستخدمين",
     "users-activate": "تفعيل مستخدم",
-    "users-deactivate": "تعطيل مستخدم"
+    "users-deactivate": "تعطيل مستخدم",
+    "specializations-list": "رؤية جميع التخصصات",
+    "specializations-edit": "تعديل التخصصات",
+    "specializations-delete": "حذف التخصصات",
+    "specializations-create": "انشاء تخصص",
+    "specializations-show": "رؤية التخصص"
   }
 }

@@ -178,6 +178,24 @@ function RoleForm({
         form.setValue("permissions", [...checkedPermissions, showUserId!]);
       }
     }
+    // specializations permissions filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "specializations-edit" ||
+          permissionsById[id]?.[0].name === "specializations-delete"
+      ).length > 0
+    ) {
+      const showSpecializationId = permisions.find(
+        (p) => p.name === "specializations-show"
+      )?.id;
+      if (!checkedPermissions.includes(showSpecializationId!)) {
+        form.setValue("permissions", [
+          ...checkedPermissions,
+          showSpecializationId!,
+        ]);
+      }
+    }
   }, [checkedPermissions, permisions, form]);
 
   function calculateDisabledState(
@@ -247,6 +265,15 @@ function RoleForm({
         fieldValue.value.includes(groupByName["users-delete"]![0].id) ||
         fieldValue.value.includes(groupByName["users-activate"]![0].id) ||
         fieldValue.value.includes(groupByName["users-deactivate"]![0].id)
+      ) {
+        return true;
+      }
+    }
+    // handle specializations
+    if (p.name === "specializations-show") {
+      if (
+        fieldValue.value.includes(groupByName["specializations-edit"]![0].id) ||
+        fieldValue.value.includes(groupByName["specializations-delete"]![0].id)
       ) {
         return true;
       }

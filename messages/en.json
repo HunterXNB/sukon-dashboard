@@ -75,7 +75,8 @@
       "home": "Home",
       "tiers": "Tiers",
       "users": "Users",
-      "settings": "Settings"
+      "settings": "Settings",
+      "specializations": "Specializations"
     }
   },
   "logoutDialog": {
@@ -414,6 +415,36 @@
       "submitLoadingBtn": "Submitting..."
     }
   },
+  "specializationsTable": {
+    "form": {
+      "createBtn": "Create Specialization",
+      "createTitle": "Create New Specialization",
+      "nameEn": "Specialization name in English",
+      "nameAr": "Specialization name in Arabic",
+      "submitBtn": "Submit",
+      "submitLoadingBtn": "Submitting...",
+      "enNameRequired": "Specialization name in English is required",
+      "arNameRequired": "Specialization name in Arabic is required.",
+      "enNameMinLength": "Specialization name in English is at least 3 characters long.",
+      "arNameMinLength": "Specialization name in Arabic is at least 3 characters long.",
+      "editTitle": "Edit Specialization"
+    },
+    "header": {
+      "id": "ID",
+      "name": "Name"
+    },
+    "actions": {
+      "actions": "Actions",
+      "edit": "Edit Specialization",
+      "delete": "Delete Specialization"
+    },
+    "table": {
+      "noPermission": "You don't have permission to access this page."
+    },
+    "deleteSpecializationDialog": {
+      "msg": "Are you sure you want to delete ({name})?"
+    }
+  },
   "permissionsNames": {
     "roles-show": "View Role",
     "roles-create": "Create New Role",
@@ -439,6 +470,11 @@
     "users-edit": "Edit Users",
     "users-list": "View All Users",
     "users-activate": "Activate User",
-    "users-deactivate": "Deactivate User"
+    "users-deactivate": "Deactivate User",
+    "specializations-list": "Show All Specializations",
+    "specializations-edit": "Edit Specializations",
+    "specializations-delete": "Delete Specializations",
+    "specializations-create": "Create New Specialization",
+    "specializations-show": "View Specialization"
   }
 }

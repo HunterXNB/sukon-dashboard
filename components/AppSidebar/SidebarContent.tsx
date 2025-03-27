@@ -36,10 +36,14 @@ const links: {
     name: "users",
     link: "/users",
   },
-  Settings:{
+  Settings: {
     name: "settings",
     link: "/settings",
-  }
+  },
+  Specializations: {
+    name: "specializations",
+    link: "/specializations",
+  },
 };
 function SidebarContent() {
   const user = useUser();
