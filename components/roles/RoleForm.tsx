@@ -196,6 +196,25 @@ function RoleForm({
         ]);
       }
     }
+    // registerations filter
+    if (
+      checkedPermissions.filter(
+        (id) =>
+          permissionsById[id]?.[0].name === "registrations-approve" ||
+          permissionsById[id]?.[0].name === "registrations-reject" ||
+          permissionsById[id]?.[0].name === "registrations-delete"
+      ).length > 0
+    ) {
+      const showRegistrationId = permisions.find(
+        (p) => p.name === "registrations-show"
+      )?.id;
+      if (!checkedPermissions.includes(showRegistrationId!)) {
+        form.setValue("permissions", [
+          ...checkedPermissions,
+          showRegistrationId!,
+        ]);
+      }
+    }
   }, [checkedPermissions, permisions, form]);
 
   function calculateDisabledState(
@@ -278,6 +297,19 @@ function RoleForm({
         return true;
       }
     }
+    // handle registerations
+    if (p.name === "registrations-show") {
+      if (
+        fieldValue.value.includes(
+          groupByName["registrations-approve"]![0].id
+        ) ||
+        fieldValue.value.includes(groupByName["registrations-delete"]![0].id) ||
+        fieldValue.value.includes(groupByName["registrations-reject"]![0].id)
+      ) {
+        return true;
+      }
+    }
+
     return false;
   }
   return (

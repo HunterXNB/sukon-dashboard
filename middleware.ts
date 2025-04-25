@@ -8,6 +8,7 @@ const protectedRoutes = [
   "/settings",
   "/users",
   "/specializations",
+  "/registerations",
 ];
 export default async function middleware(req: NextRequest) {
   const authenticated = await isAuthenticated();

@@ -12,6 +12,7 @@ const pathnames: {
   "/users": "users",
   "/settings": "settings",
   "/specializations": "specializations",
+  "/registerations": "registerations",
 };
 function PageTitle() {
   const pathname = usePathname();

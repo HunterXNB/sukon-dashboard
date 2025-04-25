@@ -44,6 +44,10 @@ const links: {
     name: "specializations",
     link: "/specializations",
   },
+  Registrations: {
+    name: "registerations",
+    link: "/registerations",
+  },
 };
 function SidebarContent() {
   const user = useUser();

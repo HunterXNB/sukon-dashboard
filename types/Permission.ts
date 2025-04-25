@@ -31,6 +31,12 @@ export type SpecializationsPermissionName =
   | "specializations-edit"
   | "specializations-delete"
   | "specializations-show";
+export type RegistrationsPermissionsName =
+  | "registrations-list"
+  | "registrations-show"
+  | "registrations-delete"
+  | "registrations-approve"
+  | "registrations-reject";
 
 export type SettingsPermissionName = "settings-list" | "settings-edit";
 export type PermissionName =
@@ -39,7 +45,8 @@ export type PermissionName =
   | TiersPermissionName
   | SettingsPermissionName
   | UsersPermissionName
-  | SpecializationsPermissionName;
+  | SpecializationsPermissionName
+  | RegistrationsPermissionsName;
 
 export type Permission = {
   id: number;

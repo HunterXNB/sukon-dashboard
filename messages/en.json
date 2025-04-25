@@ -76,7 +76,8 @@
       "tiers": "Tiers",
       "users": "Users",
       "settings": "Settings",
-      "specializations": "Specializations"
+      "specializations": "Specializations",
+      "registerations": "Registerations"
     }
   },
   "logoutDialog": {
@@ -445,6 +446,84 @@
       "msg": "Are you sure you want to delete ({name})?"
     }
   },
+  "registrationsTable": {
+    "header": {
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "mobile": "Mobile Number",
+      "role": "Specialization",
+      "title": "Title"
+    },
+    "actions": {
+      "actions": "Actions",
+      "show": "View Registration Details",
+      "approve": "Approve Request",
+      "reject": "Reject Request",
+      "delete": "Delete Request"
+    },
+    "table": {
+      "noPermission": "You do not have permission to view this data.",
+      "noResult": "No data available to display."
+    },
+    "approveDialog": {
+      "approveTitle": "Are you sure you want to approve the registration request for user ({name})?"
+    },
+    "rejectDialog": {
+      "rejectTitle": "Are you sure you want to reject the registration request for user ({name})?"
+    },
+    "deleteDialog": {
+      "deleteTitle": "Are you sure you want to delete the registration request for user ({name})?"
+    },
+    "form": {
+      "submitBtn": "Confirm",
+      "submitLoadingBtn": "Confirming..."
+    }
+  },
+  "registerationPage": {
+    "invalidId": "Invalid registration ID, please <a>click here</a> to go to the homepage.",
+    "notFound": "This registration request does not exist, please <a>click here</a> to go to the homepage.",
+    "name": "Name: ",
+    "email": "Email: ",
+    "title": "Title: ",
+    "mobile": "Mobile Number: ",
+    "role": "Specialization: ",
+    "status": "Status: ",
+    "gender": {
+      "title": "Gender: ",
+      "male": "Male",
+      "female": "Female"
+    },
+    "date_of_birth": "Date of Birth: ",
+    "nationality": "Nationality: ",
+    "country_of_residence": "Country of Residence: ",
+    "lang": "Fluent Language: ",
+    "highest_degree": "Highest Degree: ",
+    "university": "University: ",
+    "grad_year": "Graduation Year: ",
+    "classification": "Classification: ",
+    "specification": "Specialization: ",
+    "years_of_experience": "Years of Experience: ",
+    "licensing_area": "Licensing Area: ",
+    "license_Number": "License Number: ",
+    "address": "Clinic Address: ",
+    "usd": "Session Price (USD): ",
+    "egp": "Session Price (EGP): ",
+    "work_on_clinic": {
+      "title": "Works in a Clinic: ",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "more_than_qualification": {
+      "title": "Has More Than One Qualification: ",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "available": { "title": "Currently Available: ", "yes": "Yes", "no": "No" },
+    "pending": "Pending Review",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
   "permissionsNames": {
     "roles-show": "View Role",
     "roles-create": "Create New Role",
@@ -475,6 +554,11 @@
     "specializations-edit": "Edit Specializations",
     "specializations-delete": "Delete Specializations",
     "specializations-create": "Create New Specialization",
-    "specializations-show": "View Specialization"
+    "specializations-show": "View Specialization",
+    "registrations-list": "View All Registrations",
+    "registrations-approve": "Approve Registration",
+    "registrations-reject": "Reject Registration",
+    "registrations-show": "View Registration",
+    "registrations-delete": "Delete Registration"
   }
 }

@@ -91,7 +91,8 @@
       "tiers": "الباقات",
       "users": "المستخدمين",
       "settings": "الإعدادات",
-      "specializations": "التخصصات"
+      "specializations": "التخصصات",
+      "registerations": "التسجيلات"
     }
   },
   "logoutDialog": {
@@ -444,6 +445,80 @@
       "submitLoadingBtn": "جارى الارسال..."
     }
   },
+  "registrationsTable": {
+    "header": {
+      "id": "م",
+      "name": "الاسم",
+      "email": "البريد الالكترونى",
+      "mobile": "رقم الهاتف",
+      "role": "التخصص",
+      "title": "اللقب"
+    },
+    "actions": {
+      "actions": "العمليات",
+      "show": "رؤية بيانات التسجيل",
+      "approve": "الموافقة على الطلب",
+      "reject": "رفض الطلب",
+      "delete": "حذف الطلب"
+    },
+    "table": {
+      "noPermission": "لا يوجد صلاحية لعرض هذه البيانات.",
+      "noResult": "لا توجد بيانات لعرضها."
+    },
+    "approveDialog": {
+      "approveTitle": "هل انت متأكد انك تريد الموافقة على طلب التسجيل للمستخدم ({name})."
+    },
+    "rejectDialog": {
+      "rejectTitle": "هل انت متأكد انك تريد رفض طلب التسجيل للمستخدم ({name})."
+    },
+    "deleteDialog": {
+      "deleteTitle": "هل انت متأكد انك تريد حذف طلب التسجيل للمستخدم ({name})."
+    },
+    "form": {
+      "submitBtn": "تأكيد",
+      "submitLoadingBtn": "جاري التأكيد..."
+    }
+  },
+  "registerationPage": {
+    "invalidId": "رقم طلب التسجيل غير صالح، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "notFound": "طلب التسجيل هذا غير موجود، من فضلك <a> اضغط هنا </a> للذهاب الى الصفحة الرئيسية.",
+    "name": "الاسم: ",
+    "email": "البريد الالكترونى: ",
+    "title": "اللقب: ",
+    "mobile": "رقم الهاتف: ",
+    "role": "التخصص: ",
+    "status": "الحالة: ",
+    "gender": {
+      "title": "النوع: ",
+      "male": "ذكر",
+      "female": "انثى"
+    },
+    "date_of_birth": "تاريخ الميلاد: ",
+    "nationality": "الجنسية: ",
+    "country_of_residence": "بلد الاقامة: ",
+    "lang": "اللغة المتحدثة بطلاقة: ",
+    "highest_degree": "اعلى درجة تعليمية: ",
+    "university": "الجامعة: ",
+    "grad_year": "سنة التخرج: ",
+    "classification": "التصنيف: ",
+    "specification": "التخصص: ",
+    "years_of_experience": "عدد سنوات الخبرة: ",
+    "licensing_area": "منطقة الترخيص: ",
+    "license_Number": "رقم الترخيص: ",
+    "address": "عنوان العيادة: ",
+    "usd": "سعر الجلسة بالدولار: ",
+    "egp": "سعر الجلسة بالجنيه المصرى: ",
+    "work_on_clinic": { "title": "هل يعمل بعيادة: ", "yes": "نعم", "no": "لا" },
+    "more_than_qualification": {
+      "title": "لديه اكثر من مؤهل: ",
+      "yes": "نعم",
+      "no": "لا"
+    },
+    "available": { "title": "متاح الان: ", "yes": "نعم", "no": "لا" },
+    "pending": "تحت المرجعة",
+    "approved": "تم الموافقة",
+    "rejected": "تم الرفض"
+  },
   "permissionsNames": {
     "roles-show": "رؤية دور",
     "roles-create": "انشاء دور جديد",
@@ -474,6 +549,11 @@
     "specializations-edit": "تعديل التخصصات",
     "specializations-delete": "حذف التخصصات",
     "specializations-create": "انشاء تخصص",
-    "specializations-show": "رؤية التخصص"
+    "specializations-show": "رؤية التخصص",
+    "registrations-list": "رؤية جميع التسجيلات",
+    "registrations-approve": "تفعيل التسجيل",
+    "registrations-reject": "رفض التسجيل",
+    "registrations-show": "رؤية التسجيل",
+    "registrations-delete": "حذف التسجيل"
   }
 }
